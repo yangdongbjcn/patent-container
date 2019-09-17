@@ -21,3 +21,13 @@ Patent-Frame 也有一个单独的库，参见 https://github.com/yangdongbjcn/p
 提供用于单文件读取和专利分析的Ydbj-Frame代码，以及相关的用于电子表格文件读取的Ydbj-Sheet代码，以及相关算法Ydbj-Algorithm代码。
 提供用于多专利文件读取和专利分析的Ydbj-Container代码。该文件包含Container基础类，以及继承的TreeContainer类等。
 更多的内容，将收录在微信公众号yangdongpatent。
+
+专利分析环境搭建
+
+1）安装anaconda2，https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
+2）打开anaconda的命令行，安装依赖库。
+pip install jieba
+pip install gensim
+conda install xlutils
+3）安装pycharm，选择免费的社区版，https://www.jetbrains.com/pycharm 
+4）下载本库的代码，使用pycharm运行ydbj_container_test.py
