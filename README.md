@@ -8,8 +8,21 @@
 专利容器在对专利数据读取和统计之后，还提供了基于JavaScript语言的专利分析可视化技术。特别地，可以支持对于中国地图和世界地图的可视化。
 
 请依次阅读以下页面: 
+
 CONTAINER_THOUGHT.md
+
 CONTAINER_DATA.md
+
 CONTAINER_EXAMPLE.md
+
+CONTAINER_DEV.md
+
+本项目中包含了三种语言（Python、JS、PHP），多个子项目。将分别放在相应的子文件夹中，也将各个子文件夹放在了单独的项目中。
+
+1)python文件夹。patent-container-python项目。
+
+2)js文件夹。patent-container-js项目。
+
+3)map文件夹。map-container项目。
 
 更多的内容，将收录在微信公众号yangdongpatent。或者直接访问网站http://zlrq.cn。
