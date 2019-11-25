@@ -25,4 +25,5 @@ CONTAINER_DEV.md
 
 3)map文件夹。map-container项目。
 
-更多的内容，将收录在微信公众号yangdongpatent。或者直接访问网站http://zlrq.cn。
+
+更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn。
