@@ -7,7 +7,7 @@ from ydbj_sheet import *
 
 if __name__ == '__main__':
 
-    print 'testing sync'
+    print('testing sync')
     master = Container('master')
     master.nameSync()
     slave = Container('slave')
@@ -18,9 +18,9 @@ if __name__ == '__main__':
     # print frame.table
     master.frame = frame
     master.publishSync('histogram', u'申请日期')
-    print slave.frame.table
+    print(slave.frame.table)
 
-    print 'testing TreeContainer'
+    print('testing TreeContainer')
     print('test addFrame()')
     root = TreeContainer('root') # root name is ''
     a1 = root.addMember('a1')
@@ -54,22 +54,22 @@ if __name__ == '__main__':
     print('test attr path')
     print(member.path)
 
-    print 'testing getRecursiveMembers'
+    print('testing getRecursiveMembers')
     nodes = root.getRecursiveMembers()
     for node in nodes:
-        print node.name
+        print(node.name)
 
-    print 'testing addTreeData'
+    print('testing addTreeData')
     input_device = TreeContainer('input_device')
     input_device.addTreeData(u'd:\\ydbj\\patent_container\\container\\test')
     input_device.dump()
-    print 'testing getAllData'
+    print('testing getAllData')
     t_data = input_device.getAllData()
 
-    print 'testing sync'
+    print('testing sync')
     input_device.getMember(u'输入设备').syncMembers('histogram', 'IPC1')
 
-    print 'testing loadSheet computeHisto'
+    print('testing loadSheet computeHisto')
     frame = Frame()
     frame.table = YdbjSheet().loadSheet(u'd:\\ydbj\\patent_container\\container\\test\\输入设备.xls')
     histo_chart = HistoChartContainer('histo_chart')
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     histo_chart.computeHisto('IPC1')
     histo_chart.showHistoChart()
 
-    print 'over'
+    print('over')
 
 
 

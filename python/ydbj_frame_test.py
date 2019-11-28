@@ -36,23 +36,23 @@ class FrameTest(object):
        return histo_table
 
 if __name__ == '__main__':
-    print 'running ydbj_patent.__main__'
+    print('running ydbj_patent.__main__')
 
-    print 'testing FrameTest'
+    print('testi ng FrameTest')
 
     frame = Frame()
     frame.table = YdbjSheet().loadSheet(u'ti.xls', start_row = 1)
 
     new_table = FrameTest().getYearHistogram(frame.table, u'申请日期')
-    print new_table
+    print(new_table)
 
     new_table = FrameTest().getYearHistogram(frame.table, u'优先权日')
-    print new_table
+    print(new_table)
 
     new_table = FrameTest().getApplicantHistogram(frame.table, u'终属母公司')
-    print new_table
+    print(new_table)
 
     new_table = FrameTest().getOriginalCountryHistogram(frame.table, u'优先权国家/地区 - DWPI')
-    print new_table
+    print(new_table)
 
-    print 'over'
+    print('over')

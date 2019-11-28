@@ -4,7 +4,7 @@ from ydbj_frame import *
 
 from ydbj_sheet import *
 
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 import ContainerSync
 
@@ -81,7 +81,7 @@ class HistoChartContainer(PipeContainer):
     def showHistoChart(self):
         histo_frame = self.getHisto()
         histo_frame.table.plot()
-        plt.show()
+        # plt.show()
 
 class TreeContainerIO(object):
     """ """
