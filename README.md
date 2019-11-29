@@ -19,11 +19,11 @@ CONTAINER_DEV.md
 
 本项目中包含了三种语言（Python、JS、PHP），多个子项目。将分别放在相应的子文件夹中，也将各个子文件夹放在了单独的项目中。
 
-1)python文件夹。patent-container-python项目。
+1)python文件夹。patent-container-python项目。该项目适合Windows环境。如果用户需要在Linux环境下测试，请访问 https://github.com/yangdongbjcn/patent-container-python 。
 
 2)js文件夹。patent-container-js项目。
 
-3)map文件夹。map-container项目。
+3)map文件夹。map-container项目。该项目适合Windows环境。
 
 
 更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn。
