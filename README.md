@@ -6,11 +6,10 @@
 
 对于不同的专利数据库，例如Patentics，incoPat，TI数据库等，专利容器通过适配数据库的字段，可以方便的导入数据。
 
-对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。专利容器的画图功能发布在专利容器（JS版）中，具体参见chart-container和map-container这两个项目。
+对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。专利容器的画图功能发布在专利容器（JS版）中。专利容器还提供了基于JavaScript语言的专利分析可视化技术chart-container。请访问 https://github.com/yangdongbjcn/patent-chart 。
+特别地，还提供了基于JavaScript语言的地理空间可视化技术map-container，可以支持对于中国地图和世界地图的可视化。请访问 https://github.com/yangdongbjcn/map-container 。
 
 专利容器所需要的Python编程环境搭建，也给出了简要的步骤。
-
-专利容器还提供了基于JavaScript语言的专利分析可视化技术chart-container。特别地，还提供了基于JavaScript语言的地理空间可视化技术map-container，可以支持对于中国地图和世界地图的可视化。
 
 想要更多了解专利容器是什么，
 请依次阅读以下页面:
@@ -21,10 +20,8 @@ CONTAINER_DEV.md
 
 本项目包含多个子文件夹，分别对应不同的项目。
 
-1)patent-container-python子文件夹。该项目适合Windows环境。如果用户需要在Linux环境下使用，请访问 https://github.com/yangdongbjcn/patent-container-linux 。
+1)patent-container子文件夹。该项目适合Windows环境。
 
-2)chart-container文件夹。基于patent-container-js（专利容器javascript版），将专利数据转换为Echarts画图所需的JSON格式，并在网页上进行画图。
-
-3)map-container文件夹。map-container项目。
+2)patent-container-linux子文件夹。该项目适合Ubuntu Linux环境。
 
 更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn。
