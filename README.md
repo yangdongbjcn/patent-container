@@ -13,10 +13,10 @@
 
 想要更多了解专利容器是什么，
 请依次阅读以下页面:
-CONTAINER_THOUGHT.md
-CONTAINER_DATA.md
-CONTAINER_EXAMPLE.md
-CONTAINER_DEV.md
+https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_THOUGHT.md 
+https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DATA.md
+https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_EXAMPLE.md
+https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DEV.md
 
 本项目包含多个子文件夹，分别对应不同的项目。
 
@@ -24,4 +24,4 @@ CONTAINER_DEV.md
 
 2)patent-container-linux子文件夹。该项目适合Ubuntu Linux环境。
 
-更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn。
+更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn 。
