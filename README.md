@@ -6,16 +6,23 @@
 
 对于不同的专利数据库，例如Patentics，incoPat，TI数据库等，专利容器通过适配数据库的字段，可以方便的导入数据。
 
-对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。专利容器的画图功能发布在专利容器（JS版）中。专利容器还提供了基于JavaScript语言的专利分析可视化技术chart-container。请访问 https://github.com/yangdongbjcn/patent-chart 。
+对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。专利容器的画图功能发布在专利容器（JS版）中。
+
+专利容器还提供了基于JavaScript语言的专利分析可视化技术chart-container。请访问 https://github.com/yangdongbjcn/patent-chart 。
+
 特别地，还提供了基于JavaScript语言的地理空间可视化技术map-container，可以支持对于中国地图和世界地图的可视化。请访问 https://github.com/yangdongbjcn/map-container 。
 
 专利容器所需要的Python编程环境搭建，也给出了简要的步骤。
 
 想要更多了解专利容器是什么，
 请依次阅读以下页面:
+
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_THOUGHT.md 
+
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DATA.md
+
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_EXAMPLE.md
+
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DEV.md
 
 本项目包含多个子文件夹，分别对应不同的项目。
