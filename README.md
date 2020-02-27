@@ -29,4 +29,4 @@ https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DEV.md
 
 2)patent-container-linux子文件夹。该项目适合Ubuntu Linux环境。
 
-更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn 。
+更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn/yd/pc.html 。
