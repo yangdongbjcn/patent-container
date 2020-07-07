@@ -8,7 +8,7 @@
 
 对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。专利容器的画图功能发布在专利容器（JS版）中。
 
-专利容器还提供了基于JavaScript语言的专利分析可视化技术。特别地，还提供了基于JavaScript语言的地理空间可视化技术，可以支持对于中国地图和世界地图的可视化。请访问 https://github.com/yangdongbjcn/yangdong.world 。
+专利容器还提供了基于JavaScript语言的专利分析可视化技术。特别地，还提供了基于JavaScript语言的地理空间可视化技术，可以支持对于中国地图和世界地图的可视化。请访问 https://github.com/yangdongbjcn/patent-chart 。
 
 专利容器所需要的Python编程环境搭建，也给出了简要的步骤。
 
