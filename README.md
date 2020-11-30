@@ -12,7 +12,7 @@
 
 二、目录
 
-(一）patent-container-linux
+(一）patent_container_python
 
 基于Python和Linux提供了专利容器的示意代码。推荐使用PyCharm社区版编辑器，执行其中的ydbj_container_test.py。
 
@@ -24,9 +24,15 @@ JS版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame�
 
 PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame等类。
 
-三、扩展阅读
+（四）webchart_php_js
 
-专利容器还提供了基于JavaScript语言的专利分析可视化技术。特别地，还提供了基于JavaScript语言的地理空间可视化技术，可以支持对于中国地图和世界地图的可视化。请访问 https://github.com/yangdongbjcn/patent-chart 。
+本项目属于专利容器的可视化部分，使用JavaScript语言实现。本项目提供了基础版的专利分析可视化功能。包括提取国别、检索式解析、申请人标准化、提取公开号、提取DWPI号、年份直方图、统计IPC、气泡散点图、气泡矩阵图、世界地图、中国地图等多种图表。
+
+本项目的后台部分基于codeigniter框架实现。具体地，基于Github项目http://github.com/yangodongbjcn/webpage-includer-codeigniter 。
+
+本项目的可视化是对Echarts的封装。由于Echarts需要的数据是JSON格式，而专利数据库一般二维表格形式，本项目提供了从二维表到JSON结构的统计和转换功能。Echarts的功能强大导致其配置也比较复杂，本项目对其进行了封装和简化。
+
+三、扩展阅读
 
 专利容器所需要的Python编程环境搭建，也给出了简要的步骤。
 
@@ -40,11 +46,5 @@ https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DATA.md
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_EXAMPLE.md
 
 https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DEV.md
-
-本项目包含多个子文件夹，分别对应不同的项目。
-
-1)patent-container子文件夹。该项目适合Windows环境。
-
-2)patent-container-linux子文件夹。该项目适合Ubuntu Linux环境。
 
 更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn/yd/pc.html 。
