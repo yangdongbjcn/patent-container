@@ -1,0 +1,78 @@
+
+.ydbj_layout_width_xxxs {
+	width: 10%;
+}
+
+.ydbj_layout_width_xxs {
+	width: 20%;
+}
+
+.ydbj_layout_width_xs {
+	width: 30%;
+}
+
+.ydbj_layout_width_s {
+	width: 40%;
+}
+
+.ydbj_layout_width_m {
+	width: 50%;
+}
+
+.ydbj_layout_width_l {
+	width: 60%;
+}
+
+.ydbj_layout_width_xl {
+	width: 70%;
+}
+
+.ydbj_layout_width_xxl {
+	width: 80%;
+}
+
+.ydbj_layout_width_xxxl {
+	width: 90%;
+}
+
+.ydbj_layout_width_xxxxl {
+	width: 100% !important;
+}
+
+/*pixel*/
+
+.ydbj_layout_width_pixels_xxxs {
+	width: 1px;
+}
+
+.ydbj_layout_width_pixels_xxs {
+	width: 2px;
+}
+
+.ydbj_layout_width_pixels_xs {
+	width: 5px;
+}
+
+.ydbj_layout_width_pixels_s {
+	width: 10px;
+}
+
+.ydbj_layout_width_pixels_m {
+	width: 20px;
+}
+
+.ydbj_layout_width_pixels_l {
+	width: 50px;
+}
+
+.ydbj_layout_width_pixels_xl {
+	width: 100px;
+}
+
+.ydbj_layout_width_pixels_xxl {
+	width: 200px;
+}
+
+.ydbj_layout_width_pixels_xxxl {
+	width: 500px;
+}
