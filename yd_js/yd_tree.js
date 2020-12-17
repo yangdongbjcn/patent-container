@@ -1,16 +1,14 @@
 
-function YdTree(){
-    // var this.dict;
-    // var this.keys;
-    // var this.list;
+function YdTreePath(){
+    // var this.path;
 }
-YdTree.prototype = {
-  init: function(dict){
-    this.dict = dict;
+YdTreePath.prototype = {
+  init: function(path){
+    this.path = path;
     return this;
   },
   get: function(){
-    return this.dict;
+    return this.path;
   },
   initFromNames: function(excel_names){
     var split_matrix = f_tree_names_split(excel_names);
@@ -24,7 +22,7 @@ YdTree.prototype = {
     f_tree_recursive_build(split_matrix, cur_node, cur_level, cur_node_name_array);
     f_tree_recursive_set_value(json_tree.datas,"");
 
-    this.dict = json_tree;
+    this.path = json_tree;
 
     return this;
   },
@@ -172,3 +170,56 @@ function f_tree_get_values(array_1d, index_array){
 
   return return_array;
 }
+
+
+function Yd_tree(){
+  this.superior;
+  this.members = [];
+  this.names = [];
+  this.keys = [];
+  this.listss = [];
+}
+Yd_tree.prototype = {
+  // constructor: Yd_tree,
+  // 输入
+  init: function(suporior, members, names, keys, listss){
+    this.suporior = suporior;
+    this.members = members;
+    this.names = names;
+    this.keys = keys;
+    this.listss = listss;
+
+    return this;
+  },
+  
+
+  // 输出
+  getTree: function(){
+    
+  },
+  isEmpty: function() {
+    if (this.listss.length == 0) {
+      return true;
+    }else{
+      return false;
+    }
+  },
+  len: function() {
+    return this.listss.length;
+  },
+  len2: function() {
+    if (this.len()) {
+      return this.listss[0].length;  
+    }else{
+      return 0;
+    }    
+  },
+  len2: function() {
+    if (this.len2()) {
+      return this.listss[0][0].length;  
+    }else{
+      return 0;
+    }    
+  }
+  
+};

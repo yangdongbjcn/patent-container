@@ -1,10 +1,7 @@
 
-
-
-
 ///////////////////////////////////////////////////////////
 //
-//      YdLabel, YdSerie, YdBar
+//      YdLabel, YdSerie, YdLegend
 //
 ///////////////////////////////////////////////////////////
 
@@ -51,7 +48,10 @@ var YdSerie = function() {
     };  
 };
 YdSerie.prototype = new YdObject();
-
+YdSerie.prototype.init = function(value) {
+    this.dict = value;
+    return this;
+};
 YdSerie.prototype.symbolSize = function(value) {
     this.dict.symbolSize = function (data) {
         return Math.sqrt(data[2]) * value;
@@ -72,58 +72,55 @@ YdSerie.prototype.label = function(p_fontSize, p_position) {
     return this;
 };
 // chrome
-YdSerie.prototype.itemStyle = function(value) {
+YdSerie.prototype.itemColor = function(value) {
     this.dict.itemStyle = {
         color: value
     };
     return this;
 };
 
-
-
-var YdBar = function(title_text, p_type, p_data) {
-    var p_type = p_type || 'bar';
-    var p_data = p_data || [];
+var YdLegend = function() {
     YdObject.call(this);
-    this.dict = {
-        title: title_text,
-        type: 'bar',
-        tooltip: {
-            show: false
-        },
-        label: {
-            normal: {
-                show: true,
-                position: 'right',
-                textStyle: {
-                    color: '#000'
-                }
-            }
-        },
-        data: [],
+};
+YdLegend.prototype = new YdObject();
+YdLegend.prototype.init = function(p_left, p_top, p_color) {
+    var p_left = p_left || 'right';
+    var p_top = p_top || 'middle';
+    var p_color = p_color || '#fff';
+    this.legend = {
+        type: 'scroll',
+        orient: 'vertical',
+        left: p_left,
+        top: p_top,
+        textStyle: {
+            color: p_color,
+            fontSize: 16
+        }
     };
     return this;
 };
-YdBar.prototype = new YdObject();
-
-var YdMultipleBar = function(rows, legend_names, map_type, item_color) {
-    YdMultiple.call(this);
-    var keys = ['name', 'type', 'data', 'stack', 'itemStyle'];
-    var stack_name = 'one';
-    var series_rows = [];
-    var item_style = {color: item_color};
-    for (var i = 0; i < rows.length; i++) {
-        series_rows.push([legend_names[i], map_type, rows[i], stack_name, item_style]);
-    }
-    this.list = new Yd_frame().initKeysRows(keys, series_rows).getDictRows();
+YdLegend.prototype.names = function(p_names) {
+    var f_gen_legend_data = function(lines_start) {
+        var t_legend_data = [];
+        for(var i in lines_start) {
+            var t_name = lines_start[i];
+            t_legend_data.push({name: t_name});
+        }
+        return t_legend_data;
+    };
+    var p_legend_data = f_gen_legend_data(p_names);
+    this.legend.data = p_legend_data;
+    return this;
 };
-YdMultipleBar.prototype = new YdMultiple();
+YdLegend.prototype.get = function() {
+    return this.legend;
+};
 
 
 
 ///////////////////////////////////////////////////////////
 //
-//      YdOption, YdLegend, YdEcharts, YdMapOps
+//      YdOption, YdColors, YdChart
 //
 ///////////////////////////////////////////////////////////
 
@@ -307,7 +304,6 @@ YdOption.prototype.visualMapPieces = function(p_series_index, p_pieces) {
     };
     return this;
 };
-
 YdOption.prototype.timeline = function(p_timeline) {
     this.dict.timeline = {
         axisType: 'category',
@@ -335,6 +331,87 @@ YdOption.prototype.timeline = function(p_timeline) {
     };
     return this;
 };
+YdOption.prototype.initFrameBar = function(p_names, p_keys, p_clists, map_type, is_stack) {
+    // p_names = [2013, 2014, 2015]
+    // p_keys = ['sales', 'products'];
+    // p_clists = [[500, 600, 700], [550, 650, 750]];
+
+    // 使用示例
+    // var control_id = 'region_time_div';
+    // var t_option = new YdOption().initFrameBar(t_frame.getNames().get(), t_frame.getKeys().get(), t_frame.getClists().get(), 'bar', true).title('年度原创趋势').get();
+    // var time1_chart = new YdChart().init(control_id).option(t_option).get();
+
+    var map_type = map_type || 'bar';
+    var is_stack = is_stack || false;
+    if (p_keys.length != p_clists.length) {
+        debugger;
+    }
+
+    var t_lists = [];
+    if (is_stack){
+        var stack_name = 'one';
+        for (var i = p_keys.length - 1; i >= 0; i--) {
+            var t_list = [p_keys[i], map_type, p_clists[i], stack_name];
+            t_lists.push(t_list);
+        }
+        var t_keys = ['name', 'type', 'data', 'stack'];
+    }else{
+        for (var i = p_keys.length - 1; i >= 0; i--) {
+            var t_list = [p_keys[i], map_type, p_clists[i]];
+            t_lists.push(t_list);
+        }
+        var t_keys = ['name', 'type', 'data'];
+        
+    }
+    
+    var t_series = new Yd_mat().init(t_lists).toDicts(t_keys);
+    var legend = new YdLegend().init('right', 'middle', '#000').get();
+    this.xAxis(p_names, 'category', 90).yAxis(null).series(t_series).legend(legend);
+    return this;
+};
+YdOption.prototype.initScatterBubble = function(p_scatter_mat, bubble_size, bubble_font, bubble_color, x_axis, y_axis) {
+    var bubble_color = bubble_color || new YdColors().getColors();
+    var x_axis = x_axis || 'category';
+    var y_axis = y_axis || 'category';
+    // p_scatter_mat = [[["技术效果1", "技术手段1", 3, 3], ["技术效果2", "技术手段1", 3, 3]],[["技术效果1", "技术手段2", 3, 3], ["技术效果2", "技术手段2", 3, 3]]];
+    // 使用示例
+    // var control_id = 'chart_div';
+    // var t_option = new YdOption().initScatterBubble(l_data, t_size, t_font).get();
+    // var time1_chart = new YdChart().init(control_id).option(t_option).get();
+    
+    var series = Array();
+    for(var i=0; i<p_scatter_mat.length; i++) {
+        var item = p_scatter_mat[i];
+        var p_color = bubble_color[i];
+
+        var serie = new YdSerie().name(i).data(item)
+            .type('scatter').symbolSize(bubble_size).label(bubble_font).itemColor(p_color).get();
+
+        series.push(serie);
+    }
+
+    this.xAxisType(x_axis).yAxisType(y_axis).series(series);
+    return this;
+};
+
+var YdChart = function() {
+    YdObject.call(this);
+    // this.chart
+};
+YdChart.prototype = new YdObject();
+YdChart.prototype.init = function(control_id) {
+    this.chart = echarts.init(document.getElementById(control_id));
+    return this;
+};
+YdChart.prototype.get = function() {
+    return this.chart;
+};
+YdChart.prototype.option = function(p_option) {
+    this.chart.setOption(p_option);
+    return this;
+};
+
+
 
 var YdColors = function() {
     YdObject.call(this);
@@ -346,10 +423,12 @@ YdColors.prototype.getColors = function() {
 };
 YdColors.prototype.getWorldColors = function() {
     var world_color = {};
-    var world_position = new YdPosition().getWorldPositionDict();
+    var cn_names = new YdPosition().getCnNames();
+    var positions = new YdPosition().getPosition(cn_names);
 
-    for(var k in world_position) {
-        var value = world_position[k];
+    for (var i = 0; i < cn_names.length; i++) {
+        var k = cn_names[i]
+        var value = positions[i];
         var str = '#';
         str = str + t_to_string16(value[0]);
         str = str + t_to_string16(value[1]);
@@ -376,214 +455,3 @@ YdColors.prototype.getWorldColors = function() {
     return world_color;
 };
 
-
-function YdLegend(){
-    return {
-        init: function() {
-        	this.legend = {};
-			return this;    
-        },
-        set: function() {
-        	this.legend = value;
-        	return this;
-        },
-        get: function() {
-        	return this.legend;
-        },
-        att: function(key, value) {
-        	this.legend.key = value;
-        	return this;
-        },
-        initLegend: function(p_data, p_left, p_top, p_color) {
-            var p_left = p_left || 'right';
-            var p_top = p_top || 'middle';
-            var p_color = p_color || '#fff';
-        	this.legend = {
-	        	type: 'scroll',
-		    	orient: 'vertical',
-		    	data: p_data,
-		    	left: p_left,
-		    	top: p_top,
-		    	textStyle: {
-		    		color: p_color,
-		    		fontSize: 16
-		    	}
-	        };
-	        return this;
-    	},    
-    };
-}
-
-
-function YdEcharts(){
-    return {
-        
-        initChart: function(control_id) {
-			this.chart = echarts.init(document.getElementById(control_id));
-			return this;
-        },
-        set: function(option) {
-        	this.chart.setOption(option);
-        	return this;
-        },
-        get: function() {
-            return this.chart;
-        },
-        seriesArrayPlotChart: function(control_id, x_axis, series_array, legend_names, title_text) {
-            var title_text = title_text || '';
-
-            var legend = YdLegend().initLegend(legend_names, 'right', 'middle', '#000').get();
-            var legends = [legend];
-            
-			var t_option = new YdOption().tooltip(false).title(title_text)
-				.xAxis(x_axis, 'category', 90).yAxis(null).series(series_array).legend(legends).get();
-			
-    		this.initChart(control_id);
-    		this.set(t_option);
-    		return this.chart;
-        },
-        matPlotBar: function(control_id, x_axis, rows, legend_names, map_type, title_text) {
-            var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-            
-            var keys = ['name', 'type', 'data'];
-            var series_rows = [];
-            for (var i = 0; i < rows.length; i++) {
-                series_rows.push([legend_names[i], map_type, rows[i]]);
-            }
-            var t_series = new Yd_frame().initKeysRows(keys, series_rows).getDictRows();
-            return this.seriesArrayPlotChart(control_id, x_axis, t_series, legend_names, title_text);
-        },
-        framePlotBar: function(control_id, dict_rows, legend_names, map_type, title_text) {
-            var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-
-            var ydbjFrame = new Yd_frame().initDictRows(dict_rows);
-            var x_axis = ydbjFrame.getKeys().get();
-            var rows = ydbjFrame.getRows().get();
-            return this.matPlotBar(control_id, x_axis, rows, legend_names, map_type, title_text);
-        },
-        framePlotBarStack: function(control_id, dict_rows, legend_names, map_type, title_text) {
-        	var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-            
-            var ydbjFrame = new Yd_frame().initDictRows(dict_rows);
-        	var x_axis = ydbjFrame.getKeys().get();
-        	var rows = ydbjFrame.getRows().get();
-        	return this.matPlotBarStack(control_id, x_axis, rows, legend_names, map_type, title_text);
-        },
-   		arrayPlotBar: function(control_id, x_axis, data_row, map_type, title_text) {
-            var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-            
-            var keys = ['name', 'type', 'data'];
-            var rows = [ ['直方图', map_type, Object.values(data_row)] ];
-            var t_series = new Yd_frame().initKeysRows(keys, rows).getDictRows();
-
-            var t_option = new YdOption().tooltip(false).title(title_text).xAxis(x_axis).yAxis(null).series(t_series).get();
-            
-            this.initChart(control_id);
-            this.set(t_option);
-            return this.chart;
-        },
-        matPlotBarStack: function(control_id, x_axis, rows, legend_names, map_type, title_text) {
-			var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-
-            var keys = ['name', 'type', 'data', 'stack'];
-		    var stack_name = 'one';
-		    var series_rows = [];
-			for (var i = 0; i < rows.length; i++) {
-   				series_rows.push([legend_names[i], map_type, rows[i], stack_name]);
-   			}
-		    var t_series = new Yd_frame().initKeysRows(keys, series_rows).getDictRows();
-			return this.seriesArrayPlotChart(control_id, x_axis, t_series, legend_names, title_text);
-        },
-        dictPlotBar: function(control_id, p_dict, map_type, title_text) {
-			var title_text = title_text || '';
-            var map_type = map_type || 'bar'; //'line' 'pie';
-            
-            var keys = ['name', 'type', 'data'];
-		    var rows = [ ['图', map_type, this.TransDictToNameValue(p_dict)] ];
-		    var t_series = new Yd_frame().initKeysRows(keys, rows).getDictRows();
-
-		    var t_option = new YdOption().tooltip(false).title(title_text).xAxis(Object.keys(p_dict)).yAxis(null).series(t_series).get();
-			
-			this.initChart(control_id);
-			this.set(t_option);
-			return this.chart;
-        },
-        dictPlotRing: function(control_id, p_dict, radius_low, radius_high, title_text) {
-			var title_text = title_text || '';
-            var radius_low = radius_low || '50%';
-            var radius_high = radius_high || '70%';
-
-            var map_type = 'pie';
-
-            var keys = ['name', 'type', 'data'];
-		    
-		    var rows = [ ['图', map_type, this.TransDictToNameValue(p_dict)] ];
-		    var t_series = new Yd_frame().initKeysRows(keys, rows).pushKeyColOfSameValue('radius', [radius_low, radius_high]).getDictRows();
-			
-			// sort
-			t_series = t_series.sort(function (a, b) { return a.value - b.value; });
-		    
-		    var t_option = new YdOption().tooltip(false).title(title_text).xAxis(Object.keys(p_dict)).yAxis(null).series(t_series).get();
-			
-			this.initChart(control_id);
-			this.set(t_option);
-			return this.chart;
-        },
-        TransDictToNameValue: function(p_data){
-			var t_keys = Object.keys(p_data);
-			var t_values = Object.values(p_data);
-			var pie_array = new Array();
-
-			for(var i=0; i<t_keys.length; i++) {
-				var t_object = {};
-				t_object['name'] = t_keys[i];
-				t_object['value'] = t_values[i];
-
-				pie_array.push(t_object);
-			}
-			return pie_array;
-		},
-		scatterArrayPlotBubble: function(control_id, p_data, x_axis, y_axis, bubble_size, bubble_font, bubble_color, title_text) {
-            var title_text = title_text || '';
-			var t_series = new YdSerie().name('显示').data(p_data)
-				.type('scatter').symbolSize(bubble_size).label(bubble_font).itemStyle(bubble_color).get();
-
-			var t_option = new YdOption()
-				.title(title_text).xAxisType(x_axis).yAxisType(y_axis)
-				.series([t_series])
-				.get();
-
-			this.initChart(control_id);
-    		this.set(t_option);
-    		return this.chart;
-		},
-		scatterMatPlotBubble: function(control_id, p_data, bubble_size, bubble_font, title_text) {
-            var title_text = title_text || '';
-			var series = Array();
-		  	var p_colors = new YdColors().getColors();
-			for(var i=0; i<p_data.length; i++) {
-				var item = p_data[i];
-				var p_color = p_colors[i];
-
-				var serie = new YdSerie().name(i).data(item)
-					.type('scatter').symbolSize(bubble_size).label(bubble_font).itemStyle(p_color).get();
-
-				series.push(serie);
-			}
-
-			var t_option = new YdOption()
-				.title(title_text).xAxisType('category').yAxisType('category')
-				.series(series)
-				.get();
-
-			this.initChart(control_id);
-    		this.set(t_option);
-    		return this.chart;
-		},
-    };
-}

@@ -31,6 +31,11 @@ class yd_list {
         }
         return $this;
     }
+    public function initMN($m, $n) {
+        
+        
+        return $this;
+    }
     public function merge($new_list) {
         $this->list = array_merge($this->list, $new_list);
         return $this;
@@ -58,14 +63,14 @@ class yd_list {
     public function len() {
         return count($this->list);
     }
-    public function getValue($key) {
-        return $this->list[$key];
+    public function getValue($index) {
+        return $this->list[$index];
     }
-    public function getSomeValues($keys) {
+    public function getSomeValues($index_array) {
         $new_list = array();
-        for($i = 0; $i < count($keys); $i++) {
-            $key = $keys[$i];
-            $value = $this->list[$key];
+        for($i = 0; $i < count($index_array); $i++) {
+            $index = $index_array[$i];
+            $value = $this->list[$index];
             array_push($new_list, $value);
         }
         return $new_list;
@@ -73,6 +78,10 @@ class yd_list {
 
     // 判断
     public function has($value){
+        // 返回 键名 或 false
+        return array_search($value, $this->list);
+    }
+    public function getIndexByValue($value){
         // 返回 键名 或 false
         return array_search($value, $this->list);
     }
@@ -91,7 +100,12 @@ class yd_list {
         
         return $this;
     }
-    public function cloneItem($key) {
+    public function deleteValue($value_array){
+        
+        
+        return $this;
+    }
+    public function cloneItem($index) {
 
     }
     public function pop() {
@@ -110,6 +124,15 @@ class yd_list {
         $this->list = array_reverse($this->list);
         return $this;
     }
+    public function flip() {
+        $this->list = array_flip($this->list);
+        return $this;
+    }
+    public function accum() {
+        
+        
+        return $this;
+    }
     public function reIndex($re_index) { // 1 4 3 2
         assert(count($re_index) == $this->len());
         $re_index_flip = array_flip($re_index); // 1 4 3 2 
@@ -122,6 +145,10 @@ class yd_list {
         return $this;
     }
     public function trunc($len) {
+        
+        return $this;
+    }
+    public function format($format_string) {
         
         return $this;
     }
@@ -159,16 +186,16 @@ class yd_list {
     
     // 转换输出
     // clone function 不必 PHP 值复制，而非引用复制
-    public function toDict($keys) {
-        if ($this->len() != count($keys)) {
+    public function toDict($index_array) {
+        if ($this->len() != count($index_array)) {
           return FALSE;
         }
 
         $dict = array();
         for ($i = 0; $i < $this->len(); $i++) {
-          $key = $keys[$i];
+          $index = $index_array[$i];
           $value = $this->list[$i];
-          $dict[$key] = $value;
+          $dict[$index] = $value;
         }
         return $dict;
     }
@@ -198,7 +225,10 @@ class yd_list {
         }
         return $t_hist;
     }
-    
+    public function toGroup(){
+        
+        
+    }
 }
         
 ?>

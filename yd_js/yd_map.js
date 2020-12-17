@@ -4,6 +4,43 @@
 //      YdPosition
 //
 ///////////////////////////////////////////////////////////
+var YdChinaPosition = function() {
+    YdObject.call(this);
+    this.china_position_dict = this.getPositionDict('china');
+};
+
+YdChinaPosition.prototype = new YdObject();
+YdChinaPosition.prototype.getPositionDict = function(mapName) {
+    var position = {};
+    var mapFeatures = echarts.getMap(mapName).geoJson.features;
+    // IE8 不支持 forEach
+    // mapFeatures.forEach(function(v) {
+    //     // 地区名称
+    //     var name = v.properties.name;
+    //     // 地区经纬度
+    //     position[name] = v.properties.cp;
+    // });
+    for (var i = mapFeatures.length - 1; i >= 0; i--) {
+        var v = mapFeatures[i];
+        // 地区名称
+        var name = v.properties.name;
+        // 地区经纬度
+        position[name] = v.properties.cp;
+    }
+    return position;
+};
+YdChinaPosition.prototype.getChinaPosition = function(names) {
+    var position_dict = this.china_position_dict;
+
+    var return_array = [];
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        
+        var position = position_dict[name];
+        return_array.push(position);
+    }
+    return return_array;
+};
 
 var YdPosition = function() {
     YdObject.call(this);
@@ -118,7 +155,7 @@ var YdPosition = function() {
         ["-15.964452", "18.0745", "毛里塔尼亚", "Mauritania", "MR"],
         ["-101.4359", "39.4629", "美国", "United States", "US"],
         ["106.908677", "47.915632", "蒙古", "Mongolia", "MN"],
-        ["90.410568", "23.813179", "孟加拉", "Bangladesh", "BD"],
+        ["90.410568", "23.813179", "孟加拉国", "Bangladesh", "BD"],
         ["-77.042548", "-12.044223", "秘鲁", "Peru", "PE"],
         ["96.077119", "19.763943", "缅甸", "Myanmar", "MM"],
         ["13.40498", "52.521199", "民主德国", "Germany DDR", ""],
@@ -208,119 +245,140 @@ var YdPosition = function() {
         ["108.97", "34.27", "中国", "China", "CN"],
         ["121.5365", "25.0192", "中国台湾", "Taiwan", "TW"],
         ["113.52", "22.9", "中国香港", "Hong Kong", "HK"],
-        ["4.342799", "50.85052", "欧洲", "Europe Union", "EU"]
+        ["113.5", "22.2", "中国澳门", "Macao", "MO"],
+        ["4.342799", "50.85052", "欧洲", "Europe Union", "EU"],
+        ["-66.6", "18.27", "波多黎各", "Puerto Rico", "PR"],
+        ["50.36", "26.12", "巴林", "Bahrain", "BH"]
     ];
+    this.world_position_mat = new Yd_mat().init(this.world_position);
 };
 
 YdPosition.prototype = new YdObject();
-YdPosition.prototype.getPositionDict = function(mapName) {
-    var position = {};
-    var mapFeatures = echarts.getMap(mapName).geoJson.features;
-    // IE8 不支持 forEach
-    // mapFeatures.forEach(function(v) {
-    //     // 地区名称
-    //     var name = v.properties.name;
-    //     // 地区经纬度
-    //     position[name] = v.properties.cp;
-    // });
-    for (var i = mapFeatures.length - 1; i >= 0; i--) {
-        var v = mapFeatures[i];
-        // 地区名称
-        var name = v.properties.name;
-        // 地区经纬度
-        position[name] = v.properties.cp;
-    }
-    return position;
-};
-
-YdPosition.prototype.getChinaPositionDict = function() {
-    return this.getPositionDict('china');
-};
-YdPosition.prototype.getWorldPositionDict = function() {
-    var coord_map = {};
-
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        coord_map[item[2]] = [item[0], item[1]];
-    }
-    return coord_map;
-};
-YdPosition.prototype.getWorldPositionDictEnglish = function() {
-    var coord_map = {};
-
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        coord_map[item[3]] = [item[0], item[1]];
-    }
-    return coord_map;
-};
-
-YdPosition.prototype.getWorldNameDict = function() {
-    var name_map = {};
-
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        name_map[item[2]] = item[3];
-    }
-
-    return name_map;
-};
-YdPosition.prototype.getWorldNameDictEnglish = function() {
-    var name_map = {};
-
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        name_map[item[3]] = item[2];
-    }
-
-    return name_map;
-};
-
-YdPosition.prototype.translateToChinese = function(names) {
-    var new_names = [];
-    var name_map = this.getWorldNameDictEnglish();
+YdPosition.prototype.getPosition = function(names) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.getClist(2).get();
+    var longtitudes = this.world_position_mat.getClist(0).get();
+    var latitudes = this.world_position_mat.getClist(1).get();
     for (var i = 0; i < names.length; i++) {
-        var new_name = name_map[names[i]];
-        new_names.push(new_name);
-    }
-    return new_names;
-};
-YdPosition.prototype.translateToEnglish = function(names) {
-    var new_names = [];
-    var name_map = this.getWorldNameDict();
-    for (var i = 0; i < names.length; i++) {
-        var new_name = name_map[names[i]];
-        new_names.push(new_name);
-    }
-    return new_names;
-};
-YdPosition.prototype.getWorldCodeDict = function() {
-    var code_map = {};
+        var name = names[i];
+        var index = cn_names.indexOf(name);
 
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        code_map[item[2]] = item[4];
-    }
-    return code_map;
-};
-YdPosition.prototype.getWorldCode = function(names) {
-    var new_names = [];
-    var name_map = this.getWorldCodeDict();
-    for (var i = 0; i < names.length; i++) {
-        var new_name = name_map[names[i]];
-        new_names.push(new_name);
-    }
-    return new_names;
-};
-YdPosition.prototype.getWorldCodeDictEnglish = function() {
-    var code_map = {};
+        if (index == -1) {
+          return_array.push(null);
+          continue;         
+        }
 
-    for (var i = this.world_position.length - 1; i >= 0; i--) {
-        var item = this.world_position[i];
-        code_map[item[3]] = item[4];
+        var longtitude = longtitudes[index];
+        var latitude = latitudes[index];
+        return_array.push([longtitude, latitude]);
     }
-    return code_map;
+    return return_array;
 };
+YdPosition.prototype.getPositionByEnglish = function(names) {
+    var return_array = [];
+    var en_names = this.world_position_mat.getClist(3).get();
+    var longtitudes = this.world_position_mat.getClist(0).get();
+    var latitudes = this.world_position_mat.getClist(1).get();
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var index = en_names.indexOf(name);
+
+        if (index == -1) {
+          return_array.push(null);
+          continue;           
+        }
+
+        var longtitude = longtitudes[index];
+        var latitude = latitudes[index];
+        return_array.push([longtitude, latitude]);
+    }
+    return return_array;
+};
+YdPosition.prototype.getCnNames = function() {
+    var cn_names = this.world_position_mat.getClist(2).get();
+    return cn_names;
+};
+YdPosition.prototype.getCnName = function(names) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.getClist(2).get();
+    var en_names = this.world_position_mat.getClist(3).get();
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var index = en_names.indexOf(name);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = cn_names[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getEnName = function(names) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.getClist(2).get();
+    var en_names = this.world_position_mat.getClist(3).get();
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var index = cn_names.indexOf(name);
+
+        if (index == -1) {
+          return_array.push(null);
+          continue;         
+        }
+
+        var new_name = en_names[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationCodes = function() {
+    var cn_names = this.world_position_mat.getClist(4).get();
+    return cn_names;
+};
+YdPosition.prototype.getMainNationCodes = function() {
+    var cn_names = ['AR','EG','IE','AT','AU','PK','BR','PG','BX','BE','IS','BA','PL','DK','DE','RU','FR','AP','OA','PH','FI','KZ','GC','KR','NL','CA','CZ','MY','US','ZA','EM','NO','EA','EP','PT','JP','SE','CH','WO','TH','TR','ES','GR','SG','NZ','HU','IL','IT','IN','ID','GB','VM','CN',"HK","TW"];
+    return cn_names;
+};
+YdPosition.prototype.getNationCode = function(names) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.getClist(2).get();
+    var codes = this.world_position_mat.getClist(4).get();
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var index = cn_names.indexOf(name);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = codes[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationCodeByEnglish = function(names) {
+    var return_array = [];
+    var en_names = this.world_position_mat.getClist(3).get();
+    var codes = this.world_position_mat.getClist(4).get();
+    for (var i = 0; i < names.length; i++) {
+        var name = names[i];
+        var index = en_names.indexOf(name);
+
+        if (index == -1) {
+          return_array.push(null);
+          continue;          
+        }
+
+        var new_name = codes[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+
 
 ///////////////////////////////////////////////////////////
 //
@@ -697,10 +755,11 @@ YdLines.prototype.arrow = function() {
 
 function YdMapOps(){
     return {
-        ScatterCoord: function (map_scatter, world_position) {
+        ScatterCoord: function (map_scatter) {
             var res = [];
             for (var i = 0; i < map_scatter.length; i++) {
-                var geoCoord = world_position[map_scatter[i].name];
+                var names = [map_scatter[i].name];
+                var geoCoord = new YdPosition().getPosition(names)[0];
                 if (geoCoord) {
                     res.push({
                         name: map_scatter[i].name,
@@ -711,12 +770,12 @@ function YdMapOps(){
             }
             return res;
         },
-        LinesCoords: function(map_lines, world_position) {
+        LinesCoords: function(map_lines) {
             var lines_coords = [];
             for (var i = 0; i < map_lines.length; i++) {
                 var dataItem = map_lines[i];
-                var fromCoord = world_position[dataItem[0]];
-                var toCoord = world_position[dataItem[2]];
+                var fromCoord = new YdPosition().getPosition([dataItem[0]])[0];
+                var toCoord = new YdPosition().getPosition([dataItem[2]])[0];
                 if (fromCoord && toCoord) {
                     lines_coords.push({
                         coords: [fromCoord, toCoord],
@@ -729,14 +788,14 @@ function YdMapOps(){
             }
             return lines_coords;
         },
-        LongLinesCoords: function(map_lines, world_position) {
+        LongLinesCoords: function(map_lines) {
             var lines_coords = [];
             for (var i = 0; i < map_lines.length; i++) {
                 var t_lines = map_lines[i];
                 var t_coords = [];
                 for (var j = 0; j < t_lines.length; j++) {
                     var dataItem = t_lines[j];
-                    var t_coord = world_position[dataItem];
+                    var t_coord =  new YdPosition().getPosition([dataItem])[0];
                     if (t_coord) {
                         t_coords.push(t_coord);
                     }
@@ -757,7 +816,8 @@ function YdMapOps(){
             }
             return lines_start;
         },
-        LinesSeries: function(lines_start, lines_coords, color_map){
+        LinesSeries: function(lines_start, lines_coords){
+            color_map = new YdColors().getWorldColors();
             if(lines_start.length != lines_coords.length){
                 debugger;
             }
@@ -784,7 +844,8 @@ function YdMapOps(){
 
             return t_series;
         },
-        SeriesLines: function(lines_start, lines_coords, color_map, p_max_value){
+        SeriesLines: function(lines_start, lines_coords, p_max_value){
+            color_map = new YdColors().getWorldColors();
             if(lines_start.length != lines_coords.length){
                 debugger;
             }

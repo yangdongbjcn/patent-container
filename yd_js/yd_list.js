@@ -1,4 +1,4 @@
-function Yd_list(){
+ function Yd_list(){
     // var this.list;
     // var this.sortindex;
 }
@@ -11,6 +11,13 @@ Yd_list.prototype = {
   init1N: function(len) {
     this.list = []; 
     for (var i = 0; i < len; i++) {
+      this.list.push(i);
+    }
+    return this;
+  },
+  initMN: function(m, n) {
+    this.list = []; 
+    for (var i = m; i <= n; i++) {
       this.list.push(i);
     }
     return this;
@@ -42,27 +49,30 @@ Yd_list.prototype = {
   len: function() {
     return this.list.length;
   },
-  getValue: function(key) {
-      return this.list[key];
+  getValue: function(index) {
+      return this.list[index];
   },
-  getSomeValues: function(keys) {
-      var new_list = new Array();
-      for(var i = 0; i < keys.length; i++) {
-        var key = keys[i];
-        var value = this.list[key];
-        new_list.push(value);
-      }
-      return new_list;
+  getSomeValues: function(index_array) {
+    var new_list = new Array();
+    for(var i = 0; i < index_array.length; i++) {
+      var index = index_array[i];
+      var value = this.list[index];
+      new_list.push(value);
+    }
+    return new_list;
   },
 
   // 判断
   has: function(value){
-      var t_index = this.list.indexOf(value);
-      if ( t_index == -1 ) {
-          return false;
-      }else{
-          return true;
-      }
+    var t_index = this.list.indexOf(value);
+    if ( t_index == -1 ) {
+        return false;
+    }else{
+        return true;
+    }
+  },
+  getIndexByValue: function(value){
+    return this.list.indexOf(value);
   },
 
   // 改变
@@ -76,12 +86,13 @@ Yd_list.prototype = {
   },
   filterFunc: function(f_filter){
     var f_filter = f_filter || function(x){return true;};
-    for(var i=0; i<this.list.length; i++) {
-      var item = this.list[i];
-      if (f_filter(item)){
-        new_list.push(item);
-      }
-    }
+    var new_list = this.list.filter(f_filter);
+    // for(var i=0; i<this.list.length; i++) {
+    //   var item = this.list[i];
+    //   if (f_filter(item)){
+    //     new_list.push(item);
+    //   }
+    // }
     return new Yd_list().init(new_list);
   },
   filterValue: function(value_array){
@@ -94,9 +105,15 @@ Yd_list.prototype = {
     }
     return new Yd_list().init(new_list);
   },
-  cloneItem: function(key) {
+  deleteValue: function(value_array) {
+    function f_filter(value) {
+      return value_array.indexOf(value) === -1; 
+    }
+    return this.filterFunc(f_filter);
+  },
+  cloneItem: function(index) {
       // -1 表示最后，0表示不删除
-      this.list.splice(-1, 0, this.list[key]);
+      this.list.splice(-1, 0, this.list[index]);
       return this;
   },
   pop: function() {
@@ -115,6 +132,32 @@ Yd_list.prototype = {
       
       return this;
   },
+  flip: function() {
+    this.format('number');
+
+    var new_list = [];
+    for (var i = 0; i < this.len(); i++) {
+      new_list.push(0);
+    }
+    for (var i = 0; i < this.len(); i++) {
+      var t_index = this.list[i];
+      new_list[t_index] = i;
+    }
+    return new Yd_list().init(new_list);
+  },
+  accum: function() {
+    this.format('number');
+
+    var new_list = this.clone();
+
+    var t_sum = 0;
+    for (var i = 0; i < new_list.len(); i++) {
+      var item = new_list.list[i];
+      t_sum = t_sum + item;
+      new_list.list[i] = t_sum;
+    }
+    return new_list;
+  },
   reIndex: function(p_index){
     var new_list = new Array();
     for (var i = 0; i < p_index.length; i++) {
@@ -131,6 +174,20 @@ Yd_list.prototype = {
     var new_list = this.init(this.get()).clone().get();
     new_list.splice(len, new_list.length - len + 1);
     return new Yd_list().init(new_list);
+  },
+  format: function(format_string) {
+    for (var i = 0; i < this.list.length; i++) {
+      var item = this.list[i];
+      var new_item;
+      if (format_string == 'string') {
+        new_item = String(item);
+      }
+      if (format_string == 'number') {
+        new_item = Number(item);
+      }
+      this.list[i] = new_item;
+    }
+    return this;
   },
 
   // 排序
@@ -197,15 +254,15 @@ Yd_list.prototype = {
     }
     return new Yd_list().init(new_list);
   },
-  toDict: function(keys) {
-    if(this.len() != keys.length){
+  toDict: function(index_array) {
+    if(this.len() != index_array.length){
       debugger;
     }
     var dict = {};
     for (var i = 0; i < this.len(); i++) {
-      var key = keys[i];
+      var index = index_array[i];
       var value = this.list[i];
-      dict[key] = value;
+      dict[index] = value;
     }
     return dict;
   },
@@ -241,6 +298,18 @@ Yd_list.prototype = {
       }
     }
     return t_hist;
+  },
+  toGroup: function() {
+    // var fn = function(o) {
+      
+    // };
+    // const groups = {};
+    // this.list.forEach(function (o) {
+    //     const group = JSON.stringify(fn(o));
+    //     groups[group] = groups[group] || [];
+    //     groups[group].push(o);
+    // });
+    // return groups;
   }
 };
 

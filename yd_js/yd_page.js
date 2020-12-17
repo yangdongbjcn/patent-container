@@ -144,6 +144,26 @@ YdHtml.prototype = {
     this.html = this.html + t_html;
     return this;
   },
+  addChartDiv: function(id, height) {
+    var height = height || 300;
+    var t_html = "<div style='width:100%;height:" + height + "px;' id='" + id + "'></div>";
+    this.html = this.html + t_html;
+    return this;
+  },
+  addTableDiv: function(id) {
+    var t_html = "<div class='row-fluid yd_layout_border yd_layout_margin_top_s'>\
+  <table class='table table-bordered table-condensed search_result_bg_text' id='" + id + "'>\
+      <thead>\
+        <tr>\
+        </tr>\
+      </thead>\
+      <tbody>\
+      </tbody>\
+  </table>\
+</div>";
+    this.html = this.html + t_html;
+    return this;
+  },
   get: function() {
     return this.html;
   }
@@ -359,19 +379,19 @@ YdDataTables.prototype = {
   setOption: function(option) {
       this.option = option;
   },
-  showTable: function(t_data, control_id, column_dict, column_defs, complex_colunm) {
+  buildOption: function(t_data, column_dict, column_defs, complex_colunm) {
       var complex_colunm = complex_colunm || {};
-
-      var header_list = Object.values(column_dict);
-      this.initTableHeader(control_id, header_list);
 
       var key_list = Object.keys(column_dict);
       var option = this.generateOption(key_list, complex_colunm);
       option.columnDefs = column_defs;
 
-      // t_data = filter_func(t_data);
       option.data = t_data;
-
+      return option;
+  },
+  showTable: function(option, control_id, column_dict) {
+      var header_list = Object.values(column_dict);
+      this.initTableHeader(control_id, header_list);
       $('#' + control_id).DataTable(option);
   }
 };

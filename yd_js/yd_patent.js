@@ -126,7 +126,7 @@ function yd_patent_hist_first_applicant(t_applicant, trunc_len) {
 
   t_histogram = new Yd_list().init(t_array).toHistogram(t_index);
 
-  var t_trunc = new Yd_dict().init(t_histogram).trunc(trunc_len).get();
+  var t_trunc = new Yd_dict().init(t_histogram).sortIndex().trunc(trunc_len).get();
 
   return t_trunc;
 }

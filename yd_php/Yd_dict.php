@@ -25,13 +25,17 @@ class yd_dict {
         return $this;
     }
     public function initKeysValues($keys, $values) {
-        $this->dict = {};
+        $this->dict = $this->CombineKeysValues($keys, $values);
+        return $this;
+    }
+    public function CombineKeysValues($keys, $values) {
+        $dict = array();
         for ($i = 0; $i < count($keys); $i++) {
             $key = $keys[$i];
             $value = $values[$i];
-            $this->dict[$key] = $value;
+            $dict[$key] = $value;
         }
-        return $this;
+        return $dict;
     }
     public function initByHist($list) {
         $hist = array();
@@ -143,10 +147,6 @@ class yd_dict {
       
 
     }
-    public function trunc($num){
-    
-
-    }
 
     // 排序
     public function sortIndex() {
@@ -168,6 +168,10 @@ class yd_dict {
 
     // 转换输出
     // clone function 不必 PHP 值复制，而非引用复制
+    public function toGroup(){
+        
+        
+    }
 
 }
         

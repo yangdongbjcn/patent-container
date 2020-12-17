@@ -9,55 +9,49 @@
 class yd_mat {
     private $CI;
 
-    private $rows;
-    private $cols;
+    private $lists;
+    private $clists;
 
     public function __construct() {
         $this->CI = & get_instance();
 
         $this->CI->load->library('yd_list');
 
-        $this->rows = array();
-        $this->cols = array();
+        $this->lists = array();
+        $this->clists = array();
 
-        log_message('debug', 'YdbjMatrix Class Initialized');
+        log_message('debug', 'yd_mat Class Initialized');
     }
 
     // 输入
-    public function init($rows) {
-        $this->rows = $rows;
-        return $this;
-    }
-    public function initCols($cols) {
-        $this->rows = $cols;
-        $this->rows = $this->Transpose();
-        $this->cols = $cols;
+    public function init($lists) {
+        $this->lists = $lists;
         return $this;
     }
     public function merge($new_rows) {
-        $this->rows = array_merge($this->rows, $new_rows);
+        $this->lists = array_merge($this->lists, $new_rows);
         return $this;
     }
     public function push($new_item) {
-        array_push($this->rows, $new_item);
+        array_push($this->lists, $new_item);
         return $this;
     }
-    public function pushCol($col) {
-        foreach($this->rows as $i => &$row){
+    public function pushClist($col) {
+        foreach($this->lists as $i => &$row){
             $item = $col[$i];
             $row[] = $item;
         }
         return $this;
     }
     public function unshift($new_item) {
-        $this->rows = array_unshift($this->rows, $new_item);
+        $this->lists = array_unshift($this->lists, $new_item);
         return $this;
     }
     
 
     // 输出
     public function get() {
-        return $this->rows;
+        return $this->lists;
     }
     public function isEmpty() {
         if ($this->len() == 0) {
@@ -67,59 +61,58 @@ class yd_mat {
         }
     }
     public function len() {
-        return count($this->rows);
+        return count($this->lists);
     }
     public function len2() {
-        return count($this->rows[0]);
+        return count($this->lists[0]);
     }
-    public function getRow($row_num) {
-        return $this->rows[$row_num];
-    }
-    public function getSomeRows($keys) {
+    public function getSomeLists($keys) {
         $new_rows = array();
         for($i = 0; $i < count($keys); $i++) {
             $key = $keys[$i];
-            $row = $this->rows[$key];
+            $row = $this->lists[$key];
             array_push($new_rows, $row);
         }
         return $new_rows;
     }
-    public function getCol($col_num) {
+    public function getClist($col_num) {
         $col = array();
-        foreach($this->rows as $i => $row){
+        foreach($this->lists as $i => $row){
             $item = $row[$col_num];
             array_push($col, $item);
         }
         return $col;
     }
-    public function getSomeCols($col_num_array) {
+    public function getSomeClists($keys) {
       //未验证
       $new_rows = array();
       for($i=0; $i< $this->len(); $i++) {
-          $row = $this->getRow($i);
+          $row = $this->lists[$i];
           $new_row = $this->CI->yd_lib->init($row).getSomeValues($col_num_array);
           array_push($new_rows, $new_row);
       }
       return $new_rows;
     }
-    public function getCols() {
-        if(!$this->cols){
-            $this->Transpose();    
-        }        
-        return $this->cols;
-    }
     public function Transpose() {
-        $this->cols = tf_mat_transpose($this->rows);
-        return $this;
+        $clists = tf_mat_transpose($this->lists);
+        return $clists;
     }
 
     // 改变
     public function iterFunc($func_name){
-        $this->rows = array_map($func_name, $this->rows);
+        $this->lists = array_map($func_name, $this->lists);
+        return $this;
+    }
+    public function iterListFunc($func_name){
+        
+        return $this;
+    }
+    public function iterClistFunc($func_name){
+        
         return $this;
     }
     public function filterFunc($func_name){
-        $this->rows = array_filter($this->rows, $func_name);
+        $this->lists = array_filter($this->lists, $func_name);
         return $this;
     }
     public function filterValue($col_num, $value_array){
@@ -127,26 +120,26 @@ class yd_mat {
         
         return $this;
     }
-    public function cloneRow($row_num) {
+    public function cloneList($row_num) {
 
     }
-    public function cloneCol($col_num) {
+    public function cloneClist($col_num) {
 
     }
     public function pop() {
-        array_pop($this->rows);
+        array_pop($this->lists);
         return $this;
     }
     public function shift() {
-        array_shift($this->rows);
+        array_shift($this->lists);
         return $this;
     }
     public function slice($start, $length) {
-        $this->rows = array_slice($this->rows,$start,$length);
+        $this->lists = array_slice($this->lists,$start,$length);
         return $this;
     }
     public function reverse() {
-        $this->rows = array_reverse($this->rows);
+        $this->lists = array_reverse($this->lists);
         return $this;
     }
     public function reIndex($re_index) {
@@ -157,10 +150,14 @@ class yd_mat {
         
         return $this;
     }
+    public function formatClist($col_no, $format_string) {
+        
+        return $this;
+    }
 
     // 排序
     public function sortIndex() {
-        asort($this->rows);
+        asort($this->lists);
         return $this;
     }
     public function getSortIndex() {
@@ -170,19 +167,19 @@ class yd_mat {
     // 数字
     public function toNumber() {
         for ($i = 0; $i < $this->len(); $i++) {
-            $this->rows[$i] = floatval($this->rows[$i]);
+            $this->lists[$i] = floatval($this->lists[$i]);
         }
         return $this;
     }
     public function max() {
-        return max($this->rows);
+        return max($this->lists);
     }
     public function min() {
-        return min($this->rows);
+        return min($this->lists);
     }
     public function sum() {
         $sum = 0;
-        foreach ($this->rows as $i => $row) {
+        foreach ($this->lists as $i => $row) {
             $sum = $sum + array_sum($row);
         }
         return $sum;
@@ -197,40 +194,44 @@ class yd_mat {
     public function complete($default_value) {
         
     }
-    public function toDict($key_col_num, $value_col_num) {
+    public function toCdict($key_col_num, $value_col_num) {
         
     }
     public function toDataPivot($key_col_num, $value_col_num) {
         
     }
-    public function toJsonRows($keys) {
+    public function toDicts($keys) {
         
     }
     public function toString($sep) {
         
     }
+    public function toGroup(){
+        
+        
+    }
 }    
  
 
-function tf_mat_transpose($rows) {
-    $cols = array();
-    $col_num = tf_mat_get_colnum($rows);
+function tf_mat_transpose($lists) {
+    $clists = array();
+    $col_num = tf_mat_get_colnum($lists);
     for($i=0; $i<$col_num; $i++) {
         $col = array();
-        array_push($cols, $col);
+        array_push($clists, $col);
     }
-    for($i=0; $i<count($rows); $i++) {
-        $row = $rows[$i];
+    for($i=0; $i<count($lists); $i++) {
+        $row = $lists[$i];
         for($j=0; $j<count($row); $j++) {
             $item = $row[$j];
-            $cols[$j][$i] = $item;
+            $clists[$j][$i] = $item;
         }
     }   
-    return $cols;
+    return $clists;
 }
 
-function tf_mat_get_colnum($rows) {
-    $row = $rows[0];
+function tf_mat_get_colnum($lists) {
+    $row = $lists[0];
     $col_num = count($row);
     return $col_num;
 }
