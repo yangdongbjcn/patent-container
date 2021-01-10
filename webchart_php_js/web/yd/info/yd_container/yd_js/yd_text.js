@@ -1,5 +1,5 @@
 function YdText(){
-}
+} 
 YdText.prototype = {
   init: function(p_text){
       this.text = p_text;
@@ -11,7 +11,7 @@ YdText.prototype = {
   },
   removeSpace: function() {
   	var t_reg = new RegExp(" ", "g");
-	this.text = this.text.replace(t_reg, "");
+	  this.text = this.text.replace(t_reg, "");
     return this;
   },
   replace: function(p_origin, p_replace) {
@@ -48,6 +48,12 @@ YdText.prototype = {
     var sep = 'rrrrnnnn';
     this.replaceEnter(sep);
     return this.toArray(sep);
+  },
+  toLines: function(t_sep) {
+    var p_replace = '\n';
+    var t_reg = new RegExp(t_sep, "g");
+    this.text = this.text.replace(t_reg, p_replace);
+    return this.text;
   }
 };
 

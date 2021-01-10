@@ -1,9 +1,12 @@
 <div class='row'>
-	<div class='col-sm-6'>
-		<textarea id='search_text2' class='form-control' rows='3'></textarea>
+	<div class='col-sm-4'>
+		<textarea id='search_text2' class='form-control' rows='10'></textarea>
 	</div>
-	<div class='col-sm-6'>
-		<textarea id='result_text2' class='form-control' rows='3'></textarea>
+	<div class='col-sm-4'>
+		<textarea id='result_text2' class='form-control' rows='10'></textarea>
+	</div>
+	<div class='col-sm-4'>
+		<textarea id='result_text1' class='form-control' rows='10'></textarea>
 	</div>
 </div> <!-- end row -->
 
