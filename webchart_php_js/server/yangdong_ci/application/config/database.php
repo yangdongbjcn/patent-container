@@ -75,13 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	// 'hostname' => 'qdm718889551.my3w.com',
-	// 'username' => 'qdm718889551',
-	// 'password' => 'yang1982doNG',
-	// 'database' => 'qdm718889551_db',
 	'hostname' => 'localhost',
 	'username' => 'root_sql',
-	'password' => 'you1982LE&',
+	'password' => '',
 	'database' => 'dxb_training',
 
 	'dbdriver' => 'mysqli',

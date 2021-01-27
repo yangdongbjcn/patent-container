@@ -1,0 +1,56 @@
+#div_treelist {
+    /** 后来加的*/
+    position: relative;
+    /*overflow: auto;*/
+    text-align: left;
+
+    /*padding-left: -60px;*/
+}
+
+#div_treelist ul{
+    /*设置成absolute之后 每一个ul和li会有重叠现象*/
+    /*position: absolute;*/
+    position: relative;
+}
+
+#div_treelist li {
+    list-style-type:none;
+    padding: 5px 0px 0px 0px;
+    position:relative;
+}
+
+#div_treelist li span {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border:1px solid #999;
+    border-radius:5px;
+    display:inline-block;
+    padding: 3px 0px;
+    width: 150px;
+    text-decoration:none;
+}
+
+#div_treelist i:hover {
+    box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+    -webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+}
+
+#div_treelist li.parent_li>span {
+    cursor:pointer;
+}
+
+#div_treelist span.btn:hover {
+    color: white;
+    box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+    -webkit-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+    -moz-box-shadow: 0 0 10px rgba(189, 189, 189, 0.4);
+}
+
+.img_search:hover{
+    -webkit-transform: translateY(-3px);
+       -moz-transform: translateY(-3px);
+        -ms-transform: translateY(-3px);
+         -o-transform: translateY(-3px);
+            transform: translateY(-3px);
+}

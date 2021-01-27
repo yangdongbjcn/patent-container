@@ -1,5 +1,5 @@
 function comp_world_regions(col01, col02, t_max, t_min, t_size, t_font) { 
-	var p_url = g_var.g_server_chart + '/DataTransform/apiKeysColsToDictRows';
+	var p_url = g_var.g_server_chart + '/ChartData/apiKeysColsToDictRows';
 	var p_data = {
 		keys: ['name', 'value'],
 		cols: [col01, col02],

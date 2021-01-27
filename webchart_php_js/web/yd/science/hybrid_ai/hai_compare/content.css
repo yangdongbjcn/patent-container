@@ -1,0 +1,18 @@
+#map_div {
+	width:100%;
+	height:600px;
+}
+
+#dest_num_div, #dest_num_div3a{
+	width:100%;
+	height:300px;
+}
+#region_time_div, #region_time_div1a, #region_time_div2{
+	width:100%;
+	height:200px;
+}
+
+#bubble_div, #bubble_div2{
+	width:100%;
+	height:350px;
+}

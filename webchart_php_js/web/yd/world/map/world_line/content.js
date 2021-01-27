@@ -103,7 +103,7 @@ $(document).ready(function(){
 		var col02 = yd_text_input_col('#col02');
 		var col03 = yd_text_input_col('#col03');
 
-		var p_url = g_var.g_server_chart + '/DataTransform/apiColsToMat';
+		var p_url = g_var.g_server_chart + '/ChartData/apiColsToMat';
 		var p_data = {
 			cols: [col01, col03, col02],
 		};

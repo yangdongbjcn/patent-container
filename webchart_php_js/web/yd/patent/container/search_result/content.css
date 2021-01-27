@@ -1,0 +1,33 @@
+/*展开链接*/
+td.t_title_class {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+td.t_applicant_std_class {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+tr.abstract-control {
+	text-align: left;
+	text-indent: 0px;
+	/*background-color: #666;*/
+}
+
+tr.claim1-control {
+	text-align: left;
+	text-indent: 0px;
+	/*background-color: #555;*/
+}
+
+/*表格高亮*/
+td.highlight{
+	background-color: #CCFFCC !important;
+}
+
+/*收藏链接*/
+td.t_favorites_class {
+	cursor: pointer;
+	text-decoration: underline;
+}

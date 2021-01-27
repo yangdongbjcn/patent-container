@@ -10,7 +10,7 @@ $(document).ready(function(){
 		var col01 = yd_text_input_col('#col01');
 		var col02 = yd_text_input_col('#col02');
 
-		var p_url = g_var.g_server_chart + '/DataTransform/apiKeysColsToDictRows';
+		var p_url = g_var.g_server_chart + '/ChartData/apiKeysColsToDictRows';
 		var p_data = {
 			keys: ['name', 'value'],
 			cols: [col01, col02],

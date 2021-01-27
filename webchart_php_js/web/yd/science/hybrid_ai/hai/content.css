@@ -1,0 +1,8 @@
+#map_div {
+	width:100%;
+	height:900px;
+}
+#region_time_div, #dest_num_div, #region_time_div2, #dest_num_div2 {
+	width:100%;
+	height:230px;
+}

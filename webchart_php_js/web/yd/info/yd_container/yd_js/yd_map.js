@@ -345,7 +345,7 @@ YdPosition.prototype.getMainNationCodes = function() {
 YdPosition.prototype.getNationCode = function(names) {
     var return_array = [];
     var cn_names = this.world_position_mat.getClist(2).get();
-    var codes = this.world_position_mat.getClist(4).get();
+    var all_codes = this.world_position_mat.getClist(4).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = cn_names.indexOf(name);
@@ -355,7 +355,43 @@ YdPosition.prototype.getNationCode = function(names) {
           continue;          
         }
 
-        var new_name = codes[index];
+        var new_name = all_codes[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationNameByCode = function(codes) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.getClist(2).get();
+    var all_codes = this.world_position_mat.getClist(4).get();
+    for (var i = 0; i < codes.length; i++) {
+        var code = codes[i];
+        var index = all_codes.indexOf(code);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = cn_names[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationEnNameByCode = function(codes) {
+    var return_array = [];
+    var en_names = this.world_position_mat.getClist(3).get();
+    var all_codes = this.world_position_mat.getClist(4).get();
+    for (var i = 0; i < codes.length; i++) {
+        var code = codes[i];
+        var index = all_codes.indexOf(code);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = en_names[index];
         return_array.push(new_name);
     }
     return return_array;
@@ -363,7 +399,7 @@ YdPosition.prototype.getNationCode = function(names) {
 YdPosition.prototype.getNationCodeByEnglish = function(names) {
     var return_array = [];
     var en_names = this.world_position_mat.getClist(3).get();
-    var codes = this.world_position_mat.getClist(4).get();
+    var all_codes = this.world_position_mat.getClist(4).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = en_names.indexOf(name);
@@ -373,7 +409,7 @@ YdPosition.prototype.getNationCodeByEnglish = function(names) {
           continue;          
         }
 
-        var new_name = codes[index];
+        var new_name = all_codes[index];
         return_array.push(new_name);
     }
     return return_array;

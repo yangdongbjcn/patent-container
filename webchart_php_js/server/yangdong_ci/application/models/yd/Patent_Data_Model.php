@@ -15,7 +15,7 @@ class Patent_Data_Model extends CI_Model {
     public function __construct() {
         parent::__construct();
 
-        $this->load->library('yd_sql');
+        $this->load->library('yd/Yd_sql');
 
         $this->yd_sql->add_fields_dict('t_id', 'ID');
         $this->yd_sql->add_fields_dict('t_pub_num', '公开号');

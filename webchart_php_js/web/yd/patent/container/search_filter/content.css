@@ -1,0 +1,9 @@
+#id_search_filter_show{
+	text-decoration: none;
+	color: #003366;
+	/*display: none;*/
+}
+
+#id_search_filter{
+	display: none;
+}

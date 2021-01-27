@@ -26,7 +26,7 @@
 	$g_yd__speak = $g_yd__way . 'speak/';
 	$g_yd__mind = $g_yd . 'mind/';
 
-	$g_yd_study = $g_yd . 'study/';
+	$g_yd_study = $g_yd . 'science/';
 	$g_yd__hybrid_ai = $g_yd_study . 'hybrid_ai/';
 
 	$g_yd_think = $g_yd . 'think/';

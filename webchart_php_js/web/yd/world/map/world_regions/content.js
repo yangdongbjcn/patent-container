@@ -1,9 +1,9 @@
 $(document).ready(function(){ 
  
-	var t_col = ['China','United States','Japan','Germany','Korea','United Kingdom'];
+	var t_col = ['China','United States','Japan','EPO','Korea'];
 	$('#col01').val(new Yd_list().init(t_col).toStringLines());
 
-	t_col = ['177','142','102','81','47','36'];
+	t_col = ['177','142','102','81','47'];
 	$('#col02').val(new Yd_list().init(t_col).toStringLines());
 
 	$('#chart_button').click(function(){	

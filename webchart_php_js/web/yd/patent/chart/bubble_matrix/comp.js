@@ -1,5 +1,5 @@
 function comp_bubble_matrix(p_rows, p_keys, p_index, t_size, t_font) {
-	// var p_url = g_var.g_server_chart + '/DataTransform/apiFrameToScatterMat';
+	// var p_url = g_var.g_server_chart + '/ChartData/apiFrameToScatterMat';
 	// var p_data = {
 	// 	keys: p_keys,
 	// 	index: p_index,
