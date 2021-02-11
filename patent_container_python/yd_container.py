@@ -15,11 +15,6 @@ class Container(object):
         self.default_name = 'frame'
         self.setFrame(self.default_name, Frame())
 
-    def setDefaultFrame(self, frame):
-        self.setFrame(self.default_name, frame)
-    def getDefaultFrame(self):
-        return self.getFrame(self.default_name)
-
     # frame
     def getFrame(self, name):
         return self.__getattribute__(name)
@@ -30,6 +25,13 @@ class Container(object):
             frame = Frame(name=name)
         self.__setattr__(name, frame)
         frame.name = name
+
+
+    def setDefaultFrame(self, frame):
+        self.setFrame(self.default_name, frame)
+    def getDefaultFrame(self):
+        return self.getFrame(self.default_name)
+
 
     #algorithm
     def getHistogramFrom(self, frame, key):
@@ -127,7 +129,7 @@ class TreeContainer(Container):
         self.name = name
         self.superior = superior
         self.members = {}
-        self.path_sep = '------'
+        self.path_sep = '--'
 
         self._io = TreeContainerIO()
 

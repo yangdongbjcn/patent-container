@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     frame = Frame()
 
-    frame.table = YdSheet().loadSheet(u'data//autodriving//ptics------autodriving------fleet.csv', start_row=0)
+    frame.table = YdSheet().loadSheet(u'data//autodriving//ptics--autodriving--fleet.csv', start_row=0)
 
     key = u'申请日'
     new_key = key + u'_year'
