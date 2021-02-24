@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var str2 = '\
+	var str = '\
 序号  ALPHA   TREM                            \n\
 1     2       1968                            \n\
 3     2       1970                            \n\
@@ -56,18 +56,18 @@ $(document).ready(function(){
 51    13      2018 \n\
 	';
 
-	$('#search_text2').val(str2);
-
-	$('#result_text2').val('');
-	$('#submit2').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiTextMatchNumYear';
+	$('#input_text').val(str);
+	$('#result_text').val('');
+	
+	$('#submit').click(function(){
+		var p_url = g_var.gs_yd_text + 'TextLines/apiTextMatchNumYear';
 		var p_data = {
-			text: $('#search_text2').val()
+			text: $('#input_text').val()
 		};
 		p_callback = function(data, status){
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
-			$('#result_text2').val(t_data);
+			$('#result_text').val(t_data);
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/

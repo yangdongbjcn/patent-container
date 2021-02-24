@@ -1,8 +1,19 @@
 <div class='row'>
+	<div class='col-sm-12'>
+		<div class='well'>
+	      <p>年份直方图：</p>
+	      <p>1. 自动补零。  </p>
+	    </div><!--/well-->
+	</div>
+</div>
+
+<div class='row'>
 	<div class='col-sm-6'>
-		<textarea id='search_text' class='form-control' rows='27'></textarea>
+		<p>输入文本</p>
+		<textarea id='input_text' class='form-control' rows='27'></textarea>
 	</div>
 	<div class='col-sm-6'>
+		<p>输出文本</p>
 		<textarea id='result_text' class='form-control' rows='27'></textarea>
 	</div>
 </div> <!-- end row -->

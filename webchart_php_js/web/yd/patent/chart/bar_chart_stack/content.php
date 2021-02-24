@@ -1,7 +1,7 @@
 <div class='row'>
 	<div class='col-sm-12'>
 		<div class='well'>
-	      <p>使用说明：</p>
+	      <p>堆叠柱状图：</p>
 	      <p>1. 从EXCEL中直接拷贝数据进来。</p> 
 	      <p>2. IE中想要改变颜色，请先按F5刷新，再选定背景色，再点击“气泡矩阵图”按钮。</p> 
 	      <p>3. 火狐中可以右键图片，保存到本地。IE中请截屏。  </p> 
@@ -43,8 +43,8 @@
 </div> <!-- end row -->
 
 <div class='row'>	 
-	<a class='btn btn-success yd_layout_center yd_layout_width_xs' id='chart_button'>
-		柱状图
+	<a class='btn btn-success yd_layout_center yd_layout_width_xs' id='submit'>
+		确定
 	</a>
 </div> <!-- end row -->
 

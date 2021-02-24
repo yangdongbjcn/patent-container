@@ -130,7 +130,7 @@ $(document).ready(function(){
 	initTextarea('#col03', t_array);
 
 	
-	$('#chart_button').click(function(){
+	$('#submit').click(function(){
 		var col01 = yd_text_input_col('#col01');
 		var col02 = yd_text_input_col('#col02');
 		var col03 = yd_text_input_col('#col03');

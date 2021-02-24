@@ -47,7 +47,7 @@ huawei technologies	21\n\
 英特尔	19\n\
 ';
 
-	$('#mat1').val(str);
+	$('#input_text1').val(str);
 
 	var str2='\
 402 technologies\n\
@@ -317,14 +317,14 @@ zymeworks\n\
 卓尔智联武汉研究院有限公司\n\
 ';
 
-	$('#index1').val(str2);
+	$('#input_text2').val(str2);
 
 	$('#result_text').val('');
 	$('#submit').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiCombineHistogram';
+		var p_url = g_var.gs_yd_text + 'TextLines/apiCombineHistogram';
 		var p_data = {
-			text: $('#mat1').val(),
-			index: $('#index1').val()
+			text: $('#input_text1').val(),
+			index: $('#input_text2').val()
 		};
 		p_callback = function(data, status){
 			var regReturn = new RegExp('rrrrnnnn', "g");

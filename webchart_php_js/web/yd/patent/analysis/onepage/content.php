@@ -151,7 +151,7 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td witdh="30%">合并直方图</td>
+						<td witdh="30%">直方图合并</td>
 						<td width="70%"><a href="<?php echo $g_yd__analysis ?>add_histogram.php">add_histogram.php</a></td>
 					</tr>
 				</tbody>
@@ -208,11 +208,11 @@
 					</tr>
 					<tr>
 						<td witdh="30%">世界地图</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map">world_regions.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>">world_regions.php</a></td>
 					</tr>
 					<tr>
 						<td witdh="30%">中国地图</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map/china">china_regions.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>/china">china_regions.php</a></td>
 					</tr>
 				</tbody>
 			</table>

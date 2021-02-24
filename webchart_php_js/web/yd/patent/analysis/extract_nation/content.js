@@ -57,18 +57,19 @@ $(document).ready(function(){
 52    1       LU                             \n\
 53    1       IE ';
 
-	$('#search_text3').val(str);
-	$('#result_text3').val('');
-	$('#submit3').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiTextMatchNumNation';
+	$('#input_text').val(str);
+	$('#result_text').val('');
+
+	$('#submit').click(function(){
+		var p_url = g_var.gs_yd_text + 'TextLines/apiTextMatchNumNation';
 		var p_data = {
-			text: $('#search_text3').val()
+			text: $('#input_text').val()
 		};
 		p_callback = function(data, status){
 			// var t_data = JSON.parse(data);
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
-			$('#result_text3').val(t_data);
+			$('#result_text').val(t_data);
 			// alert(data);			
 		};
 		$.post(p_url, p_data, p_callback);

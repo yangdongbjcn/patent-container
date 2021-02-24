@@ -5,7 +5,7 @@
 <script src='<?php echo $g_yd__resources ?>bootstrap_ie8/html5shiv.min.js'></script>
 <![endif]-->
 
-<script src='<?php echo $g_yd_common ?>includes/end.js'></script>
+<script src='<?php echo $g_yd__includes ?>/end.js'></script>
 
 </body>
 

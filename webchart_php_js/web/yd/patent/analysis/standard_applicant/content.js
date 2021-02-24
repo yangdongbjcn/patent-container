@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-		var str1='\
+		var input_text_str='\
 BOSCH (ROBERT) GMBH	\n\
 TOYOTA MOTOR CORP	\n\
 CONTINENTAL AG (GERMANY FED. REP.)	\n\
@@ -99,7 +99,7 @@ UISEE TECHNOLOGIES BEIJING CO LTD	\n\
 AUTOMOTIVE RESEARCH & TESTING CENTER	\n\
 ';
 
-	var str2='\
+	var map_text_str='\
 BOSCH	博世\n\
 TOYOTA	丰田\n\
 DENSO	电装\n\
@@ -328,22 +328,20 @@ MICRON	美光\n\
 HYNIX	海力士\n\
 ';
 
-	$('#search_text').val(str1);
-	$('#map_text').val(str2);
-
+	$('#input_text').val(input_text_str);
+	$('#map_text').val(map_text_str);
 	$('#result_text').val('');
+
 	$('#submit').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiTextMap';
+		var p_url = g_var.gs_yd_text + 'TextLines/apiTextMap';
 		var p_data = {
-			text: $('#search_text').val(),
+			text: $('#input_text').val(),
 			map: $('#map_text').val()
 		};
 		p_callback = function(data, status){
-			// var t_data = JSON.parse(data);
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
 			$('#result_text').val(t_data);
-			// alert(data);
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/

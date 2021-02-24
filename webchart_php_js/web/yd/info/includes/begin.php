@@ -23,30 +23,30 @@
 
 <script src='<?php echo $g_yd__resources ?>echarts/echarts.js'></script>
 
-<link href='<?php echo $g_library ?>yd_css/yd_layout_margin.css' rel='stylesheet'>
+<link href='<?php echo $g_yd__container ?>yd_css/yd_layout_margin.css' rel='stylesheet'>
 
 
 <link href='<?php echo $g_yd__resources ?>datatables/css/jquery.dataTables.css' rel='stylesheet'>
 <!-- <link href='<?php echo $g_yd__resources ?>datatables/css/jquery.dataTables.bootstrap.css' rel='stylesheet'> -->
 <script src='<?php echo $g_yd__resources ?>datatables/js/jquery.dataTables.js'></script>
 
-<script src="<?php echo $g_library ?>yd_js/yd_object.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_list.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_dict.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_mat.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_frame.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_cube.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_box.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_tree.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_page.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_text.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_map.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_patent.js"></script>
-<script src="<?php echo $g_library ?>yd_js/yd_chart.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_object.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_list.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_dict.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_mat.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_frame.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_cube.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_box.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_tree.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_page.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_text.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_map.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_patent.js"></script>
+<script src="<?php echo $g_yd__container ?>yd_js/yd_chart.js"></script>
 
 
 <link rel='stylesheet' href='<?php echo $g_yd__resources ?>zTree_v3/css/zTreeStyle/zTreeStyle.css'>
 
 <script type='text/javascript' src='<?php echo $g_yd__resources ?>zTree_v3/js/jquery.ztree.core.js'></script>
 
-<script src="<?php echo $g_yd_common ?>includes/before_config.js"></script>
+<script type='text/javascript' src='<?php echo $g_yd__resources ?>/js_datepic/laydate.js'></script>

@@ -1,15 +1,26 @@
 <div class='row'>
+	<div class='col-sm-12'>
+		<div class='well'>
+	      <p>DWPI入藏号抽取：</p>
+	      <p>1. 输入文本来自于S系统的统计结果。  </p>
+	      <p>2. 判断条件：十位入藏号的前四位是年份数字。  </p>
+	    </div><!--/well-->
+	</div>
+</div>
+
+<div class='row'>
 	<div class='col-sm-6'>
-		<textarea id='search_text' class='form-control' rows='27'></textarea>
+		<p>输入文本</p>
+		<textarea id='input_text' class='form-control' rows='27'></textarea>
 	</div>
 	<div class='col-sm-6'>
-		<div class='input-group'>
-	    	<span class='input-group-addon'>查找</span>
-	    	<input class='form-control' readonly="readonly" value='十位，前四位是年份'></input>
-	    	<span class='input-group-btn'>
-	    		<button class="btn btn-warning" type='button' id='submit3'>DWPI入藏号抽取</button>
-	    	</span>
-	    </div>
-		<textarea id='result_text3' class='form-control yd_layout_margin_top_s' rows='25'></textarea>
+		<p>输出文本</p>		
+		<textarea id='result_text' class='form-control' rows='27'></textarea>
 	</div>
 </div> <!-- end row --> 
+
+<div class='row'>	
+	<a class='btn btn-success yd_layout_margin_top_s yd_layout_width_xs yd_layout_center' id='submit'>
+		确定
+	</a>
+</div> <!-- end row -->

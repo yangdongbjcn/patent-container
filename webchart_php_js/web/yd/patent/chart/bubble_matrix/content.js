@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$('#p_rows').val(new Yd_mat().init(t_matrix).toString());
 	g_param_size.set_param(15);
 
-	$('#chart_button').click(function(){
+	$('#submit').click(function(){
 		var p_keys = yd_text_input_row('#p_keys');
 		var p_index = yd_text_input_col('#p_index');
 		var p_rows = yd_text_input_mat('#p_rows');

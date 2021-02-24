@@ -77,7 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root_sql',
-	'password' => '',
+	'password' => '???',
 	'database' => 'dxb_training',
 
 	'dbdriver' => 'mysqli',

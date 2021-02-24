@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
 	var str='\
-2002	1\n\
-2003	0\n\
 2004	1\n\
 2005	4\n\
 2006	11\n\
@@ -36,17 +34,15 @@ $(document).ready(function(){
 2015	38\n\
 2016	44\n\
 2017	34\n\
-2018	4\n\
-2019	2\n\
 ';
 
-	$('#search_text').val(str);
+	$('#input_text').val(str);
 
 	$('#result_text').val('');
 	$('#submit').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiAddHistogram';
+		var p_url = g_var.gs_yd_text + 'TextLines/apiAddHistogram';
 		var p_data = {
-			text: $('#search_text').val()
+			text: $('#input_text').val()
 		};
 		p_callback = function(data, status){
 			var regReturn = new RegExp('rrrrnnnn', "g");

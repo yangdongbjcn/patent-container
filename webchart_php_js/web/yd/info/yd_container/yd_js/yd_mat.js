@@ -67,15 +67,14 @@ Yd_mat.prototype = {
   },
   getClist: function(col_no) {
     var column = new Array();
-    for(var i=0; i< this.lists.length; i++) {
-      var value = this.lists[i][col_no];
-      column.push(value);
+    for(var i=0; i<this.lists.length; i++) {
+      column.push(this.lists[i][col_no]);
     }
     return new Yd_list().init(column);
   },
   getSomeClists: function(col_num_array) {
       var lists = new Array();
-      for(var i=0; i< this.lists.length; i++) {
+      for(var i=0; i<this.lists.length; i++) {
           var list = new Yd_list().init(this.lists[i]).getSomeValues(col_num_array);
           lists.push(list);
       }
@@ -85,7 +84,7 @@ Yd_mat.prototype = {
     if (new_clist.length != this.len()) {
       debugger;
     }
-    for(var i=0; i< this.len(); i++) {
+    for(var i=0; i<this.len(); i++) {
         this.lists[i][col_no] = new_clist[i];
     }
     return this;

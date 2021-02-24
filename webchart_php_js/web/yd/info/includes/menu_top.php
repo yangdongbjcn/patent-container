@@ -1,3 +1,4 @@
+<script src="<?php echo $g_yd__includes ?>menu_top.js"></script>
 
 <div class='container-fluid'><!-- 全局container -->
 
@@ -23,5 +24,3 @@
 	</div>
 	<!-- top menu ends -->
 </div><!-- menu_top row -->
-
-<script src="<?php echo $g_yd_common ?>includes/menu_top.js"></script>

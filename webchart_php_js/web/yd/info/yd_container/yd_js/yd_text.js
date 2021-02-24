@@ -6,7 +6,9 @@ YdText.prototype = {
       return this;
   },
   trim: function() {
-    this.text = this.text.trim();
+    // this.text = this.text.trim();
+    // 20210219, IE下不支持trim、使用replace代替
+    this.text = this.text.replace(/^\s+|\s+$/g,'');
     return this;
   },
   removeSpace: function() {

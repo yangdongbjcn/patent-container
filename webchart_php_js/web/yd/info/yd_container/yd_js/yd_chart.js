@@ -282,7 +282,7 @@ YdOption.prototype.visualMapPieces = function(p_series_index, p_pieces) {
         {min: 200, max: 500},
         {min: 100, max: 200},
         {min: 20, max: 100},
-        {min: 1, max: 20},
+        {min: 1, max: 20}
         // {value: 123, label: '123（自定义特殊颜色）', color: 'grey'},
         // {min: 5, max: 5, label: '5（自定义特殊颜色）', color: 'black'},
         // {max: 5},

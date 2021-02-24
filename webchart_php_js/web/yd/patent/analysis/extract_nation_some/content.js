@@ -59,22 +59,20 @@ $(document).ready(function(){
 
 
 
-	$('#search_text').val(str);
-	$('#col_key').val('US CN JP EP GB KR');
+	$('#input_text').val(str);
+	$('#input_keys').val('US CN JP EP GB KR');
 
 	$('#result_text').val('');
 	$('#submit').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiTextMatchNumKeys';
+		var p_url = g_var.gs_yd_text + 'TextLines/apiTextMatchNumKeys';
 		var p_data = {
-			text: $('#search_text').val(),
-			key: $('#col_key').val()
+			text: $('#input_text').val(),
+			key: $('#input_keys').val()
 		};
 		p_callback = function(data, status){
-			// var t_data = JSON.parse(data);
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
 			$('#result_text').val(t_data);
-			// alert(data);
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/
