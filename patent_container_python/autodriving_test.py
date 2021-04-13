@@ -10,7 +10,6 @@ def func_get_year(item):
 
 if __name__ == '__main__':
 
-    print('blockchain test')
     master = Container('master')
     master.nameSync()
     slave = Container('slave')
@@ -27,9 +26,3 @@ if __name__ == '__main__':
     master.frame = frame
     master.publishSync('histogram', new_key)
     print(slave.frame.table)
-
-    print('over')
-
-
-
-

@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     frame = Frame()
 
-    frame.table = YdSheet().loadSheet(u'data//blockchain//20200628--BlockChain--Patentics--SimpleFamily.csv', start_row=0)
+    frame.table = YdSheet().loadSheet(u'data//ai//中科寒武纪//ANN-中科寒武纪-20210414-Ptics.xlsx', start_row=1)
 
     key = u'申请日'
     new_key = key + u'_year'
