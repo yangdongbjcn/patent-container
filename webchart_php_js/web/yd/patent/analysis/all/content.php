@@ -63,7 +63,7 @@
 						<td width="70%"><a href="standard_applicant.php">standard_applicant.php</a></td>
 					</tr>
 					<tr>
-						<td witdh="30%">生成申请人检索式</td>
+						<td witdh="30%">申请人扩展并生成检索式</td>
 						<td width="70%"><a href="search_applicant.php">search_applicant.php</a></td>
 					</tr>
 				</tbody>
@@ -179,11 +179,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td witdh="30%">合并直方图</td>
+						<td witdh="30%">直方图合并</td>
 						<td width="70%"><a href="add_histogram.php">add_histogram.php</a></td>
 					</tr>
 					<tr>
-						<td witdh="30%">拼接直方图</td>
+						<td witdh="30%">直方图排序</td>
 						<td width="70%"><a href="combine_histogram.php">combine_histogram.php</a></td>
 					</tr>
 				</tbody>
@@ -240,19 +240,19 @@
 					</tr>
 					<tr>
 						<td witdh="30%">世界地图</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map">world_regions.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>">world_regions.php</a></td>
 					</tr>
 					<tr>
 						<td witdh="30%">世界地图（技术流向图）</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map/world_line.php">world_line.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>/world_line.php">world_line.php</a></td>
 					</tr>
 					<tr>
 						<td witdh="30%">中国地图</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map/china">china_regions.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>/china">china_regions.php</a></td>
 					</tr>
 					<tr>
 						<td witdh="30%">北京地图</td>
-						<td width="70%"><a href="<?php echo $g_yd_world ?>map/china/beijing">beijing_regions.php</a></td>
+						<td width="70%"><a href="<?php echo $g_yd__map ?>/china/beijing">beijing_regions.php</a></td>
 					</tr>
 				</tbody>
 			</table>

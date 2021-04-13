@@ -1,0 +1,1 @@
+<script src="<?php echo $g_yd__includes ?>before_config.js"></script>

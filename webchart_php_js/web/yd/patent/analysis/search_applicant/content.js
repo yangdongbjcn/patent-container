@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-	var str2='\
+	var map_text_str='\
 BOSCH	博世\n\
 TOYOTA	丰田\n\
 DENSO	电装\n\
@@ -230,9 +230,9 @@ MICRON	美光\n\
 HYNIX	海力士\n\
 ';
 
-	$('#map_text').val(str2);
+	$('#map_text').val(map_text_str);
 
-var str3='\
+var input_text_str='\
 博世\n\
 丰田\n\
 大陆\n\
@@ -318,29 +318,23 @@ IHI\n\
 北京航空航天大学\n\
 ';
 
-	$('#search_text2').val(str3);
+	$('#input_text').val(input_text_str);
+	$('#input_postfix').val('and 25 |');
+	$('#result_text').val('');
 
-	$('#postfix').val('and 25 |');
-
-	$('#result_text2').val('');
-	$('#submit2').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiMapPa';
+	$('#submit').click(function(){
+		var p_url = g_var.gs_yd_text + 'TextLines/apiMapPa';
 		var p_data = {
-			text: $('#search_text2').val(),
-			postfix: $('#postfix').val(),
+			text: $('#input_text').val(),
+			postfix: $('#input_postfix').val(),
 			map: $('#map_text').val()
 		};
 		p_callback = function(data, status){
-			// var t_data = JSON.parse(data);
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
-			$('#result_text2').val(t_data);
-			// alert(data);
+			$('#result_text').val(t_data);
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/
 		
 });
-
-
-

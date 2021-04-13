@@ -1,15 +1,27 @@
 <div class='row'>
+	<div class='col-sm-12'>
+		<div class='well'>
+	      <p>提取IPC：</p>
+	      <p>1. 输入文本来自于S系统的统计结果。  </p>
+	      <p>2. IPC分类号用|分隔，仅统计第一个IPC分类号。  </p>
+	    </div><!--/well-->
+	</div>
+</div>
+
+<div class='row'>
 	<div class='col-sm-6'>
-		<textarea id='search_text3' class='form-control' rows='27'></textarea>
+		<p>输入文本</p>
+		<textarea id='input_text' class='form-control' rows='27'></textarea>
 	</div>
 	<div class='col-sm-6'>
-		<textarea id='result_text3' class='form-control' rows='27'></textarea>
+		<p>输出文本</p>
+		<textarea id='result_text' class='form-control' rows='27'></textarea>
 	</div>
 </div> <!-- end row -->
 
 <div class='row'>	 
-	<a class='btn btn-success yd_layout_margin_top_s yd_layout_center yd_layout_width_xs' id='submit3'>
-		提取主IPC
+	<a class='btn btn-success yd_layout_margin_top_s yd_layout_width_xs yd_layout_center' id='submit'>
+		确定
 	</a>
 </div> <!-- end row -->
 

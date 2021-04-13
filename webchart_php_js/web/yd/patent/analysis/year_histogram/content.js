@@ -54,13 +54,13 @@ $(document).ready(function(){
 2016	\n\
 ';
 
-	$('#search_text').val(str);
-
+	$('#input_text').val(str);
 	$('#result_text').val('');
+
 	$('#submit').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiGetYearHist';
+		var p_url = g_var.gs_yd_text + 'TextLines/apiGetYearHist';
 		var p_data = {
-			text: $('#search_text').val()
+			text: $('#input_text').val()
 		};
 		p_callback = function(data, status){
 			var regReturn = new RegExp('rrrrnnnn', "g");
@@ -69,9 +69,4 @@ $(document).ready(function(){
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/
-
-
 });
-
-
-

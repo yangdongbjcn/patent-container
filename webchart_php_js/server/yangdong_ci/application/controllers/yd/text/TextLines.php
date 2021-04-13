@@ -643,7 +643,7 @@ class TextLines extends CI_Controller {
     }
 
     public function apiCombineHistogram() {
-        // echo 'ok';
+
         $text = $this->input->post('text');
         // 匹配text每一行，需要在最后一行补充换行符。
         $text = $text . "\n";
@@ -662,7 +662,6 @@ class TextLines extends CI_Controller {
 
             $preg_str = "/" . $item . "\t+.*/i";
             if (preg_match($preg_str, $text, $result)){
-                var_dump($result[0]);
                 $output_line = $result[0];                
             }else{
                 $output_line = $item;

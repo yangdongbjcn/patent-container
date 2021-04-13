@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var str4='\
+var str='\
 IPC分类号\n\
 G06F16/242 | G06F16/28 | G06F16/25 | G06F16/245\n\
 H04W12/02 | H04W12/04 | H04W24/02 | H04W24/04\n\
@@ -24,19 +24,18 @@ H04L12/24 | H04L29/06 | H04L29/08\n\
 H04W36/00\n\
 ';
 
-	$('#search_text3').val(str4);
-	$('#result_text3').val('');
-	$('#submit3').click(function(){
-		var p_url = g_var.g_server_text + 'TextLines/apiGetIpc1';
+	$('#input_text').val(str);
+	$('#result_text').val('');
+	
+	$('#submit').click(function(){
+		var p_url = g_var.gs_yd_text + 'TextLines/apiGetIpc1';
 		var p_data = {
-			text: $('#search_text3').val()
+			text: $('#input_text').val()
 		};
 		p_callback = function(data, status){
-			// var t_data = JSON.parse(data);
 			var regReturn = new RegExp('rrrrnnnn', "g");
 			t_data = data.replace(regReturn,"\r\n" );
-			$('#result_text3').val(t_data);
-			// alert(data);
+			$('#result_text').val(t_data);
 		};
 		$.post(p_url, p_data, p_callback);
 	});/*click function*/
