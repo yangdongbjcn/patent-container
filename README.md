@@ -16,21 +16,28 @@
 
 基于Python和Linux提供了专利容器的示意代码。推荐使用PyCharm社区版编辑器，执行其中的ydbj_container_test.py。
 
-（二）yd_js
+（二）patent_data_classes
+
+1、patent_data_classes_js
 
 JS版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame、yd_tree等类。
 
-（三）yd_php
+2、patent_data_classes_php
 
 PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame等类。
 
-（四）webchart_php_js
+3、patent_data_classes_python
+
+Python版的专利容器核心库。提供了Frame、Container、TreeContainer等类。
+
+三、相关资源
+
+（一）webchart_php_js
 
 本项目属于专利容器的可视化部分，使用JavaScript语言实现。本项目提供了基础版的专利分析可视化功能。包括提取国别、检索式解析、申请人标准化、提取公开号、提取DWPI号、年份直方图、统计IPC、气泡散点图、气泡矩阵图、世界地图、中国地图等多种图表。
 
-本项目的后台部分基于codeigniter框架实现。具体地，基于Github项目http://github.com/yangodongbjcn/webpage-includer-codeigniter 。
+具体参见本人的Github项目，http://github.com/yangodongbjcn/webpage-includer
 
-本项目的可视化是对Echarts的封装。由于Echarts需要的数据是JSON格式，而专利数据库一般二维表格形式，本项目提供了从二维表到JSON结构的统计和转换功能。Echarts的功能强大导致其配置也比较复杂，本项目对其进行了封装和简化。
 
 三、扩展阅读
 
