@@ -1,34 +1,44 @@
 一、简介
 
-专利分析人员经常从付费专利数据库中导出各种电子表格文件，例如CSV文件或者XLS文件。这些文件包含了成百上千条专利著录项目。然而付费专利数据库的统计画图功能一般只能在系统中使用，无法对导出的电子表格进行专利分析。更无法对其他数据库导出的电子表格进行分析。
+专利分析人员经常从付费专利数据库中导出各种电子表格文件，例如CSV文件或者XLS文件。这些文件包含了成百上千条专利著录项目。
 
-专利容器(Patent-Container)可以载入和组织这些文件，并基于这些文件进行专利分析。专利容器使用Python语言实现，其可视化部分使用JavaScript语言实现。
+这些导出的电子表格文件，实际上已经包含了专利分析所需要的各种信息。例如电子表格文件一般包含申请日这一字段，从这一字段可以提取出申请年，从而进行专利分析中的年度趋势统计。
 
-专利容器可以对一维、二维、三维数据建模。从专利数据库中导出的单个CSV或XLS文件属于二维数据。多个CSV或XLS文件的组合属于三维数据，三维数据的组织方式可以是数据立方体，或者是技术分支树。
+专利容器(Patent-Container)可以载入和组织这些文件，并基于这些文件进行专利分析。
+
+专利容器可以对一维、二维、三维数据建模。从专利数据库中导出的单个CSV或XLS文件属于二维数据。多个CSV或XLS文件的组合属于三维数据，三维数据的组织方式可以是树形数据结构，例如技术分支树。
 
 对于不同的专利数据库，例如Patentics，incoPat，TI数据库等，专利容器通过适配数据库的字段，可以方便的导入数据。
 
-对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以兼容和切换同类算法。
+对于不同的专利分析算法，例如申请年份统计、申请人统计、分类号统计，专利容器通过数据结构的标准化，可以方便地切换算法。
+
+专利容器可以使用各种语言实现。例如Python语言、PHP语言、JavaScript语言。
+
+关于专利容器的思想、数据结构、举例、开发环境，请依次阅读以下页面:
+
+CONTAINER_THOUGHT.md 
+CONTAINER_DATA.md
+CONTAINER_EXAMPLE.md
+CONTAINER_DEV.md
 
 二、目录
 
+
 (一）patent_container_python
 
-基于Python和Linux提供了专利容器的示意代码。推荐使用PyCharm社区版编辑器，执行其中的ydbj_container_test.py。
+基于Python语言实现了专利容器的数据结构，参见 yd_container.py 等文件。
 
-（二）patent_data_classes
+该文件夹还包括一些示意数据，参见 data 文件夹下的数据。并演示了使用这些数据进行专利统计分析。
 
-1、patent_data_classes_js
+推荐安装 Anaconda3 编程环境，使用 PyCharm 社区版编辑器，导入整个文件夹作为项目，并执行其中的 ydbj_container_test.py 文件。
+
+（二）patent_container_js
 
 JS版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame、yd_tree等类。
 
-2、patent_data_classes_php
+（三）patent_container_php
 
 PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame等类。
-
-3、patent_data_classes_python
-
-Python版的专利容器核心库。提供了Frame、Container、TreeContainer等类。
 
 三、相关资源
 
@@ -41,17 +51,6 @@ Python版的专利容器核心库。提供了Frame、Container、TreeContainer�
 
 三、扩展阅读
 
-专利容器所需要的Python编程环境搭建，也给出了简要的步骤。
+更多的内容，将收录在微信公众号yangdongpatent。
 
-想要更多了解专利容器是什么，
-请依次阅读以下页面:
-
-https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_THOUGHT.md 
-
-https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DATA.md
-
-https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_EXAMPLE.md
-
-https://github.com/yangdongbjcn/patent-container/blob/master/CONTAINER_DEV.md
-
-更多的内容，将收录在微信公众号yangdongpatent。2019年出版的专著《玩转专利大数据——智慧容器助力专利分析与运营》第三章和第6.2节。或者直接访问网站http://zlrq.cn/web/yd/pc.html 。
+2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
