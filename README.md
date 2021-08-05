@@ -40,14 +40,6 @@ JS版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame�
 
 PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame等类。
 
-三、相关资源
-
-（一）webchart_php_js
-
-本项目属于专利容器的可视化部分，使用JavaScript语言实现。本项目提供了基础版的专利分析可视化功能。包括提取国别、检索式解析、申请人标准化、提取公开号、提取DWPI号、年份直方图、统计IPC、气泡散点图、气泡矩阵图、世界地图、中国地图等多种图表。
-
-具体参见本人的Github项目，http://github.com/yangodongbjcn/webpage-includer
-
 
 三、扩展阅读
 
