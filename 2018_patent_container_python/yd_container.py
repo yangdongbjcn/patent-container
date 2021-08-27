@@ -121,6 +121,7 @@ class TreeContainerIO(object):
         return file_name
 
 
+
 class TreeContainer(Container):
     """ """
     def __init__(self, name, superior=None):
@@ -136,15 +137,15 @@ class TreeContainer(Container):
         self.alldata_name = 'all'
         self.setFrame(self.alldata_name)
 
-    def getAllData(self):
-        nodes = self.getRecursiveMembers()
-        all_data = Frame()
-        for node in nodes:
-            t_data = node.getDefaultFrame()
-            t_table = t_data.table
-            all_data.table.append(t_table)
-        self.setFrame(self.alldata_name, all_data)
-        return all_data
+    # def getAllData(self):
+    #     nodes = self.getRecursiveMembers()
+    #     all_data = Frame()
+    #     for node in nodes:
+    #         t_data = node.getDefaultFrame()
+    #         t_table = t_data.table
+    #         all_data.table.append(t_table)
+    #     self.setFrame(self.alldata_name, all_data)
+    #     return all_data
 
     #IO:
     def addTreeData(self, path):

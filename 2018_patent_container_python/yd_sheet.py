@@ -19,7 +19,7 @@ class YdSheet(object):
           data_frame = pandas.read_csv(file_name, header = start_row, encoding='utf-8')
           # convert_float is false, to deal with #NUM! in excel file
         elif (file_ext in [u'xls', u'xlsx']):
-          data_frame = pandas.read_excel(file_name, header = start_row, encoding='utf-8')
+          data_frame = pandas.read_excel(file_name, header = start_row)
         return data_frame
 
     def saveSheet(self, file_name, data_frame):

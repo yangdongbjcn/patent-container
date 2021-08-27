@@ -54,15 +54,12 @@ if __name__ == '__main__':
     #    print(node.name)
 
     print('testing addTreeData')
-    input_device = TreeContainer('input_device')
-    input_device.addTreeData(u'data//treetest')
-    input_device.dump()
-
-    #print('testing getAllData')
-    #t_data = input_device.getAllData()
+    tree_root = TreeContainer('tree_root')
+    tree_root.addTreeData(u'data//treetest')
+    tree_root.dump()
 
     print('testing sync')
-    input_device.getMember(u'input').syncMembers('histogram', 'IPC1')
+    tree_root.getMember(u'input').syncMembers('histogram', 'IPC1')
 
     print('testing loadSheet computeHisto')
     frame = Frame()
