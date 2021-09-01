@@ -7,13 +7,11 @@ from pandas import DataFrame
 
 from datetime import datetime
 
-class Frame(object):
+class Yd_frame(object):
     """ """
     def __init__(self, table = DataFrame(), name = ''):
         self.name = name
         self.table = table
-        self.start = datetime.now()
-        self.end = datetime.now()
 
     # row
     def getRowNum(self):
@@ -21,8 +19,8 @@ class Frame(object):
     def getRows(self, i):
         # i=10, i=0:10
         return self.table.iloc[i, :]
-    def addRows(self, data_frame):
-        self.table = self.table.append(data_frame, ignore_index = True)   # 避免多次添加索引
+    def addRows(self, table):
+        self.table = self.table.append(table, ignore_index = True)   # 避免多次添加索引
         # self.table = pandas.concat(self.table, table, ignore_index = True)
 
     # col
@@ -42,8 +40,8 @@ class Frame(object):
         self.table[key] = value
     def addCol(self, key, value):
         self.setCol(key, value)
-    def mergeCol(self, data_frame, suffixes = ('_x', '_y')):
-       self.table = pandas.merge(self.table, data_frame, left_index = True, right_index = True, suffixes = suffixes)
+    def mergeCol(self, table, suffixes = ('_x', '_y')):
+       self.table = pandas.merge(self.table, table, left_index = True, right_index = True, suffixes = suffixes)
        return
 
     # time

@@ -10,29 +10,29 @@ from datetime import datetime
 
 import pandas
 
-class YdSheet(object):
+class Yd_sheet(object):
     """"""
     def loadSheet(self, file_name, start_row = 0):
         file_ext = self.getFileExt(file_name)
-        data_frame = None
+        table = None
         if (file_ext in [u'csv']):
-          data_frame = pandas.read_csv(file_name, header = start_row, encoding='utf-8')
+          table = pandas.read_csv(file_name, header = start_row, encoding='utf-8')
           # convert_float is false, to deal with #NUM! in excel file
         elif (file_ext in [u'xls', u'xlsx']):
-          data_frame = pandas.read_excel(file_name, header = start_row)
-        return data_frame
+          table = pandas.read_excel(file_name, header = start_row)
+        return table
 
-    def saveSheet(self, file_name, data_frame):
+    def saveSheet(self, file_name, table):
         file_ext = self.getFileExt(file_name)
         if (file_ext in [u'csv']):
-            data_frame.to_csv(file_name)
+            table.to_csv(file_name)
         elif (file_ext in [u'xls', u'xlsx']):
-            data_frame.to_excel(file_name)
+            table.to_excel(file_name)
 
-    def saveSheet2(self, file_name, data_frame):
-        key_cols = data_frame.keys()
-        value_cols = data_frame.values
-        sheet_new = YdSheet()
+    def saveSheet2(self, file_name, table):
+        key_cols = table.keys()
+        value_cols = table.values
+        sheet_new = Yd_sheet()
         sheet_new.openFile(file_name = file_name)
         sheet_new.addSheet()
         sheet_new.writeRow(key_cols)

@@ -10,14 +10,14 @@ def func_get_year(item):
 
 if __name__ == '__main__':
 
-    master = Container('master')
+    master = Yd_container('master')
     master.nameSync()
-    slave = Container('slave')
+    slave = Yd_container('slave')
     slave.connectSync('master')
 
-    frame = Frame()
+    frame = Yd_frame()
 
-    frame.table = YdSheet().loadSheet(u'data//ai//中科寒武纪//ANN-中科寒武纪-20210414-Ptics.xlsx', start_row=1)
+    frame.table = Yd_sheet().loadSheet(u'data//ai//中科寒武纪//ANN-中科寒武纪-20210414-Ptics.xlsx', start_row=1)
 
     key = u'申请日'
     new_key = key + u'_year'

@@ -10,7 +10,7 @@ def func_get_year(item):
 
 if __name__ == '__main__':
 
-    tree_root = TreeContainer('增强现实')
+    tree_root = Yd_tree('增强现实')
     tree_root.addTreeData(u'data//ai//增强现实//全部')
     tree_root.dump()
 

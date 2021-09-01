@@ -42,8 +42,8 @@ if __name__ == '__main__':
 
     print('testi ng FrameTest')
 
-    frame = Frame()
-    frame.table = YdSheet().loadSheet(u'data//ti.xls', start_row = 1)
+    frame = Yd_frame()
+    frame.table = Yd_sheet().loadSheet(u'data//ti.xls', start_row = 1)
 
     new_table = FrameTest().getYearHistogram(frame.table, u'申请日期')
     print(new_table)

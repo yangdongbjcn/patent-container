@@ -8,21 +8,21 @@ import matplotlib.pyplot as plt
 
 import ContainerSync
 
-class Container(object):
+class Yd_container(object):
     """ """
     def __init__(self, name, superior=None):
         self.name = name
         self.default_name = 'frame'
-        self.setFrame(self.default_name, Frame())
+        self.setFrame(self.default_name, Yd_frame())
 
     # frame
     def getFrame(self, name):
         return self.__getattribute__(name)
     def setFrame(self, name, frame = None):
-        if frame and not isinstance(frame, Frame):
+        if frame and not isinstance(frame, Yd_frame):
             raise ValueError('frame is not a Frame')
         if frame is None:
-            frame = Frame(name=name)
+            frame = Yd_frame(name=name)
         self.__setattr__(name, frame)
         frame.name = name
 
@@ -52,21 +52,21 @@ class Container(object):
         key = a[1]
         if (type == 'histogram'):
             histo_table = self.getHistogramFrom(frame, key)
-            t_frame = Frame(table= histo_table)
+            t_frame = Yd_frame(table= histo_table)
             self.setDefaultFrame(t_frame)
 
 
-class PipeContainer(Container):
+class Yd_pipe(Yd_container):
     """ """
     def __init__(self, name, superior = None):
         """"""
-        super(PipeContainer, self).__init__(name, superior)
+        super(Yd_pipe, self).__init__(name, superior)
 
-class PipeHistoChart(PipeContainer):
+class Yd_pipe_histo_chart(Yd_pipe):
     """ """
     def __init__(self, name, superior = None):
         """"""
-        super(PipeHistoChart, self).__init__(name, superior)
+        super(Yd_pipe_histo_chart, self).__init__(name, superior)
         self.histo_name = 'histo'
         self.setFrame(self.histo_name)
 
@@ -74,7 +74,7 @@ class PipeHistoChart(PipeContainer):
         """"""
         new_key = key + '_histogram'
         histo_table = YdAlgorithm().getHistogram(self.frame.table, key, new_key)
-        histo_data = Frame(name = self.histo_name, table= histo_table)
+        histo_data = Yd_frame(name = self.histo_name, table= histo_table)
         self.setFrame(self.histo_name, histo_data)
 
     def pipe2Chart(self):
@@ -83,7 +83,7 @@ class PipeHistoChart(PipeContainer):
         frame.table.plot()
         plt.show()
 
-class TreeContainerIO(object):
+class Yd_tree_io(object):
     """ """
     def addTreeData(self, cont, path):
         sheet_files = self.getSheetFiles(path)
@@ -96,7 +96,7 @@ class TreeContainerIO(object):
             tree_path = file_name
             leaf = cont.findMember(tree_path)
             file_path = path + '//' + file
-            leaf.frame.table = YdSheet().loadSheet(file_path)
+            leaf.frame.table = Yd_sheet().loadSheet(file_path)
         return cont
 
     def getSheetFiles(self, path):
@@ -122,17 +122,17 @@ class TreeContainerIO(object):
 
 
 
-class TreeContainer(Container):
+class Yd_tree(Yd_container):
     """ """
     def __init__(self, name, superior=None):
-        super(TreeContainer, self).__init__(name, superior)
+        super(Yd_tree, self).__init__(name, superior)
 
         self.name = name
         self.superior = superior
         self.members = {}
         self.path_sep = '--'
 
-        self._io = TreeContainerIO()
+        self._io = Yd_tree_io()
 
         self.alldata_name = 'all'
         self.setFrame(self.alldata_name)
@@ -157,7 +157,7 @@ class TreeContainer(Container):
         if (type == 'histogram'):
             self.histo_name = 'histo'
             histo_table = self.getHistogramFrom(frame, key)
-            histo_data = Frame(name=self.histo_name, table=histo_table)
+            histo_data = Yd_frame(name=self.histo_name, table=histo_table)
             self.setFrame(self.histo_name, histo_data)
 
     def syncMembers(self, type, *a, **kw):
@@ -216,10 +216,10 @@ class TreeContainer(Container):
         return nodes
 
     def addMember(self, name, obj=None):
-        if obj and not isinstance(obj, TreeContainer):  # YD
+        if obj and not isinstance(obj, Yd_tree):  # YD
             raise ValueError('member is not a Container')
         if obj is None:
-            obj = TreeContainer(name)  # YD
+            obj = Yd_tree(name)  # YD
         obj.superior = self
         self.members[name] = obj
         return obj
