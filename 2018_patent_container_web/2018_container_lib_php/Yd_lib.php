@@ -10,7 +10,7 @@ class yd_lib {
 
     public function __construct() {
         $this->CI = & get_instance();
-        log_message('debug', 'yd_lib Class Initialized');
+        log_message('debug', 'yd/Yd_lib Class Initialized');
     }
 
     public function gen_dict_values_compare($field_name_values_dict, $opt = 'like', $values_conn = 'and', $dict_conn = 'or') {

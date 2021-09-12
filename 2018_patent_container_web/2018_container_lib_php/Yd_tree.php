@@ -18,7 +18,7 @@ class yd_tree {
     public function __construct() {
         $this->CI = & get_instance();
 
-        $this->CI->load->library('yd_cube');
+        $this->CI->load->library('yd/Yd_cube');
 
         $this->superior;
         $this->members = array();
@@ -26,7 +26,7 @@ class yd_tree {
         $this->keys = array();
         $this->listss = array();
 
-        log_message('debug', 'yd_tree Class Initialized');
+        log_message('debug', 'yd/Yd_tree Class Initialized');
     }
 
     // 输入

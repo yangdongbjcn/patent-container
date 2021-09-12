@@ -13,7 +13,7 @@ class yd_sql {
     
     public function __construct() {
         $this->CI = & get_instance();
-        $this->CI->load->library('yd_lib');
+        $this->CI->load->library('yd/Yd_lib');
 
         $this->get_db();
 

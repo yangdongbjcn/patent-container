@@ -25,7 +25,7 @@ YdTreePath.prototype = {
     this.path = json_tree;
 
     return this;
-  },
+  }
 };
 
 function f_tree_names_split(excel_names){

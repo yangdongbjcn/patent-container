@@ -1,13 +1,13 @@
-function yd_cookie_set(cookie_name, json_var)
+function yd_cookie_set(cookie_name, cookie_value)
 {
-    var cookie_string = cookie_name + '=' + json_var; 
+    var cookie_string = cookie_name + '=' + cookie_value; 
     
     var d = new Date();
     d.setMonth(d.getMonth()+1);
     d = d.toGMTString();
+    
     cookie_string += ';' + 'expires=' + d;
     
-    //20180606--cookie路径，全网站通用
     cookie_string += ';' + 'path=/';
     
     document.cookie = cookie_string;
@@ -32,13 +32,6 @@ function yd_url_get_params(page_name)
     var t_split = t_site.split(page_name);
     var t_split_after = t_split[1];
 
-    // if (t_split_after) {
-    //     // 20190508 YDBJ
-    //     var label = '#';
-    //     var t_split_label = t_split_after.split(label);
-    //     var t_split_after = t_split_label[0];
-    // }
-
     if (t_split_after) {
         var param_array = t_split_after.split('/');
         param_array.splice(0, 1);
@@ -48,8 +41,6 @@ function yd_url_get_params(page_name)
 };
 
 function YdMenuActive(){
-    // var __id;
-    // var __menu_id;
     return {
         init: function(id){
             this.id = id;
@@ -256,7 +247,7 @@ YdColumnDefs.prototype = {
   },
   get: function() {
     return this.list;
-  },
+  }
 };
 
 function YdColumns() {
@@ -395,3 +386,37 @@ YdDataTables.prototype = {
       $('#' + control_id).DataTable(option);
   }
 };
+
+
+function yd_psd_is_weak(p_psd){
+  // 不包含数字
+  var t_reg_num = /[0-9]/;
+  if( !p_psd.match(t_reg_num) ){
+    return true;
+  }
+
+  // 不包含大写字母
+  var t_reg_cap = /[A-Z]/;
+  if( !p_psd.match(t_reg_cap) ){
+    return true;
+  }
+
+  // 不包含小写字母
+  var t_reg_letter = /[a-z]/;
+  if( !p_psd.match(t_reg_letter) ){
+    return true;
+  }
+
+  // 不包含特殊字符
+  var t_reg_special = /[%#@!~&\^\$\*\(\)]/;
+  if( !p_psd.match(t_reg_special) ){
+    return true;
+  }
+
+  // 长度小于8位
+  if( p_psd.length < 8 ){
+    return true;
+  }
+
+  return false;
+}

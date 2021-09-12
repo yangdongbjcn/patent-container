@@ -15,12 +15,12 @@ class yd_mat {
     public function __construct() {
         $this->CI = & get_instance();
 
-        $this->CI->load->library('yd_list');
+        $this->CI->load->library('yd/Yd_list');
 
         $this->lists = array();
         $this->clists = array();
 
-        log_message('debug', 'yd_mat Class Initialized');
+        log_message('debug', 'yd/Yd_mat Class Initialized');
     }
 
     // 输入
@@ -48,7 +48,6 @@ class yd_mat {
         return $this;
     }
     
-
     // 输出
     public function get() {
         return $this->lists;
@@ -93,37 +92,33 @@ class yd_mat {
       }
       return $new_rows;
     }
-    public function Transpose() {
+    public function getTranspose() {
         $clists = tf_mat_transpose($this->lists);
         return $clists;
     }
 
     // 改变
-    public function iterFunc($func_name){
+    public function toIter($func_name){
         $this->lists = array_map($func_name, $this->lists);
         return $this;
     }
-    public function iterListFunc($func_name){
+    public function toIterListFunc($func_name){
         
         return $this;
     }
-    public function iterClistFunc($func_name){
+    public function toIterClistFunc($func_name){
         
         return $this;
     }
-    public function filterFunc($func_name){
+    public function toFilterByFunc($func_name){
         $this->lists = array_filter($this->lists, $func_name);
         return $this;
     }
-    public function filterValue($col_num, $value_array){
-        
-        
-        return $this;
-    }
+
     public function cloneList($row_num) {
 
     }
-    public function cloneClist($col_num) {
+    public function toCloneClist($col_num) {
 
     }
     public function pop() {
@@ -140,18 +135,6 @@ class yd_mat {
     }
     public function reverse() {
         $this->lists = array_reverse($this->lists);
-        return $this;
-    }
-    public function reIndex($re_index) {
-        
-        return $this;
-    }
-    public function trunc($len) {
-        
-        return $this;
-    }
-    public function formatClist($col_no, $format_string) {
-        
         return $this;
     }
 

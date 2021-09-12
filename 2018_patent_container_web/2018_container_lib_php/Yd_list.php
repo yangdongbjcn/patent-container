@@ -16,7 +16,7 @@ class yd_list {
 
         $this->dict = array();
 
-        log_message('debug', 'yd_list Class Initialized');
+        log_message('debug', 'yd/Yd_list Class Initialized');
     }
 
     // 输入
@@ -81,31 +81,27 @@ class yd_list {
         // 返回 键名 或 false
         return array_search($value, $this->list);
     }
-    public function getIndexByValue($value){
+    public function getValueByFind($value){
         // 返回 键名 或 false
         return array_search($value, $this->list);
     }
 
     // 改变
-    public function iterFunc($func_name){
+    public function toIter($func_name){
         $this->list = array_map($func_name, $this->list);
         return $this;
     }
-    public function filterFunc($func_name){
+    public function toFilterByFunc($func_name){
         $this->list = array_filter($this->list, $func_name);
         return $this;
     }
-    public function filterValue($value_array){
+
+    public function toDelete($value_array){
         
         
         return $this;
     }
-    public function deleteValue($value_array){
-        
-        
-        return $this;
-    }
-    public function cloneItem($index) {
+    public function toCloneItem($index) {
 
     }
     public function pop() {
@@ -133,7 +129,7 @@ class yd_list {
         
         return $this;
     }
-    public function reIndex($re_index) { // 1 4 3 2
+    public function toReindex($re_index) { // 1 4 3 2
         assert(count($re_index) == $this->len());
         $re_index_flip = array_flip($re_index); // 1 4 3 2 
         $old_list = $this->list;
@@ -186,7 +182,7 @@ class yd_list {
     
     // 转换输出
     // clone function 不必 PHP 值复制，而非引用复制
-    public function toDict($index_array) {
+    public function getDict($index_array) {
         if ($this->len() != count($index_array)) {
           return FALSE;
         }
@@ -206,10 +202,17 @@ class yd_list {
         $sep = "\r\n";  // PHP 单引号 双引号
         return implode($sep, $this->list);
     }
-    public function unique(){
+    public function toStringArray() {
+        for ($i = 0; $i < $this->len(); $i++) {
+          $value = $this->list[$i];
+          $this->list[$i] = strval($value);
+        }
+        return $this;
+    }
+    public function getUnique(){
         return array_unique($this->list);
     }
-    public function toHistogram($p_value){
+    public function getHistogram($p_value){
         $p_input = $this->list;
         $t_length = count($p_value);
         $t_hist = array();
@@ -225,9 +228,18 @@ class yd_list {
         }
         return $t_hist;
     }
-    public function toGroup(){
-        
-        
+    public function getUniqueHistogram(){
+        $list = $this->list;
+        $hist = array();
+        for ($i=0; $i<count($list); $i++) {
+            $item = $list[$i];
+            $hist[$item] = 0;
+        }
+        for ($i=0; $i<count($list); $i++) {
+            $item = $list[$i];
+            $hist[$item] = $hist[$item] + 1;
+        }
+        return $hist;
     }
 }
         

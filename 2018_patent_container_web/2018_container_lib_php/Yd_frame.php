@@ -9,7 +9,6 @@
 class yd_frame {
     private $CI;
 
-    private $dicts;
     private $names;
     private $keys;
     private $lists;
@@ -17,119 +16,53 @@ class yd_frame {
     public function __construct() {
         $this->CI = & get_instance();
 
-        $this->CI->load->library('yd_mat');
+        $this->CI->load->library('yd/Yd_mat');
 
-        $this->dicts = array();
         $this->names = array();
         $this->keys = array();
         $this->lists = array();
 
-        log_message('debug', 'yd_frame Class Initialized');
+        log_message('debug', 'yd/Yd_frame Class Initialized');
     }
 
     // 输入
     public function initNamesKeysLists($names, $keys, $lists) {
         
+        $this->names = $names;
+        $this->keys = $keys;
+        $this->lists = $lists;
 
         return $this;
     }
     public function initMatNamesKeysLists($mat) {
         // 默认第一列是names，第一行是keys，剩下的是lists
-        $this->CI->load->library('yd_mat');
-        // $clists = $this->CI->yd_mat->Transpose($mat);
-        $clists = $this->CI->yd_mat->init($mat)->Transpose();
+        $this->CI->load->library('yd/Yd_mat');
+        $clists = $this->CI->yd_mat->init($mat)->getTranspose();
 
         $this->names = array_shift($clists);
         array_shift($this->names);
 
-        // $this->lists = $this->CI->yd_mat->Transpose($clists);
-        $this->lists = $this->CI->yd_mat->init($clists)->Transpose();
+        $this->lists = $this->CI->yd_mat->init($clists)->getTranspose();
         
         $this->keys = array_shift($this->lists);
         return $this;
     }
     public function initNamesDicts($names, $dicts) {
-        $this->dicts = $dicts;
-        $this->keys = tf_get_keys_from_dict_rows($dicts);
-        $this->lists = tf_get_rows_from_dict_rows($dicts);
+        $this->keys = tf_get_keys_from_dicts($dicts);
+        $this->lists = tf_get_lists_from_dicts($dicts);
 
         $this->names = $names;
 
         return $this;
     }
-    public function initKeysClists($keys, $clists) {
-        
-        $this->CI->load->library('yd_mat');
-        $lists = $this->CI->yd_mat->init($clists)->Transpose();
-
-        return $this->initKeysLists($keys, $lists);
-    }
-
-    // 无names 输入
-
+    
     public function setNames($names) {
         $this->names = $names;
         return $this;
     }
-    public function initKeysLists($keys, $lists) {
-        $this->keys = $keys;
-        $this->lists = $lists;
-        $this->dicts = tf_combine_keys_rows($keys, $lists);
-
-        $index_num = count($dicts);
-        $this->names = $this->CI->yd_list->init1N($index_num)->get();
-        
-        return $this;
-    }
-    public function initMatKeysLists($mat) {
-        // 默认第一行是keys，剩下的是lists
-        $this->keys = array_slice($mat, 0, 1)[0];
-        $this->lists = array_slice($mat, 1);
-        $this->dicts = tf_combine_keys_rows($this->keys, $this->lists);
-
-        $index_num = count($dicts);
-        $this->names = $this->CI->yd_list->init1N($index_num)->get();
-
-        return $this;
-    }
-    public function initDicts($dicts) {
-        $index_num = count($dicts);
-        $names = $this->CI->yd_list->init1N($index_num)->get();
-
-        $this->initNamesDicts($names, $dicts);
-
-        return $this;
-    }
-    public function initCdicts($cdicts) {
-        
-
-        return $this;
-    }  
-
-    // push 输入
-    public function merge($new_frame) {
-        
-
-        return $this;
-    }
-    public function pushKeyClist($key, $col) {
-        
-
-        return $this;
-    }
-    public function pushKeyClistOfSameValue($key, $value) {
-        
-
-        return $this;
-    }
-    public function pushNameList($new_index, $new_row) {
-        
-
-        return $this;
-    }
-
+    
     // 输出
-    public function getFrame() {
+    public function getNamesDicts() {
         // key, names, value
         $lists = $this->lists;
         $keys = $this->keys;
@@ -155,10 +88,10 @@ class yd_frame {
         }
     }
     public function len() {
-        return count($this->dicts);
+        return count($this->lists);
     }
     public function len2() {
-        
+        return count($this->keys);
     }
     public function getKeys() {
         return $this->keys;
@@ -177,82 +110,12 @@ class yd_frame {
         
     }
     public function getDicts() {
-        return $this->dicts;
-    }
-    public function getClist($p_key) {
-        
-
-    }
-    public function updateClist($p_key, $p_clist) {
-        
-
-    }
-    public function getKeysClists() {
-        
-        
-    }
-    public function getCdicts() {
-        // $clists = $this->CI->yd_mat->Transpose($this->lists);
-        $clists = $this->CI->yd_mat->init($this->lists)->Transpose();
-
-        $cdicts = tf_combine_keys_values($this->keys, $clists);
-        return $cdicts;
-    }
-    public function Transpose() {
-        
-        return $this;
-    }
-
-    // 改变
-    public function filterValue($key, $value_array){
-        
-        
-        return $this;
-    }
-    public function iterFunc(){
-        
-        
-        return $this;
-    }
-    public function iterMatFunc(){
-        
-        
-        return $this;
-    }
-    public function iterListFunc(){
-        
-        
-        return $this;
-    }
-    public function iterClistFunc(){
-        
-        
-        return $this;
-    }
-    public function trunc($p_num){
-        
-        
-        return $this;
-    }
-    public function reIndexAndTrunc($p_index, $p_num){
-        
-        
-        return $this;
-    }
-
-    // 数字
-    public function sumClists($f_stat){
-        
-        
-        return $this;
+        return tf_get_dicts_from_keys_and_lists($this->keys, $this->lists);
     }
 
     // 转换输出
-    // clone function 不必 PHP 值复制，而非引用复制
-    public function complete($default_value) {
-        
-    }
-    public function toScatter() {
+    
+    public function getScatter() {
         // key, names, value
         $lists = $this->lists;
         $keys = $this->keys;
@@ -269,27 +132,7 @@ class yd_frame {
           }
         }
         return $array_rows;
-    }
-
-    // public function toScatter2() {
-    //     // names, key, value
-    //     $lists = $this->lists;
-    //     $keys = $this->keys;
-    //     $names = $this->names;
-    //     $array_rows = array();
-    //     for($i=0; $i<count($lists); $i++) {
-    //         $this_row = $lists[$i];
-    //         for($j=0; $j<count($this_row); $j++) {
-    //             $node = array();
-    //             array_push($node, $names[$i]);
-    //             array_push($node, $keys[$j]);
-    //             array_push($node, $this_row[$j]);
-    //             array_push($array_rows, $node);
-    //       }
-    //     }
-    //     return $array_rows;
-    // }
-    
+    }    
     
     public function toGroup(){
         
@@ -300,7 +143,7 @@ class yd_frame {
 }
 
 
-function tf_combine_keys_values($keys, $clists) {
+function tf_get_dict_from_keys_and_values($keys, $clists) {
     $cdicts = array();
     for($i=0; $i<count($clists); $i++) {
         $col = $clists[$i];
@@ -310,13 +153,13 @@ function tf_combine_keys_values($keys, $clists) {
     return $cdicts;
 }
 
-function tf_get_keys_from_dict_rows($dicts) {
+function tf_get_keys_from_dicts($dicts) {
     $dict_row = $dicts[0];
     $keys = array_keys($dict_row);
     return $keys;
 }
 
-function tf_get_rows_from_dict_rows($dicts) {
+function tf_get_lists_from_dicts($dicts) {
     $lists = array();
     for($i=0; $i<count($dicts); $i++) {
         $dict_row = $dicts[$i];
@@ -326,11 +169,11 @@ function tf_get_rows_from_dict_rows($dicts) {
     return $lists;
 }
 
-function tf_combine_keys_rows($keys, $lists) {
+function tf_get_dicts_from_keys_and_lists($keys, $lists) {
     $dicts = array();
     for($i=0; $i<count($lists); $i++) {
         $row = $lists[$i];
-        $dict_row = tf_combine_keys_values($keys, $row);
+        $dict_row = tf_get_dict_from_keys_and_values($keys, $row);
         array_push($dicts, $dict_row);
     }
     return $dicts;

@@ -20,7 +20,7 @@ Yd_cube.prototype = {
       return false;
     }
   },
-  len: function() {
+  len1: function() {
     return this.listss.length;
   },
   len2: function() {

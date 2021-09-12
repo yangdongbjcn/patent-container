@@ -2,28 +2,10 @@ function Yd_mat(){
     // var this.lists;
 }
 Yd_mat.prototype = {
-  // constructor: Yd_mat,
   // 输入
   init: function(lists){
     this.lists = lists;
     return this;
-  },
-  merge: function(new_mat){
-      
-      return this;
-  },
-  push: function(new_list){
-      this.lists.push(new_list);
-      return this;
-  },
-  pushClist: function(new_list){
-      
-      
-      return this;
-  },
-  unshift: function(new_list){
-      
-      return this;
   }, 
   initFromCsv: function(file_path, f_func) {
     var reader = new FileReader();
@@ -34,65 +16,71 @@ Yd_mat.prototype = {
     }
   },
 
-
   // 输出
   get: function() {
     return this.lists;
   },
-  isEmpty: function() {
-    if (this.lists.length == 0) {
-      return true;
-    }else{
-      return false;
-    }
-  },
-  len: function() {
+  getLen1: function() {
     return this.lists.length;
   },
-  len2: function() {
-    var len;
-    if (this.len() == 0){
-      len = 0;
+  getLen2: function() {
+    var len1;
+    if (this.getLen1() == 0){
+      len1 = 0;
     }else{
-      len = this.lists[0].length;
+      len1 = this.lists[0].length;
     }
-    return len;
+    return len1;
   },
-  getSomeLists: function(row_num_array) {
+  getDicts: function(keys){
+    if(this.getLen2() != keys.length){
+      debugger;
+    }
+    var dicts = [];
+    for(var j=0; j<this.lists.length; j++){
+      var dict = new Yd_list().init(this.lists[j]).getDict(keys);
+      dicts.push(dict);
+    }
+    return dicts;
+  },
+  getString: function(sep) {
+    var sep = sep || '\t';
+    var lists = this.lists;
+    var t_array = new Array();
+    for(var i=0; i<lists.length; i++){
+      var list = lists[i];
+      var t_string = new Yd_list().init(list).getString(sep);
+      t_array.push(t_string);
+    }
+    return new Yd_list().init(t_array).getStringLines();
+  },
+
+  // 获取Yd类
+  bldSomeLists: function(row_num_array) {
     var lists = new Array();
     for(var i=0; i<row_num_array.length; i++) {
       lists.push(this.lists[i]);
     }
     return new Yd_mat().init(lists);
   },
-  getClist: function(col_no) {
+  bldClist: function(col_no) {
     var column = new Array();
-    for(var i=0; i< this.lists.length; i++) {
-      var value = this.lists[i][col_no];
-      column.push(value);
+    for(var i=0; i<this.lists.length; i++) {
+      column.push(this.lists[i][col_no]);
     }
     return new Yd_list().init(column);
   },
-  getSomeClists: function(col_num_array) {
+  bldSomeClists: function(col_num_array) {
       var lists = new Array();
-      for(var i=0; i< this.lists.length; i++) {
+      for(var i=0; i<this.lists.length; i++) {
           var list = new Yd_list().init(this.lists[i]).getSomeValues(col_num_array);
           lists.push(list);
       }
       return new Yd_mat().init(lists);
   },
-  updateClist: function(col_no, new_clist) {
-    if (new_clist.length != this.len()) {
-      debugger;
-    }
-    for(var i=0; i< this.len(); i++) {
-        this.lists[i][col_no] = new_clist[i];
-    }
-    return this;
-  },
-  Transpose: function() {
+  bldTranspose: function() {
     var new_mat = new Array();
-    var col_num = this.len2();
+    var col_num = this.getLen2();
     for(var j=0; j<col_num; j++){
        var new_array = new Array();
        new_mat.push(new_array);
@@ -110,183 +98,78 @@ Yd_mat.prototype = {
     }
     return new Yd_mat().init(new_mat);
   },
-
-  // 改变
-  iterFunc: function(f_filter){
-    
-
-      return this;
-  },
-  iterListFunc: function(f_filter){
-    for (var i = 0; i < this.lists.length; i++) {
-      var t_list = this.lists[i];
-      this.lists[i] = f_filter(t_list);
+  bldSumClist: function() {
+    var t_keys = this.keys;
+    var t_json = {};
+    for (var i = 0; i < t_keys.length; i++) {
+        var t_key = t_keys[i];
+        var t_col = this.bldClist(t_key).get();
+        var t_stat = new Yd_list().init(t_col).getSum();
+        t_json[t_key] = t_stat;
     }
-    return this;
+    return new Yd_dict().init(t_json);
   },
-  iterClistFunc: function(f_filter){
-    for (var i = 0; i < this.len2(); i++) {
-      var t_clist = this.getClist(i).get();
-      var new_clist = f_filter(t_clist);
-      this.updateClist(i, new_clist);
-    }
-    return this;
-  },
-  filterFunc: function(f_filter){
-   
-
-      return this;
-  },
-  filterValue: function(col_no, t_values) {
-      var list;
-      var lists = [];
-      var t_array = new Yd_list().init(t_values);
-      for(var i=0; i< this.lists.length; i++) {
-          if ( t_array.has(this.lists[i][col_no])){
-              list = new Yd_dict().init(this.lists[i]).clone().get();
-              lists.push(list);
-          }
-      }
-      return new Yd_mat().init(lists);
-  },
-  cloneList: function(row_num) {
-      
-
-      return this;
-  },
-  cloneClist: function(col_no){
-    for (var i = 0; i < this.lists.length; i++) {
-      var list = this.lists[i];
-      new Yd_list().init(list).cloneItem(col_no);
-    }
-    return this;
-  },
-  pop: function() {
-      
-      return this;
-  },
-  shift: function() {
-      
-      return this;
-  },
-  slice: function(p_start, p_length) {
-      
-      return this;
-  },
-  reverse: function() {
-      
-      return this;
-  },
-  reIndex: function(p_index) {
-    var new_mat = new Array();
-    for (var i = 0; i < p_index.length; i++) {
-      var t_index = p_index[i];
-      var t_item = this.lists[t_index];
-      var new_item = new Yd_list().init(t_item).clone().get();
-      new_mat.push(new_item);
-    }
-    this.lists = new_mat;
-    return this;
-  },
-  trunc: function(len) {
-    if (len >= this.len()) {
-      return this;
-    }
-    // var new_mat = this.init(this.get()).clone().get();
-    // new_mat.splice(len, new_mat.length - len + 1);
-    // return new Yd_mat().init(new_mat);
-    this.lists.splice(len, this.len() - len + 1);
-    return this;
-  },
-  formatClist: function(col_no, format_string) {
-    for (var i = 0; i < this.lists.length; i++) {
-      var item = this.lists[i][col_no];
-      var new_item;
-      if (format_string == 'string') {
-        new_item = String(item);
-      }
-      if (format_string == 'number') {
-        new_item = Number(item);
-      }
-      this.lists[i][col_no] = new_item;
-    }
-    return this;
-  },
-
-  // 排序
-  sortIndex: function(col_no) {
-    var new_col = this.getClist(col_no).get();
-    this.sortindex = new Yd_list().init1N(new_col.length).get();
-    yd_array_merge_sort(new_col, this.sortindex); 
-    this.lists = new Yd_mat().init(this.lists).reIndex(this.sortindex).get();
-    return this;
-  },
-  getSortIndex: function(){
-    return this.sortindex;
-  },
-
-  // 数字
-  toNumber: function(){
-      for(var j=0; j<this.lists.length; j++){
-         for(var i=0; i<this.lists[j].length; i++){
-            var value = this.lists[j][i];
-            if( !isNaN( value ) )
-            {
-               this.lists[j][i] = value - 0;
-            }
-         }
-      }
-      return this;
-  },
-  max: function(){
-      
-  },
-  min: function(){
-      
-  },
-  sum: function() {
-      
-  },
-  average: function() {
-      
-  },
-
-  // 转换输出
-  clone: function() {
+  bldClone: function() {
     new_mat = new Array();
     for (var i = 0; i < this.lists.length; i++) {
-      var new_list = new Yd_list().init(this.lists[i]).clone().get();
-      new_mat.push(new_list);
-    }
-    return new Yd_mat().init(new_mat);
-  }, 
-  complete: function(col_no, complete_list, default_value) {
-    var default_value = default_value || 0;
-    var t_clist = this.getClist(col_no).get();
-
-    var new_mat = new Array();
-    for (var i = 0; i < complete_list.length; i++) {
-      var this_item = complete_list[i];
-      var t_index = t_clist.indexOf(this_item);
-      if (t_index != -1) {
-        var new_list = new Yd_list().init(this.lists[t_index]).clone().get();
-      }else{
-        var new_list = new Yd_list().init([this_item, default_value]).get();
-      }
+      var new_list = new Yd_list().init(this.lists[i]).bldClone().get();
       new_mat.push(new_list);
     }
     return new Yd_mat().init(new_mat);
   },
-  toCdict: function(key_col_num, value_col_num){
-    var t_keys = this.getClist(key_col_num).get();
-    var t_values = this.getClist(value_col_num).get();
+  // bldComplete: function(col_no, complete_list, default_value) {
+  //   var default_value = default_value || 0;
+  //   var t_clist = this.bldClist(col_no).get();
+
+  //   var new_mat = new Array();
+  //   for (var i = 0; i < complete_list.length; i++) {
+  //     var this_item = complete_list[i];
+  //     var t_index = t_clist.indexOf(this_item);
+  //     if (t_index != -1) {
+  //       var new_list = new Yd_list().init(this.lists[t_index]).bldClone().get();
+  //     }else{
+  //       var new_list = new Yd_list().init([this_item, default_value]).get();
+  //     }
+  //     new_mat.push(new_list);
+  //   }
+  //   return new Yd_mat().init(new_mat);
+  // },
+  bldCdict: function(key_col_num, value_col_num){
+    var t_keys = this.bldClist(key_col_num).get();
+    var t_values = this.bldClist(value_col_num).get();
     return new Yd_dict().initKeysValues(t_keys, t_values);
   },
-  toDataPivot: function(key_col_num, value_col_num){
+  //  bldGroup: function(col_no) {
+  //   var t_lists_group = {};
+
+  //   var t_lists = this.lists;
+
+  //   var t_uniques = this.bldClist(col_no).unique().get();
+  //   for(i=0; i<t_uniques.length; i++) {
+  //     var this_unique = t_uniques[i];
+  //     t_lists_group[this_unique] = new Array();
+  //   }
+
+  //   var t_clist = this.bldClist(col_no).get();
+  //   for(i=0; i<t_clist.length; i++) {
+  //     var this_item = t_clist[i]; 
+  //     var this_list = t_lists[i];
+  //     t_lists_group[this_item].push(this_list);
+  //   }
+
+  //   var t_mat_group = {};
+  //   for(var key in t_lists_group) {
+  //     var value = t_lists_group[key];
+  //     t_mat_group[key] = new Yd_mat().init(value);
+  //   }   
+
+  //   return t_mat_group;
+  // },
+  bldDataPivot: function(key_col_num, value_col_num){
     var dict = {};
-    var t_keys = this.getClist(key_col_num).get();
-    var t_values = this.getClist(value_col_num).get();
-    var key_unique = new Yd_list().init(t_keys).unique().get();
+    var t_keys = this.bldClist(key_col_num).get();
+    var t_values = this.bldClist(value_col_num).get();
+    var key_unique = new Yd_list().init(t_keys).bldUnique().get();
 
     for(var j=0; j<key_unique.length; j++){
         var t_key = key_unique[j];
@@ -300,53 +183,109 @@ Yd_mat.prototype = {
     }
     return new Yd_dict().init(dict);
   },
-  toDicts: function(keys){
-    if(this.len2() != keys.length){
+
+  // 改变
+  toUpdateClist: function(col_no, new_clist) {
+    if (new_clist.length != this.getLen1()) {
       debugger;
     }
-    var dicts = [];
-    for(var j=0; j<this.lists.length; j++){
-      var dict = new Yd_list().init(this.lists[j]).toDict(keys);
-      dicts.push(dict);
+    for(var i=0; i<this.getLen1(); i++) {
+        this.lists[i][col_no] = new_clist[i];
     }
-    return dicts;
+    return this;
   },
-  toString: function(sep) {
-    var sep = sep || '\t';
-    var lists = this.lists;
-    var t_array = new Array();
-    for(var i=0; i<lists.length; i++){
-      var list = lists[i];
-      var t_string = new Yd_list().init(list).toString(sep);
-      t_array.push(t_string);
-    }
-    return new Yd_list().init(t_array).toStringLines();
+  toPush: function(new_list){
+      this.lists.push(new_list);
+      return this;
   },
-  toGroup: function(col_no) {
-    var t_lists_group = {};
-
-    var t_lists = this.lists;
-
-    var t_uniques = this.getClist(col_no).unique().get();
-    for(i=0; i<t_uniques.length; i++) {
-      var this_unique = t_uniques[i];
-      t_lists_group[this_unique] = new Array();
+  toIterListFunc: function(f_filter){
+    for (var i = 0; i < this.lists.length; i++) {
+      var t_list = this.lists[i];
+      this.lists[i] = f_filter(t_list);
     }
-
-    var t_clist = this.getClist(col_no).get();
-    for(i=0; i<t_clist.length; i++) {
-      var this_item = t_clist[i]; 
-      var this_list = t_lists[i];
-      t_lists_group[this_item].push(this_list);
+    return this;
+  },
+  toIterClistFunc: function(f_filter){
+    for (var i = 0; i < this.getLen2(); i++) {
+      var t_clist = this.bldClist(i).get();
+      var new_clist = f_filter(t_clist);
+      this.toUpdateClist(i, new_clist);
     }
-
-    var t_mat_group = {};
-    for(var key in t_lists_group) {
-      var value = t_lists_group[key];
-      t_mat_group[key] = new Yd_mat().init(value);
-    }   
-
-    return t_mat_group;
+    return this;
+  },
+  toCloneClist: function(col_no){
+    for (var i = 0; i < this.lists.length; i++) {
+      var list = this.lists[i];
+      new Yd_list().init(list).toCloneItem(col_no);
+    }
+    return this;
+  },
+  toReindex: function(p_index) {
+    var new_mat = new Array();
+    for (var i = 0; i < p_index.length; i++) {
+      var t_index = p_index[i];
+      var t_item = this.lists[t_index];
+      var new_item = new Yd_list().init(t_item).bldClone().get();
+      new_mat.push(new_item);
+    }
+    this.lists = new_mat;
+    return this;
+  },
+  toTrunc: function(len1) {
+    if (len1 >= this.getLen1()) {
+      return this;
+    }
+    this.lists.splice(len1, this.getLen1() - len1 + 1);
+    return this;
+  },
+  toFormatClist: function(col_no, format_string) {
+    for (var i = 0; i < this.lists.length; i++) {
+      var item = this.lists[i][col_no];
+      var new_item;
+      if (format_string == 'string') {
+        new_item = String(item);
+      }
+      if (format_string == 'number') {
+        new_item = Number(item);
+      }
+      this.lists[i][col_no] = new_item;
+    }
+    return this;
+  },
+  toSortIndex: function(col_no) {
+    var new_col = this.bldClist(col_no).get();
+    this.sortindex = new Yd_list().init1N(new_col.length).get();
+    yd_array_merge_sort(new_col, this.sortindex); 
+    this.lists = new Yd_mat().init(this.lists).toReindex(this.sortindex).get();
+    return this;
+  },
+  getSortIndex: function(){
+    return this.sortindex;
+  },
+  toNumber: function(){
+      for(var j=0; j<this.lists.length; j++){
+         for(var i=0; i<this.lists[j].length; i++){
+            var value = this.lists[j][i];
+            if( !isNaN( value ) )
+            {
+               this.lists[j][i] = value - 0;
+            }
+         }
+      }
+      return this;
+  },
+  toFilterClistByValues: function(col_no, t_values) {
+      var list;
+      var lists = [];
+      var t_array = new Yd_list().init(t_values);
+      for(var i=0; i< this.lists.length; i++) {
+          if ( t_array.getIsHaving(this.lists[i][col_no])){
+              list = new Yd_dict().init(this.lists[i]).bldClone().get();
+              lists.push(list);
+          }
+      }
+      this.lists = lists;
+      return this;
   }
 };
 

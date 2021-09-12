@@ -22,32 +22,10 @@ Yd_list.prototype = {
     }
     return this;
   },
-  merge: function(new_list){
-      
-      return this;
-  },
-  push: function(new_value) {
-      
-      return this;
-  },
-  unshift: function(new_value){
-      
-      return this;
-  },
-
+  
   // 输出
   get: function() {
     return this.list;
-  },
-  isEmpty: function() {
-    if (this.len() == 0) {
-      return true;
-    }else{
-      return false;
-    }
-  },
-  len: function() {
-    return this.list.length;
   },
   getValue: function(index) {
       return this.list[index];
@@ -61,9 +39,10 @@ Yd_list.prototype = {
     }
     return new_list;
   },
-
-  // 判断
-  has: function(value){
+  getValueByFind: function(value){
+    return this.list.indexOf(value);
+  },
+  getIsHaving: function(value){
     var t_index = this.list.indexOf(value);
     if ( t_index == -1 ) {
         return false;
@@ -71,179 +50,70 @@ Yd_list.prototype = {
         return true;
     }
   },
-  getIndexByValue: function(value){
-    return this.list.indexOf(value);
+  getLen: function() {
+    return this.list.length;
   },
-
-  // 改变
-  iterFunc: function(f_filter){
-    var f_filter = f_filter || function(x){return x;};
-    var new_list = new Array();
-    for(var i=0; i<this.list.length; i++) {
-      this.list[i] = f_filter(this.list[i]);
-    }
-    return this;
-  },
-  filterFunc: function(f_filter){
-    var f_filter = f_filter || function(x){return true;};
-    var new_list = this.list.filter(f_filter);
-    // for(var i=0; i<this.list.length; i++) {
-    //   var item = this.list[i];
-    //   if (f_filter(item)){
-    //     new_list.push(item);
-    //   }
-    // }
-    return new Yd_list().init(new_list);
-  },
-  filterValue: function(value_array){
-    var t_array = new Yd_list().init(value_array);
-    for(var i=0; i<this.list.length; i++) {
-      var item = this.list[i];
-      if ( t_array.has(item)){
-        new_list.push(item);
-      }
-    }
-    return new Yd_list().init(new_list);
-  },
-  deleteValue: function(value_array) {
-    function f_filter(value) {
-      return value_array.indexOf(value) === -1; 
-    }
-    return this.filterFunc(f_filter);
-  },
-  cloneItem: function(index) {
-      // -1 表示最后，0表示不删除
-      this.list.splice(-1, 0, this.list[index]);
-      return this;
-  },
-  pop: function() {
-      
-      return this;
-  },
-  shift: function() {
-      
-      return this;
-  },
-  slice: function(p_start, p_length) {
-      
-      return this;
-  },
-  reverse: function() {
-      
-      return this;
-  },
-  flip: function() {
-    this.format('number');
-
-    var new_list = [];
-    for (var i = 0; i < this.len(); i++) {
-      new_list.push(0);
-    }
-    for (var i = 0; i < this.len(); i++) {
-      var t_index = this.list[i];
-      new_list[t_index] = i;
-    }
-    return new Yd_list().init(new_list);
-  },
-  accum: function() {
-    this.format('number');
-
-    var new_list = this.clone();
-
-    var t_sum = 0;
-    for (var i = 0; i < new_list.len(); i++) {
-      var item = new_list.list[i];
-      t_sum = t_sum + item;
-      new_list.list[i] = t_sum;
-    }
-    return new_list;
-  },
-  reIndex: function(p_index){
-    var new_list = new Array();
-    for (var i = 0; i < p_index.length; i++) {
-      var t_index = p_index[i];
-      var t_item = this.list[t_index];
-      new_list.push(t_item);
-    }
-    return new Yd_list().init(new_list);
-  },
-  trunc: function(len) {
-    if (len >= this.list.length) {
-      return this;
-    }
-    var new_list = this.init(this.get()).clone().get();
-    new_list.splice(len, new_list.length - len + 1);
-    return new Yd_list().init(new_list);
-  },
-  format: function(format_string) {
-    for (var i = 0; i < this.list.length; i++) {
-      var item = this.list[i];
-      var new_item;
-      if (format_string == 'string') {
-        new_item = String(item);
-      }
-      if (format_string == 'number') {
-        new_item = Number(item);
-      }
-      this.list[i] = new_item;
-    }
-    return this;
-  },
-
-  // 排序
-  // asort: function() {
-  //   var f_compare = function(value1, value2) {
-  //         if (value1 < value2) {
-  //             return -1;
-  //         }else if(value1 > value2) {
-  //             return 1;
-  //         }else {
-  //             return 0;
-  //         }
-  //     }
-  //     this.list.sort(f_compare); 
-  //   return this;
-  // },
-  sortIndex: function() {
-    this.sortindex = new Yd_list().init([]).init1N(this.list.length).get();
-    yd_array_merge_sort(this.list, this.sortindex); 
-    return this;
-  },
-  getSortIndex: function(){
-    return this.sortindex;
-  },
-  
-  // 数字
-  toNumber: function(){
-      for(var j=0; j<this.list.length; j++){
-          var value = this.list[j];
-          if( !isNaN( value ) )
-          {
-             this.list[j] = value - 0;
-          }
-      }
-      return this;
-  },
-  max: function(){
+  getMax: function(){
     return Math.max.apply(Math, this.list);
   },
-  min: function(){
+  getMin: function(){
     return Math.min.apply(Math, this.list);
   },
-  sum: function() {
+  getSum: function() {
       var s = 0;
-      for (var i=0; i<this.len(); i++) {
+      for (var i=0; i<this.getLen(); i++) {
         s += this.list[i];
       }
       return s;
   },
-  average: function() {
-      var average = this.sum() / this.len();
+  getAverage: function() {
+      var average = this.sum() / this.getLen();
       return average;
   },
+  getDict: function(index_array) {
+    if(this.getLen() != index_array.length){
+      debugger;
+    }
+    var dict = {};
+    for (var i = 0; i < this.getLen(); i++) {
+      var index = index_array[i];
+      var value = this.list[i];
+      dict[index] = value;
+    }
+    return dict;
+  },
+  getString: function(sep){
+    var sep = sep || '\t';
+    return this.list.join(sep);
+  },
+  getStringLines: function(){
+      return this.list.join('\r\n');
+  },
+  getHistogram: function(p_value){
+    var p_input = this.list;
+    var t_length = p_value.length;
+    var t_hist = new Array(t_length);
+    var i;
+    for(i=0; i<t_length; i++){
+      t_hist[p_value[i]] = 0;
+    }
+    for(i=0; i<p_input.length; i++){
+      var item = p_input[i];
+      var t_in = new Yd_list().init(p_value).getIsHaving(item);
+      if (t_in) {
+        t_hist[item] = t_hist[item] + 1;
+      }
+    }
+    return t_hist;
+  },
+  getUniqueHistogram: function(){
+    var t_values = this.bldUnique().get();
+    var t_hist = this.getHistogram(t_values);
+    return t_hist;
+  },
 
-  // 转换输出
-  clone: function() {
+  // 输出Yd类
+  bldClone: function() {
     var new_list = new Array();
     if (this.list == undefined){
       debugger;
@@ -254,26 +124,50 @@ Yd_list.prototype = {
     }
     return new Yd_list().init(new_list);
   },
-  toDict: function(index_array) {
-    if(this.len() != index_array.length){
-      debugger;
+  bldFlip: function() {
+    this.toNumber();
+
+    var new_list = [];
+    for (var i = 0; i < this.getLen(); i++) {
+      new_list.push(0);
     }
-    var dict = {};
-    for (var i = 0; i < this.len(); i++) {
-      var index = index_array[i];
-      var value = this.list[i];
-      dict[index] = value;
+    for (var i = 0; i < this.getLen(); i++) {
+      var t_index = this.list[i];
+      new_list[t_index] = i;
     }
-    return dict;
+    return new Yd_list().init(new_list);
   },
-  toString: function(sep){
-    var sep = sep || '\t';
-    return this.list.join(sep);
+  bldAccum: function() {
+    this.toNumber();
+
+    var new_list = this.bldClone();
+
+    var t_sum = 0;
+    for (var i = 0; i < new_list.getLen(); i++) {
+      var item = new_list.list[i];
+      t_sum = t_sum + item;
+      new_list.list[i] = t_sum;
+    }
+    return new_list;
   },
-  toStringLines: function(){
-      return this.list.join('\r\n');
+  bldReindex: function(p_index){
+    var new_list = new Array();
+    for (var i = 0; i < p_index.length; i++) {
+      var t_index = p_index[i];
+      var t_item = this.list[t_index];
+      new_list.push(t_item);
+    }
+    return new Yd_list().init(new_list);
   },
-  unique: function(){
+  bldTrunc: function(len) {
+    if (len >= this.list.length) {
+      return this;
+    }
+    var new_list = this.init(this.get()).bldClone().get();
+    new_list.splice(len, new_list.length - len + 1);
+    return new Yd_list().init(new_list);
+  },
+  bldUnique: function(){
     var new_array = [];
     for(var i=0; i<this.list.length;i++){
       if(new_array.indexOf(this.list[i]) == -1) {
@@ -282,34 +176,61 @@ Yd_list.prototype = {
     }
     return new Yd_list().init(new_array);
   },
-  toHistogram: function(p_value){
-    var p_input = this.list;
-    var t_length = p_value.length;
-    var t_hist = new Array(t_length);
-    var i;
-    for(i=0; i<t_length; i++){
-      t_hist[p_value[i]] = 0;
+  
+
+  // 改变
+  toIter: function(f_filter){
+    var f_filter = f_filter || function(x){return x;};
+    for(var i=0; i<this.list.length; i++) {
+      this.list[i] = f_filter(this.list[i]);
     }
-    for(i=0; i<p_input.length; i++){
-      var item = p_input[i];
-      var t_in = new Yd_list().init(p_value).has(item);
-      if (t_in) {
-        t_hist[item] = t_hist[item] + 1;
+    return this;
+  },
+  toFilterByFunc: function(f_filter){
+    var f_filter = f_filter || function(x){return true;};
+    this.list = this.list.filter(f_filter);
+    return this;
+  },
+  toFilterByValues: function(value_array){
+    var t_array = new Yd_list().init(value_array);
+    var new_list = new Array();
+    for(var i=0; i<this.list.length; i++) {
+      var item = this.list[i];
+      if ( t_array.has(item)){
+        new_list.push(item);
       }
     }
-    return t_hist;
+    this.list = new_list;
+    return this;
   },
-  toGroup: function() {
-    // var fn = function(o) {
-      
-    // };
-    // const groups = {};
-    // this.list.forEach(function (o) {
-    //     const group = JSON.stringify(fn(o));
-    //     groups[group] = groups[group] || [];
-    //     groups[group].push(o);
-    // });
-    // return groups;
+  toDelete: function(value_array) {
+    function f_filter(value) {
+      return value_array.indexOf(value) === -1; 
+    }
+    return this.toFilterByFunc(f_filter);
+  },
+  toCloneItem: function(index) {
+      // -1 表示最后，0表示不删除
+      this.list.splice(-1, 0, this.list[index]);
+      return this;
+  },
+  toSortIndex: function() {
+    this.sortindex = new Yd_list().init([]).init1N(this.list.length).get();
+    yd_array_merge_sort(this.list, this.sortindex); 
+    return this;
+  },
+  getSortIndex: function(){
+    return this.sortindex;
+  },
+  toNumber: function(){
+      for(var j=0; j<this.list.length; j++){
+          var value = this.list[j];
+          if( !isNaN( value ) )
+          {
+             this.list[j] = value - 0;
+          }
+      }
+      return this;
   }
 };
 

@@ -1,23 +1,30 @@
-function YdText(){
-}
-YdText.prototype = {
+function Yd_text(){
+} 
+Yd_text.prototype = {
   init: function(p_text){
       this.text = p_text;
       return this;
   },
   trim: function() {
-    this.text = this.text.trim();
+    // this.text = this.text.trim();
+    // 20210219, IE下不支持trim、使用replace代替
+    this.text = this.text.replace(/^\s+|\s+$/g,'');
     return this;
   },
   removeSpace: function() {
   	var t_reg = new RegExp(" ", "g");
-	this.text = this.text.replace(t_reg, "");
+	  this.text = this.text.replace(t_reg, "");
     return this;
   },
   replace: function(p_origin, p_replace) {
   	var t_reg = new RegExp(p_origin, "g");
-	this.text = this.text.replace(t_reg, p_replace);
-	return this;
+	 this.text = this.text.replace(t_reg, p_replace);
+	 return this;
+  },
+  getHaving: function(p_match) {
+    var t_reg = new RegExp(p_match);
+    var result = this.text.match(t_reg);
+    return result;
   },
   replaceEnter: function(p_replace) {
   	var t_reg = new RegExp("\r\n", "g");
@@ -48,6 +55,12 @@ YdText.prototype = {
     var sep = 'rrrrnnnn';
     this.replaceEnter(sep);
     return this.toArray(sep);
+  },
+  toLines: function(t_sep) {
+    var p_replace = '\n';
+    var t_reg = new RegExp(t_sep, "g");
+    this.text = this.text.replace(t_reg, p_replace);
+    return this.text;
   }
 };
 
@@ -59,7 +72,7 @@ function yd_text_input_row(element_id_string) {
 		exit();
 	}
 
-	var t_array = new YdText().init(t_input).toArrayByTab();
+	var t_array = new Yd_text().init(t_input).toArrayByTab();
 
 	return t_array;
 }
@@ -73,9 +86,9 @@ function yd_text_input_col(element_id_string) {
 		exit();
 	}
 
-	t_input = new YdText().init(t_input).replaceEnter(',').trim().get();
+	t_input = new Yd_text().init(t_input).replaceEnter(',').trim().get();
 
-	var t_array = new YdText().init(t_input).toArray(',');
+	var t_array = new Yd_text().init(t_input).toArray(',');
 
 	return t_array;
 }
@@ -89,13 +102,13 @@ function yd_text_input_mat(element_id_string) {
 		exit();
 	}
 
-	var t_array = new YdText().init(t_input).toArrayByEnter();
+	var t_array = new Yd_text().init(t_input).toArrayByEnter();
 
 	var t_matrix = new Array();
 
 	for(var i=0; i<t_array.length; i++) {
     var item = t_array[i];
-		var t1 = new YdText().init(item).toArrayByTab();
+		var t1 = new Yd_text().init(item).toArrayByTab();
 		t_matrix.push(t1);
 	}
 	return t_matrix;
@@ -111,6 +124,13 @@ function yd_url_decode(utf_string) {
 	return decodeURI(utf_string);
 }
 
+function yd_url_encode_b64(utf_string) {
+  return btoa(encodeURIComponent(utf_string));
+}
+
+function yd_url_decode_b64(utf_string) {
+  return decodeURIComponent(atob(utf_string));
+}
 
 function YdUrlJson(){
 }
@@ -129,5 +149,5 @@ YdUrlJson.prototype = {
   },
   get: function() {
     return this.json;
-  },
+  }
 };

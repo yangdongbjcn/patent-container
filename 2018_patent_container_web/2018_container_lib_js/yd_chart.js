@@ -36,7 +36,7 @@ YdLabel.prototype.emp = function(f_formatter, p_color, p_fontSize, p_position) {
         formatter: f_formatter,
         position: p_position,
         fontSize: p_fontSize,
-        color: p_color,
+        color: p_color
     };
     return this;
 };
@@ -100,10 +100,10 @@ YdLegend.prototype.init = function(p_left, p_top, p_color) {
     return this;
 };
 YdLegend.prototype.names = function(p_names) {
-    var f_gen_legend_data = function(lines_start) {
+    var f_gen_legend_data = function(os_appl_s_start) {
         var t_legend_data = [];
-        for(var i in lines_start) {
-            var t_name = lines_start[i];
+        for(var i in os_appl_s_start) {
+            var t_name = os_appl_s_start[i];
             t_legend_data.push({name: t_name});
         }
         return t_legend_data;
@@ -187,7 +187,7 @@ YdOption.prototype.yAxisType = function(value) {
             }
         },
         type: value,
-        scale: true,
+        scale: true
     };
     return this;
 };
@@ -204,9 +204,9 @@ YdOption.prototype.xAxis = function(value, p_type, p_rotate) {
         scale: true,
         axisLabel: {
             interval: 0,
-            rotate: p_rotate,
+            rotate: p_rotate
         },
-        data: value,
+        data: value
     };
     return this;
 };
@@ -220,7 +220,7 @@ YdOption.prototype.yAxis = function(value, p_type) {
         },
         type: p_type,
         scale: true,
-        data: value,
+        data: value
     };
     return this;
 };
@@ -237,7 +237,7 @@ YdOption.prototype.grid = function(left, right, top, bottom) {
         left: left,
         right: right,
         top: top,
-        bottom: bottom,
+        bottom: bottom
     };
     return this;
 };
@@ -268,7 +268,7 @@ YdOption.prototype.visualMap = function(p_min, p_max) {
             // color: ['#00467F', '#A5CC82'] // 蓝绿
             // color: ['#00467F', '#A5CC82'] // 蓝绿
             // color: ['#00467F', '#A5CC82'] // 蓝绿
-            color: ['#50a3ba', '#eac736','#d94e5d'],
+            color: ['#50a3ba', '#eac736','#d94e5d']
         },
         seriesIndex: [p_series_index],  // 把地图区域的数据放在第一个Series
     };
@@ -282,7 +282,7 @@ YdOption.prototype.visualMapPieces = function(p_series_index, p_pieces) {
         {min: 200, max: 500},
         {min: 100, max: 200},
         {min: 20, max: 100},
-        {min: 1, max: 20},
+        {min: 1, max: 20}
         // {value: 123, label: '123（自定义特殊颜色）', color: 'grey'},
         // {min: 5, max: 5, label: '5（自定义特殊颜色）', color: 'black'},
         // {max: 5},
@@ -326,7 +326,7 @@ YdOption.prototype.timeline = function(p_timeline) {
             emphasis: {
                 color: '#aaa',
                 borderColor: '#aaa'
-            },
+            }
         }
     };
     return this;
@@ -337,8 +337,8 @@ YdOption.prototype.initFrameBar = function(p_names, p_keys, p_clists, map_type, 
     // p_clists = [[500, 600, 700], [550, 650, 750]];
 
     // 使用示例
-    // var control_id = 'region_time_div';
-    // var t_option = new YdOption().initFrameBar(t_frame.getNames().get(), t_frame.getKeys().get(), t_frame.getClists().get(), 'bar', true).title('年度原创趋势').get();
+    // var control_id = 'div_patentnum_year_regions';
+    // var t_option = new YdOption().initFrameBar(t_frame.getNames().get(), t_frame.bldKeys().get(), t_frame.getClists().get(), 'bar', true).title('年度原创趋势').get();
     // var time1_chart = new YdChart().init(control_id).option(t_option).get();
 
     var map_type = map_type || 'bar';
@@ -364,7 +364,7 @@ YdOption.prototype.initFrameBar = function(p_names, p_keys, p_clists, map_type, 
         
     }
     
-    var t_series = new Yd_mat().init(t_lists).toDicts(t_keys);
+    var t_series = new Yd_mat().init(t_lists).getDicts(t_keys);
     var legend = new YdLegend().init('right', 'middle', '#000').get();
     this.xAxis(p_names, 'category', 90).yAxis(null).series(t_series).legend(legend);
     return this;

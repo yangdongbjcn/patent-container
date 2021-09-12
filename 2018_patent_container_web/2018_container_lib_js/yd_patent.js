@@ -17,7 +17,7 @@ function yd_patent_hist_type(t_pub) {
     }
     return patent_type;
   } 
-  var t_hist = new Yd_list().init(t_pub).iterFunc(filter_func).toHistogram(["发明", "实用新型", "外观"]);
+  var t_hist = new Yd_list().init(t_pub).toIter(filter_func).getHistogram(["发明", "实用新型", "外观"]);
 
   return t_hist;
 }
@@ -46,7 +46,7 @@ function yd_patent_hist_year(t_appli_date) {
     patent_year_index.push(i);
   }
 
-  patent_year_histogram = new Yd_list().init(patent_year_array).toHistogram(patent_year_index);
+  patent_year_histogram = new Yd_list().init(patent_year_array).getHistogram(patent_year_index);
 
   return patent_year_histogram;
 }
@@ -68,7 +68,7 @@ function yd_patent_hist_region(t_pub_num) {
 
   t_index = Array.unique(t_array);
 
-  patent_histogram = new Yd_list().init(t_array).toHistogram(t_index);
+  patent_histogram = new Yd_list().init(t_array).getHistogram(t_index);
 
   return patent_histogram;
 }
@@ -87,7 +87,7 @@ function yd_patent_hist_law(t_legal_valid) {
 
   t_index = ['公开', '授权', '驳回', '其他'];
 
-  t_histogram = new Yd_list().init(t_array).toHistogram(t_index);
+  t_histogram = new Yd_list().init(t_array).getHistogram(t_index);
 
   return t_histogram;
 }
@@ -124,9 +124,9 @@ function yd_patent_hist_first_applicant(t_applicant, trunc_len) {
 
   t_index = Array.unique(t_array);
 
-  t_histogram = new Yd_list().init(t_array).toHistogram(t_index);
+  t_histogram = new Yd_list().init(t_array).getHistogram(t_index);
 
-  var t_trunc = new Yd_dict().init(t_histogram).sortIndex().trunc(trunc_len).get();
+  var t_trunc = new Yd_dict().init(t_histogram).toSortIndex().bldTrunc(trunc_len).get();
 
   return t_trunc;
 }
@@ -152,7 +152,7 @@ function yd_patent_hist_first_applicant(t_applicant, trunc_len) {
 
 //   t_index = Array.unique(t_array);
 
-//   t_histogram = new Yd_list().init(t_array).toHistogram(t_index);
+//   t_histogram = new Yd_list().init(t_array).getHistogram(t_index);
 
 //   return t_histogram;
 // }

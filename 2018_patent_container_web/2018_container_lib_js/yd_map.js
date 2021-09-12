@@ -256,9 +256,9 @@ var YdPosition = function() {
 YdPosition.prototype = new YdObject();
 YdPosition.prototype.getPosition = function(names) {
     var return_array = [];
-    var cn_names = this.world_position_mat.getClist(2).get();
-    var longtitudes = this.world_position_mat.getClist(0).get();
-    var latitudes = this.world_position_mat.getClist(1).get();
+    var cn_names = this.world_position_mat.bldClist(2).get();
+    var longtitudes = this.world_position_mat.bldClist(0).get();
+    var latitudes = this.world_position_mat.bldClist(1).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = cn_names.indexOf(name);
@@ -276,9 +276,9 @@ YdPosition.prototype.getPosition = function(names) {
 };
 YdPosition.prototype.getPositionByEnglish = function(names) {
     var return_array = [];
-    var en_names = this.world_position_mat.getClist(3).get();
-    var longtitudes = this.world_position_mat.getClist(0).get();
-    var latitudes = this.world_position_mat.getClist(1).get();
+    var en_names = this.world_position_mat.bldClist(3).get();
+    var longtitudes = this.world_position_mat.bldClist(0).get();
+    var latitudes = this.world_position_mat.bldClist(1).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = en_names.indexOf(name);
@@ -295,13 +295,13 @@ YdPosition.prototype.getPositionByEnglish = function(names) {
     return return_array;
 };
 YdPosition.prototype.getCnNames = function() {
-    var cn_names = this.world_position_mat.getClist(2).get();
+    var cn_names = this.world_position_mat.bldClist(2).get();
     return cn_names;
 };
 YdPosition.prototype.getCnName = function(names) {
     var return_array = [];
-    var cn_names = this.world_position_mat.getClist(2).get();
-    var en_names = this.world_position_mat.getClist(3).get();
+    var cn_names = this.world_position_mat.bldClist(2).get();
+    var en_names = this.world_position_mat.bldClist(3).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = en_names.indexOf(name);
@@ -318,8 +318,8 @@ YdPosition.prototype.getCnName = function(names) {
 };
 YdPosition.prototype.getEnName = function(names) {
     var return_array = [];
-    var cn_names = this.world_position_mat.getClist(2).get();
-    var en_names = this.world_position_mat.getClist(3).get();
+    var cn_names = this.world_position_mat.bldClist(2).get();
+    var en_names = this.world_position_mat.bldClist(3).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = cn_names.indexOf(name);
@@ -335,7 +335,7 @@ YdPosition.prototype.getEnName = function(names) {
     return return_array;
 };
 YdPosition.prototype.getNationCodes = function() {
-    var cn_names = this.world_position_mat.getClist(4).get();
+    var cn_names = this.world_position_mat.bldClist(4).get();
     return cn_names;
 };
 YdPosition.prototype.getMainNationCodes = function() {
@@ -344,8 +344,8 @@ YdPosition.prototype.getMainNationCodes = function() {
 };
 YdPosition.prototype.getNationCode = function(names) {
     var return_array = [];
-    var cn_names = this.world_position_mat.getClist(2).get();
-    var codes = this.world_position_mat.getClist(4).get();
+    var cn_names = this.world_position_mat.bldClist(2).get();
+    var all_codes = this.world_position_mat.bldClist(4).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = cn_names.indexOf(name);
@@ -355,15 +355,51 @@ YdPosition.prototype.getNationCode = function(names) {
           continue;          
         }
 
-        var new_name = codes[index];
+        var new_name = all_codes[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationNameByCode = function(codes) {
+    var return_array = [];
+    var cn_names = this.world_position_mat.bldClist(2).get();
+    var all_codes = this.world_position_mat.bldClist(4).get();
+    for (var i = 0; i < codes.length; i++) {
+        var code = codes[i];
+        var index = all_codes.indexOf(code);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = cn_names[index];
+        return_array.push(new_name);
+    }
+    return return_array;
+};
+YdPosition.prototype.getNationEnNameByCode = function(codes) {
+    var return_array = [];
+    var en_names = this.world_position_mat.bldClist(3).get();
+    var all_codes = this.world_position_mat.bldClist(4).get();
+    for (var i = 0; i < codes.length; i++) {
+        var code = codes[i];
+        var index = all_codes.indexOf(code);
+
+        if (index == -1) {
+          return_array.push(null); 
+          continue;          
+        }
+
+        var new_name = en_names[index];
         return_array.push(new_name);
     }
     return return_array;
 };
 YdPosition.prototype.getNationCodeByEnglish = function(names) {
     var return_array = [];
-    var en_names = this.world_position_mat.getClist(3).get();
-    var codes = this.world_position_mat.getClist(4).get();
+    var en_names = this.world_position_mat.bldClist(3).get();
+    var all_codes = this.world_position_mat.bldClist(4).get();
     for (var i = 0; i < names.length; i++) {
         var name = names[i];
         var index = en_names.indexOf(name);
@@ -373,7 +409,7 @@ YdPosition.prototype.getNationCodeByEnglish = function(names) {
           continue;          
         }
 
-        var new_name = codes[index];
+        var new_name = all_codes[index];
         return_array.push(new_name);
     }
     return return_array;
@@ -397,7 +433,7 @@ var YdMap = function(map_name) {
         roam: false,
         itemStyle: {
             normal: new YdMapColor().get(),
-            emphasis: new YdMapColor().emp().get(),
+            emphasis: new YdMapColor().emp().get()
         },
         animation: false
     };
@@ -414,7 +450,7 @@ var YdMapTimeline = function(p_data, p_name) {
     this.dict = {
         type: 'map',
         name: p_name,
-        data: p_data,
+        data: p_data
     };
 };
 YdMapTimeline.prototype = new YdObject();
@@ -423,7 +459,7 @@ var YdMapColor = function(p_map_name) {
     this.dict = {
         areaColor: '#323c48',
         borderColor: '#3B5077',
-        // borderColor: '#323c48',
+        // borderColor: '#323c48'
     };
     return this;
 };
@@ -464,13 +500,13 @@ var YdGeo = function(p_map_name) {
         roam: false,
         itemStyle: {
             normal: new YdMapColor().get(),
-            emphasis: new YdMapColor().emp().get(),
+            emphasis: new YdMapColor().emp().get()
         },
         // center: [115.97, 29.71],
         top: 'auto',
         bottom: 'auto',
         left: 'auto',
-        right: 'auto',
+        right: 'auto'
     };
     return this;
 };
@@ -533,7 +569,7 @@ var YdScatter = function() {
     YdObject.call(this);
     this.dict = {
         type: 'scatter',
-        coordinateSystem: 'geo',
+        coordinateSystem: 'geo'
     };  
 };
 YdScatter.prototype = new YdObject();
@@ -552,12 +588,12 @@ var YdScatterSize = function(p_data, f_size, p_type, p_offset, p_color, p_opacit
         itemStyle: {
             normal: {
                 color: p_color, //标志颜色
-                opacity: p_opacity,
+                opacity: p_opacity
             }
         },
         // zlevel: 6,
         data: p_data,
-        symbolOffset: p_offset,
+        symbolOffset: p_offset
     }; 
 };
 YdScatterSize.prototype = new YdObject();
@@ -589,13 +625,13 @@ var YdScatterVisualMap = function(p_data, p_size, p_type, p_offset, p_opacity) {
         },
         itemStyle: {
             normal: {
-                opacity: p_opacity,
+                opacity: p_opacity
             }
         },
         // zlevel: 6,
         data: p_data,
         symbolOffset: p_offset,
-        // visualMap: true,
+        // visualMap: true
     }; 
 };
 YdScatterVisualMap.prototype = new YdObject();
@@ -615,12 +651,12 @@ YdScatterVisualMap.prototype.label = function(p_position, p_offset, p_fontSize) 
 
 ///////////////////////////////////////////////////////////
 //
-//      YdLines
+//      YdChartCurves
 //
 ///////////////////////////////////////////////////////////
 
 
-var YdLinesEffect = function() {
+var YdChartCurvesEffect = function() {
     YdObject.call(this);
     this.dict = {
         show: true,
@@ -630,24 +666,24 @@ var YdLinesEffect = function() {
         symbolSize: 5 //图标大小，宽度
     };  
 };
-YdLinesEffect.prototype = new YdObject();
+YdChartCurvesEffect.prototype = new YdObject();
 
-var YdLinesLineStyle = function() {
+var YdChartCurvesStyle = function() {
     YdObject.call(this);
     this.dict = {
         width: 2,   //线的宽度
         opacity: 0.6,
         curveness: 0.55,
-        color: '#eee',
+        color: '#eee'
     };  
 };
-YdLinesLineStyle.prototype = new YdObject();
+YdChartCurvesStyle.prototype = new YdObject();
 
 
-var YdLines = function() {
+var YdChartCurves = function() {
     YdObject.call(this);
-    this.effect = new YdLinesEffect();
-    this.normal_lineStyle = new YdLinesLineStyle();
+    this.effect = new YdChartCurvesEffect();
+    this.normal_os_applStyle = new YdChartCurvesStyle();
 
     var f_formatter = f_formatter || function(param){
         var str = '';
@@ -675,39 +711,39 @@ var YdLines = function() {
         zlevel: 10,
         effect: this.effect.get(),
         lineStyle: {
-            normal: this.normal_lineStyle.get(),
+            normal: this.normal_os_applStyle.get()
         },
         label: this.label.get(),
-        data: [],
+        data: []
     };  
 };
-YdLines.prototype = new YdObject();
-YdLines.prototype.constructor = YdLines;
-YdLines.prototype.period = function(value) {
+YdChartCurves.prototype = new YdObject();
+YdChartCurves.prototype.constructor = YdChartCurves;
+YdChartCurves.prototype.period = function(value) {
     this.effect.att('period', value);
     return this;
 };
-YdLines.prototype.trailLength = function(value) {
+YdChartCurves.prototype.trailLength = function(value) {
     this.effect.att('trailLength', value);
     return this;
 };
-YdLines.prototype.symbolSize = function(value) {
+YdChartCurves.prototype.symbolSize = function(value) {
     // this.dict.effect.symbolSize = value;
     this.effect.att('symbolSize', value);
     return this;
 };
-YdLines.prototype.color = function(value) {
+YdChartCurves.prototype.color = function(value) {
     // this.dict.lineStyle.normal.color = value;
-    this.normal_lineStyle.att('color', value);
+    this.normal_os_applStyle.att('color', value);
     return this;
 };
-YdLines.prototype.widthPixel = function(value) {
+YdChartCurves.prototype.widthPixel = function(value) {
     // this.dict.lineStyle.normal.width = value;
-    this.normal_lineStyle.att('width', value);
+    this.normal_os_applStyle.att('width', value);
     return this;
 };
-YdLines.prototype.width = function(value) {
-    var f_lines_width = function(p_value) {
+YdChartCurves.prototype.width = function(value) {
+    var f_os_appl_s_width = function(p_value) {
         var min_px = 1;
         var max_px = 10;
         var min_value = 0;
@@ -715,32 +751,32 @@ YdLines.prototype.width = function(value) {
         var new_value = (p_value - min_value) / (max_value - min_value) * (max_px - min_px) + min_px;
         return new_value;
     };
-    var t_width = f_lines_width(value);
-    this.normal_lineStyle.att('width', t_width);
+    var t_width = f_os_appl_s_width(value);
+    this.normal_os_applStyle.att('width', t_width);
     return this;
 };
-YdLines.prototype.opacity = function(value) {
+YdChartCurves.prototype.opacity = function(value) {
     // this.dict.lineStyle.normal.opacity = value;
-    this.normal_lineStyle.att('opacity', value);
+    this.normal_os_applStyle.att('opacity', value);
     return this;
 };
-YdLines.prototype.curveness = function(value) {
+YdChartCurves.prototype.curveness = function(value) {
     // this.dict.lineStyle.normal.curveness = value;
-    this.normal_lineStyle.att('curveness', value);
+    this.normal_os_applStyle.att('curveness', value);
     return this;
 };
-YdLines.prototype.label_show = function(value) {
+YdChartCurves.prototype.label_show = function(value) {
     this.label.att('show', value);
     return this;
 };
-YdLines.prototype.label_fontSize = function(value) {
+YdChartCurves.prototype.label_fontSize = function(value) {
     // this.dict.label.fontSize = value;
     this.label.att('fontSize', value);
     return this;
 };
-YdLines.prototype.arrow = function() {
+YdChartCurves.prototype.arrow = function() {
     this.dict.symbol = 'arrow';
-    this.dict.symbolSize = this.normal_lineStyle.getAtt('width') * 5;
+    this.dict.symbolSize = this.normal_os_applStyle.getAtt('width') * 5;
     // this.dict.symbolOffset = [0, '50%'];
     return this;
 };
@@ -755,113 +791,72 @@ YdLines.prototype.arrow = function() {
 
 function YdMapOps(){
     return {
-        ScatterCoord: function (map_scatter) {
-            var res = [];
-            for (var i = 0; i < map_scatter.length; i++) {
-                var names = [map_scatter[i].name];
+        GetScatterDicts: function (p_dicts) {
+            var t_dicts = [];
+            for (var i = 0; i < p_dicts.length; i++) {
+                var names = [p_dicts[i].name];
                 var geoCoord = new YdPosition().getPosition(names)[0];
                 if (geoCoord) {
-                    res.push({
-                        name: map_scatter[i].name,
-                        // value: geoCoord.concat(map_scatter[i].value)
-                        value: geoCoord.concat([map_scatter[i].value, map_scatter[i].name])     // 值，国家名字 20191211
+                    t_dicts.push({
+                        name: p_dicts[i].name,
+                        // value: geoCoord.concat(p_dicts[i].value)
+                        value: geoCoord.concat([p_dicts[i].value, p_dicts[i].name])     // 值，国家名字 20191211
                     });
                 }
             }
-            return res;
+            return t_dicts;
         },
-        LinesCoords: function(map_lines) {
-            var lines_coords = [];
-            for (var i = 0; i < map_lines.length; i++) {
-                var dataItem = map_lines[i];
-                var fromCoord = new YdPosition().getPosition([dataItem[0]])[0];
-                var toCoord = new YdPosition().getPosition([dataItem[2]])[0];
-                if (fromCoord && toCoord) {
-                    lines_coords.push({
-                        coords: [fromCoord, toCoord],
-                        value: [dataItem[0], dataItem[2], dataItem[1]],
-                        // value: '向' + dataItem[2] + '布局专利' + dataItem[1] + '件',
+        GetLineDicts: function(p_os_appl_mat){
+            var t_os_appl_dicts = [];
+            for (var i = 0; i < p_os_appl_mat.length; i++) {
+                var t_os_appl_list = p_os_appl_mat[i];
+                var t_from_coord = new YdPosition().getPosition([t_os_appl_list[0]])[0];
+                var t_to_coord = new YdPosition().getPosition([t_os_appl_list[2]])[0];
+                if (t_from_coord && t_to_coord) {
+                    t_os_appl_dicts.push({
+                        coords: [t_from_coord, t_to_coord],
+                        value: [t_os_appl_list[0], t_os_appl_list[2], t_os_appl_list[1]],
+                        // value: '向' + t_os_appl_list[2] + '布局专利' + t_os_appl_list[1] + '件'
                     });
                 }else{
                     debugger;
                 }
             }
-            return lines_coords;
-        },
-        LongLinesCoords: function(map_lines) {
-            var lines_coords = [];
-            for (var i = 0; i < map_lines.length; i++) {
-                var t_lines = map_lines[i];
-                var t_coords = [];
-                for (var j = 0; j < t_lines.length; j++) {
-                    var dataItem = t_lines[j];
-                    var t_coord =  new YdPosition().getPosition([dataItem])[0];
-                    if (t_coord) {
-                        t_coords.push(t_coord);
-                    }
-                }
-                var t_serie = {
-                    coords: t_coords,
-                    value: '多区域关联',
-                };
-                lines_coords.push(t_serie);
-            }
-            return lines_coords;
-        },
-        LinesStart: function(map_lines) {
-            var lines_start = [];
-            for (var i = 0; i < map_lines.length; i++) {
-                var dataItem = map_lines[i];
-                lines_start.push(dataItem[0]);
-            }
-            return lines_start;
-        },
-        LinesSeries: function(lines_start, lines_coords){
-            color_map = new YdColors().getWorldColors();
-            if(lines_start.length != lines_coords.length){
+
+            // 分组依据
+            var t_from_list = new Yd_mat().init(p_os_appl_mat).bldClist(0).get();
+
+
+            if(t_from_list.length != t_os_appl_dicts.length){
                 debugger;
             }
 
-            var t_coords = {};
-
-            for (var i = 0; i < lines_start.length; i++) {
-                var t_name = lines_start[i];
-                t_coords[t_name] = [];
-            }
-            for (var i = 0; i < lines_start.length; i++) {
-                var t_name = lines_start[i];
-                t_coords[t_name].push(lines_coords[i]); 
+            // 分组
+            var t_from_dicts_dict = {};
+            for (var i = 0; i < t_from_list.length; i++) {
+                var t_name = t_from_list[i];
+                t_from_dicts_dict[t_name] = [];
             }
 
+            for (var i = 0; i < t_from_list.length; i++) {
+                var t_name = t_from_list[i];
+                t_from_dicts_dict[t_name].push(t_os_appl_dicts[i]); 
+            }
+
+
+            // 各组变成各个serie
             var t_series = [];
-            for (var t_name in t_coords) {
+            t_color_map = new YdColors().getWorldColors();
+
+            for (var t_name in t_from_dicts_dict) {
                 
-                var t_serie = new YdLines().widthPixel(5).opacity(0.03).curveness(0.15)
-                            .att('data',t_coords[t_name]).color(color_map[t_name]).att('polyline', false)
+                var t_serie = new YdChartCurves().widthPixel(5).opacity(0.03).curveness(0.15)
+                            .att('data',t_from_dicts_dict[t_name]).color(t_color_map[t_name]).att('polyline', false)
                             .att('name',t_name).get();
                 t_series.push(t_serie);
             }
 
             return t_series;
-        },
-        SeriesLines: function(lines_start, lines_coords, p_max_value){
-            color_map = new YdColors().getWorldColors();
-            if(lines_start.length != lines_coords.length){
-                debugger;
-            }
-            var t_series = [];
-            for (var i = 0; i < lines_start.length; i++) {
-                var t_name = lines_start[i];
-                var t_color = color_map[t_name];
-                var t_coord = lines_coords[i];
-                
-                var t_serie = new YdLines().att('data', [t_coord]).color(t_color)
-                                .arrow().att('name',t_name).width(t_coord.value[2]/p_max_value)
-                                .label_show(false).get();
-                t_series.push(t_serie);
-            }
-
-            return t_series;
-        },
+        }
     };
 }
