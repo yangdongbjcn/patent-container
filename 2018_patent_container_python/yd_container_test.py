@@ -2,7 +2,7 @@
 
 from yd_container import *
 
-from yd_sheet import *
+from yd_excel import *
 
 
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     slave.connectSync('master')
     #
     frame = Yd_frame()
-    frame.table = Yd_sheet().loadSheet(u'data//ti.xls', start_row=1)
+    frame.table = Yd_excel().loadSheet(u'data//ti.xls', start_row=1)
     master.frame = frame
     master.publishSync('histogram', u'申请日期')
     print(slave.frame.table)
@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
     print('testing loadSheet computeHisto')
     frame = Yd_frame()
-    frame.table = Yd_sheet().loadSheet(u'data//treetest//input.xls')
+    frame.table = Yd_excel().loadSheet(u'data//treetest//input.xls')
     histo_chart = Yd_pipe_histo_chart('histo_chart')
     histo_chart.setDefaultFrame(frame)
     histo_chart.pipe1Histo('IPC1')

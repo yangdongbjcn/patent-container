@@ -2,7 +2,7 @@
 
 from yd_frame import *
 
-from yd_sheet import *
+from yd_excel import *
 
 import matplotlib.pyplot as plt
 
@@ -96,7 +96,7 @@ class Yd_tree_io(object):
             tree_path = file_name
             leaf = cont.findMember(tree_path)
             file_path = path + '//' + file
-            leaf.frame.table = Yd_sheet().loadSheet(file_path)
+            leaf.frame.table = Yd_excel().loadSheet(file_path)
         return cont
 
     def getSheetFiles(self, path):

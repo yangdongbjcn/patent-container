@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from yd_frame import *
-from yd_sheet import *
+from yd_excel import *
 from yd_algorithm import *
 
 def func_get_year(item):
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     print('testi ng FrameTest')
 
     frame = Yd_frame()
-    frame.table = Yd_sheet().loadSheet(u'data//ti.xls', start_row = 1)
+    frame.table = Yd_excel().loadSheet(u'data//ti.xls', start_row = 1)
 
     new_table = Yd_frame_test().getYearHistogram(frame.table, u'申请日期')
     print(new_table)

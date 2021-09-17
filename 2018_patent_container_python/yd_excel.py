@@ -10,7 +10,7 @@ from datetime import datetime
 
 import pandas
 
-class Yd_sheet(object):
+class Yd_excel(object):
     """"""
     def loadSheet(self, file_name, start_row = 0):
         file_ext = self.getFileExt(file_name)
@@ -32,7 +32,7 @@ class Yd_sheet(object):
     def saveSheet2(self, file_name, table):
         key_cols = table.keys()
         value_cols = table.values
-        sheet_new = Yd_sheet()
+        sheet_new = Yd_excel()
         sheet_new.openFile(file_name = file_name)
         sheet_new.addSheet()
         sheet_new.writeRow(key_cols)

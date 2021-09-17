@@ -2,7 +2,7 @@
 
 from yd_container import *
 
-from yd_sheet import *
+from yd_excel import *
 
 def func_get_year(item):
     item_str = str(item)
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     frame = Yd_frame()
 
-    frame.table = Yd_sheet().loadSheet(u'data//autodriving//ptics--autodriving--fleet.csv', start_row=0)
+    frame.table = Yd_excel().loadSheet(u'data//autodriving//ptics--autodriving--fleet.csv', start_row=0)
 
     key = u'申请日'
     new_key = key + u'_year'
