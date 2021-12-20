@@ -7,35 +7,33 @@ class YdAlgorithm(object):
 
     def getHistogram(self, table, key, new_key):
        # new_key = key + '_histogram'
-       grouped = self.getGrouped(table, key)
-       new_series = grouped.size()
-       new_table = DataFrame(new_series, columns=[new_key])
-       new_table.reset_index(inplace=True)
-       dict = {'index': key}
-       new_table.rename(columns=dict, inplace=True)
-       return new_table
+       groupby_object = self.getGrouped(table, key)
+       df_label_num = groupby_object.size()
+       dict = {'size': new_key}
+       df_label_num.rename(columns=dict, inplace=True)
+       return df_label_num
 
     def getGrouped(self, table, key):
-       grouped = table.groupby(by=key, as_index=False)
-       return grouped
+       groupby_object = table.groupby(by=key, as_index=False)
+       return groupby_object
 
     def getGroupProperty(self, table, key, new_key, func_arg):
+       # 20211220 YDBK untested
        # new_key = key + '_property'
-       grouped = self.getGrouped(table, key)
-       new_obj = {}
-       for name, group in grouped:
-           new_obj[name] = func_arg(group)
-       new_series = Series(new_obj)
-       new_table = DataFrame(new_series, columns=[new_key])
-       new_table.reset_index(inplace=True)
-       dict = {'index': key}
-       new_table.rename(columns=dict, inplace=True)
+       groupby_object = self.getGrouped(table, key)
+       key_col = []
+       new_key_col = []
+       for name, group in groupby_object:
+           key_col.append(name)
+           new_key_col.append(func_arg(group))
+       new_table = DataFrame([key_col, new_key_col], columns=[key, new_key])
        return new_table
 
     def addGroupId(self, table, key, new_key):
+       # 20211220 YDBK untested
        # new_key = key + '_group'
-       grouped = self.getGrouped(table, key)
-       ngroup = grouped.ngroup()
+       groupby_object = self.getGrouped(table, key)
+       ngroup = groupby_object.ngroup()
        table[new_key] = ngroup
        return table
 
