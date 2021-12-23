@@ -14,13 +14,6 @@
 
 专利容器可以使用各种语言实现。例如Python语言、PHP语言、JavaScript语言。
 
-关于专利容器的思想、数据结构、举例、开发环境，请依次阅读以下页面:
-
-CONTAINER_THOUGHT.md 
-CONTAINER_DATA.md
-CONTAINER_EXAMPLE.md
-CONTAINER_DEV.md
-
 二、目录
 
 (一）patent_container_python
@@ -50,5 +43,9 @@ PHP版的专利容器可视化。提供了图表、地图。
 更多的内容，将收录在微信公众号yangdongpatent（专利容器）。
 
 2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
+
+开源代码将公开在Github和Gitee。
+github.com/yangdongbjcn/patent-container
+gitee.com/yangdongbjcn/patent-container
 
 简单的在线专利分析小工具，请访问 http://zlrq.cn
