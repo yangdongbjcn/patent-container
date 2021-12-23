@@ -45,7 +45,7 @@ PHP版的专利容器可视化。提供了图表、地图。
 2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
 
 开源代码将公开在Github和Gitee。
-github.com/yangdongbjcn/patent-container
-gitee.com/yangdongbjcn/patent-container
+http://github.com/yangdongbjcn/patent-container  
+http://gitee.com/yangdongbjcn/patent-container
 
 简单的在线专利分析小工具，请访问 http://zlrq.cn
