@@ -36,16 +36,21 @@ PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame�
 
 （3）202101_webchart_europe_map
 
-PHP版的专利容器可视化。提供了图表、地图。
+PHP版的专利容器可视化。提供了图表、地图。其中地图将欧洲专利局的所有国家合在一起显示。
 
 三、扩展阅读
 
-更多的内容，将收录在微信公众号yangdongpatent（专利容器）。
+（一）微信公众号yangdongpatent（专利容器）。
 
-2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
+包含2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》的第3章和第6.2节内容试读。
 
-开源代码将公开在Github和Gitee。
+（二）官方网站http://zlrq.cn
+
+包含简单的在线专利分析小工具。
+
+开源代码公开在Github和Gitee。备注：Github有时候更新不及时。
+
 http://github.com/yangdongbjcn/patent-container  
+
 http://gitee.com/yangdongbjcn/patent-container
 
-简单的在线专利分析小工具，请访问 http://zlrq.cn
