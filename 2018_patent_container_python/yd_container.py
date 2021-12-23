@@ -38,23 +38,46 @@ class Yd_container(object):
         new_key = key + '_histogram'
         histo_table = YdAlgorithm().getHistogram(frame.table, key, new_key)
         return histo_table
+    def getMyHistogram(self, key):
+        new_key = key + '_histogram'
+        t_frame = self.getFrame()
+        histo_table = YdAlgorithm().getHistogram(t_frame.table, key, new_key)
+        return histo_table
 
-    # sync between containers
-    def nameSync(self):
-        ContainerSync.init(self.name)
-    def publishSync(self, type, key):
-        ContainerSync.pub(self.name, type, self.frame, key)
+    # sync between containers, as a master
+    def initMaster(self):
+        ContainerSync.init_master(self.name) 
 
-    def connectSync(self, topic):
-        ContainerSync.sub(topic, self)
-    def receiveSync(self, topic, type, *a, **kw):
-        frame = a[0]
-        key = a[1]
+    def masterSend(self, type, *a, **kw):
         if (type == 'histogram'):
+            ContainerSync.master_send(self.name, type, self.frame, *a, **kw)
+
+    def connectSlave(self, slave):
+        ContainerSync.slave_connect(self.name, slave)
+
+    def disconnectSlave(self, slave):
+        ContainerSync.slave_disconnect(self.name, slave)
+    
+    # sync between containers, as a slave
+    def slaveConnect(self, topic):
+        ContainerSync.slave_connect(topic, self)
+
+    def slaveDisconnect(self, topic):
+        ContainerSync.slave_disconnect(topic, self)
+
+    def slaveReceive(self, topic, type, *a, **kw):
+        if (type == 'histogram'):
+            frame = a[0]
+            key = a[1]
             histo_table = self.getHistogramFrom(frame, key)
             t_frame = Yd_frame(table= histo_table)
             self.setDefaultFrame(t_frame)
 
+    def slaveReport(self, topic, type):
+        if (type == 'histogram'):
+            key = a[0]
+            histo_table = self.getMyHistogram(key)
+            return histo_table
 
 class Yd_pipe(Yd_container):
     """ """

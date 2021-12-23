@@ -8,16 +8,16 @@ from yd_excel import *
 if __name__ == '__main__':
 
     print('testing sync')
-    master = Yd_container('master')
-    master.nameSync()
-    slave = Yd_container('slave')
-    slave.connectSync('master')
+    master_node = Yd_container('master')
+    master_node.initMaster()
+    slave_node = Yd_container('slave')
+    slave_node.slaveConnect(master_node.name)
     #
     frame = Yd_frame()
     frame.table = Yd_excel().loadSheet(u'data//ti.xls', start_row=1)
-    master.frame = frame
-    master.publishSync('histogram', u'申请日期')
-    print(slave.frame.table)
+    master_node.frame = frame
+    master_node.masterSend('histogram', u'申请日期')
+    print(slave_node.frame.table)
 
     print('testing TreeContainer')
     root = Yd_tree('root') # root name is ''

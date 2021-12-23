@@ -2,18 +2,29 @@
 
 from collections import defaultdict
 
-sync_table = defaultdict(list)
+master_salves_table = defaultdict(list)
 
-def init(topic):
-    return sync_table[topic]
+# for master
+def init_master(topic):
+    return master_salves_table[topic]
 
-def sub(topic, subscriber):
-    if not (subscriber in sync_table[topic]):
-        return sync_table[topic].append(subscriber)
+def master_send(topic, type, *a, **kw):
+    for slave in master_salves_table[topic]:
+        slave.slaveReceive(topic, type, *a, **kw)
 
-def pub(topic, type, *a, **kw):
-    for subscriber in sync_table[topic]:
-        subscriber.receiveSync(topic, type, *a, **kw)
+def master_collect(topic, type):
+    t_result = defaultdict(list)
+    for slave in master_salves_table[topic]:
+        t_result[topic] = slave.slaveReport(topic, type)
+    return t_result
 
-def unsub(topic, subscriber):
-    sync_table[topic].remove(subscriber)
+def get_slaves(topic):
+    return master_salves_table[topic]
+
+# for slave
+def slave_connect(topic, slave):
+    if not (slave in master_salves_table[topic]):
+        return master_salves_table[topic].append(slave)
+
+def slave_disconnect(topic, slave):
+    master_salves_table[topic].remove(slave)

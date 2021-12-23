@@ -10,10 +10,10 @@ def func_get_year(item):
 
 if __name__ == '__main__':
 
-    master = Yd_container('master')
-    master.nameSync()
-    slave = Yd_container('slave')
-    slave.connectSync('master')
+    master_node = Yd_container('master')
+    master_node.initMaster()
+    slave_node = Yd_container('slave')
+    slave_node.slaveConnect(master_node.name)
 
     frame = Yd_frame()
 
@@ -23,6 +23,6 @@ if __name__ == '__main__':
     new_key = key + u'_year'
     frame.table = YdAlgorithm().addColProperty(frame.table, key, new_key, func_get_year)
 
-    master.frame = frame
-    master.publishSync('histogram', new_key)
-    print(slave.frame.table)
+    master_node.frame = frame
+    master_node.masterSend('histogram', new_key)
+    print(slave_node.frame.table)
