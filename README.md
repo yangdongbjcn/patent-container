@@ -1,4 +1,4 @@
-一、简介
+一、ZLFX（专利分析）
 
 专利分析人员经常从付费专利数据库中导出各种电子表格文件，例如CSV文件或者XLS文件。这些文件包含了成百上千条专利著录项目。
 
@@ -14,43 +14,36 @@
 
 专利容器可以使用各种语言实现。例如Python语言、PHP语言、JavaScript语言。
 
-二、目录
-
-(一）patent_container_python
-
 基于Python语言实现了专利容器的数据结构，参见 yd_container.py 等文件。
 
 该文件夹还包括一些示意数据，参见 data 文件夹下的数据。并演示了使用这些数据进行专利统计分析。
 
 推荐安装 Anaconda3 编程环境，使用 PyCharm 社区版编辑器，导入整个文件夹作为项目，并执行其中的 ydbj_container_test.py 文件。
 
-（二）patent_container_web
+（一）version文件夹
 
-（1）2018_container_lib_js
+各个版本的专利容器。
 
-JS版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame、yd_tree等类。
+（二）example文件夹
 
-（2）2018_container_lib_php
+基于专利容器进行专利分析的例子。
 
-PHP版的专利容器核心库。提供了yd_list、yd_dict、yd_mat、yd_frame等类。
+二、ZLZX（专利撰写）
 
-（3）202101_webchart_europe_map
+专利撰写时，检查错误。
 
-PHP版的专利容器可视化。提供了图表、地图。其中地图将欧洲专利局的所有国家合在一起显示。
+三、HDBG（互动报告）
 
-三、扩展阅读
+基于Python Jupiter Notebook 或 PHP，实现专利分析报告的可读可点。
 
-（一）微信公众号yangdongpatent（专利容器）。
+四、扩展阅读
 
-包含2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》的第3章和第6.2节内容试读。
+更多的内容，将收录在微信公众号yangdongpatent（专利容器）。
 
-（二）官方网站http://zlrq.cn
+2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
 
-包含简单的在线专利分析小工具。
-
-开源代码公开在Github和Gitee。备注：Github有时候更新不及时。
-
+开源代码将公开在Github和Gitee。
 http://github.com/yangdongbjcn/patent-container  
-
 http://gitee.com/yangdongbjcn/patent-container
 
+专利分析永久域名，请访问 http://zlrq.cn
