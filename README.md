@@ -1,16 +1,4 @@
-一、GitHub和Gitee
-
-代码主要公开在Gitee（经常更新）、Github（较少更新）。
-
-http://gitee.com/yangdongbjcn/patent-container
-
-http://github.com/yangdongbjcn/patent-container  
-
-更多的内容，将收录在微信公众号yangdongpatent（专利容器）。永久域名，请访问 http://zlrq.cn
-
-2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
-
-二、ZLFX（专利分析）文件夹
+一、ZLFX（专利分析）
 
 专利分析人员经常从付费专利数据库中导出各种电子表格文件，例如CSV文件或者XLS文件。这些文件包含了成百上千条专利著录项目。
 
@@ -39,3 +27,23 @@ http://github.com/yangdongbjcn/patent-container
 （二）example文件夹
 
 基于专利容器进行专利分析的例子。
+
+二、ZLZX（专利撰写）
+
+专利撰写时，检查错误。
+
+三、HDBG（互动报告）
+
+基于Python Jupiter Notebook 或 PHP，实现专利分析报告的可读可点。
+
+四、扩展阅读
+
+更多的内容，将收录在微信公众号yangdongpatent（专利容器）。
+
+2019年出版的图书《玩转专利大数据——智慧容器助力专利分析与运营》第3章和第6.2节。
+
+开源代码将公开在Github和Gitee。
+http://github.com/yangdongbjcn/patent-container  
+http://gitee.com/yangdongbjcn/patent-container
+
+专利分析永久域名，请访问 http://zlrq.cn

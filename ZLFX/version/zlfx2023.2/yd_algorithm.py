@@ -25,7 +25,7 @@ class YdAlgorithm(object):
         # INCOPAT标准化申请人第一个
         t_func = self.getANN1_incopat
       if (type == 'set_semicolon'):
-        # INCOPAT标准化申请人第一个
+        # 集合字段，分号间隔
         t_func = self.getSetSemicolon
       return t_func
     
